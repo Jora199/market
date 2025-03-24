@@ -14,15 +14,19 @@ def load_data():
     df['timestamp'] = pd.to_datetime(df['timestamp'])
     return df
 
+def initialize_session_state():
+    if 'last_update' not in st.session_state:
+        st.session_state.last_update = datetime.now()
+    if 'next_update' not in st.session_state:
+        st.session_state.next_update = st.session_state.last_update + timedelta(hours=1)
+
 def main():
+    # Инициализация session_state
+    initialize_session_state()
+    
     # Заголовок
     st.title("Price History Analysis")
     
-    # Инициализация времени последнего обновления
-    if 'last_update' not in st.session_state:
-        st.session_state.last_update = datetime.now()
-        st.session_state.next_update = st.session_state.last_update + timedelta(hours=1)
-
     # Загрузка данных
     df = load_data()
     
@@ -53,7 +57,14 @@ def main():
         
         # Таймер обновления
         st.subheader("Next Update")
-        time_remaining = st.session_state.next_update - datetime.now()
+        current_time = datetime.now()
+        time_remaining = st.session_state.next_update - current_time
+        
+        if time_remaining.total_seconds() <= 0:
+            st.session_state.last_update = current_time
+            st.session_state.next_update = current_time + timedelta(hours=1)
+            st.rerun()
+        
         minutes = int(time_remaining.total_seconds() // 60)
         seconds = int(time_remaining.total_seconds() % 60)
         
@@ -63,12 +74,6 @@ def main():
             f"</div>",
             unsafe_allow_html=True
         )
-        
-        # Проверяем, нужно ли обновить кэш
-        if time_remaining.total_seconds() <= 0:
-            st.session_state.last_update = datetime.now()
-            st.session_state.next_update = st.session_state.last_update + timedelta(hours=1)
-            st.rerun()
 
     # Основная область с графиком
     if selected_items:
