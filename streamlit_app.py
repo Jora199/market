@@ -57,28 +57,50 @@ def main():
     items = [col for col in df.columns if col != 'timestamp']
     
     # Боковая панель с фильтрами
-    with st.sidebar:
-        st.header("Фильтры")
+        with st.sidebar:
+        if 'last_update' not in st.session_state:
+            st.session_state.last_update = datetime.now()
         
-        # Выбор предмета
-        selected_items = st.multiselect(
-            "Выберите предметы",
-            items,
-            default=[items[0]]
+        last_update = st.session_state.last_update
+        next_update = last_update + timedelta(hours=1)
+        
+        # Таймер обратного отсчета
+        st.markdown(
+            f"""
+            <div style="color: white; font-size: 14px; padding: 0.5em 0;">
+                До обновления: <span id="countdown"></span>
+            </div>
+            <script>
+                function startTimer() {{
+                    const targetTime = new Date('{next_update.strftime("%Y-%m-%d %H:%M:%S")}').getTime();
+                    
+                    function updateTimer() {{
+                        const now = new Date().getTime();
+                        const timeLeft = targetTime - now;
+                        
+                        const minutes = Math.floor(timeLeft / (1000 * 60));
+                        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                        
+                        if (timeLeft > 0) {{
+                            document.getElementById('countdown').textContent = 
+                                `${{minutes.toString().padStart(2, '0')}}:${{seconds.toString().padStart(2, '0')}}`;
+                        }} else {{
+                            document.getElementById('countdown').textContent = '00:00';
+                        }}
+                    }}
+                    
+                    // Первое обновление
+                    updateTimer();
+                    // Обновление каждую секунду
+                    return setInterval(updateTimer, 1000);
+                }}
+
+                // Запуск таймера при загрузке страницы
+                window.addEventListener('load', startTimer);
+            </script>
+            """,
+            unsafe_allow_html=True
         )
-        
-        # Выбор временного диапазона
-        date_range = st.date_input(
-            "Выберите период",
-            value=(df['timestamp'].min().date(), df['timestamp'].max().date()),
-            min_value=df['timestamp'].min().date(),
-            max_value=df['timestamp'].max().date()
-        )
-        
-        # Показывать скользящую среднюю
-        show_ma = st.checkbox("Показать скользящую среднюю", value=True)
-        if show_ma:
-            ma_period = st.slider("Период скользящей средней (часов)", 1, 24, 6)
 
     # Основная область с графиком
     if selected_items:
