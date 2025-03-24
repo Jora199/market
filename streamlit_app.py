@@ -16,12 +16,6 @@ count = st_autorefresh(interval=1000, key="refresh_timer")
 # Функция загрузки данных с ограничением времени кэша
 @st.cache_data(ttl=3600)  # Кэш будет обновляться каждый час
 def load_data():
-    # Если данные находятся на GitHub, используйте прямую ссылку на raw-данные
-    # Пример:
-    # url = "https://raw.githubusercontent.com/username/repository/branch/data/price_history.csv"
-    # df = pd.read_csv(url)
-    
-    # В данном примере данные загружаются локально
     df = pd.read_csv("data/price_history.csv")
     df['timestamp'] = pd.to_datetime(df['timestamp'])
     return df
