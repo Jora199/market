@@ -10,20 +10,15 @@ st.set_page_config(page_title="Price History Viewer", layout="wide")
 # Функция загрузки данных с ограничением времени кэша
 @st.cache_data(ttl=3600)  # Кэш будет обновляться каждый час
 def load_data():
+    # При каждой загрузке данных обновляем время следующего обновления кэша
+    if 'cache_update_time' not in st.session_state:
+        st.session_state.cache_update_time = datetime.now() + timedelta(hours=1)
+    
     df = pd.read_csv("data/price_history.csv")
     df['timestamp'] = pd.to_datetime(df['timestamp'])
     return df
 
-def initialize_session_state():
-    if 'last_update' not in st.session_state:
-        st.session_state.last_update = datetime.now()
-    if 'next_update' not in st.session_state:
-        st.session_state.next_update = st.session_state.last_update + timedelta(hours=1)
-
 def main():
-    # Инициализация session_state
-    initialize_session_state()
-    
     # Заголовок
     st.title("Price History Analysis")
     
@@ -55,22 +50,21 @@ def main():
         if show_ma:
             ma_period = st.slider("MA Period (hours)", 1, 24, 4)
         
-        # Таймер обновления
-        st.subheader("Next Update")
-        current_time = datetime.now()
-        time_remaining = st.session_state.next_update - current_time
+        # Таймер обновления кэша
+        st.subheader("Cache Update Timer")
+        time_until_cache_update = st.session_state.cache_update_time - datetime.now()
         
-        if time_remaining.total_seconds() <= 0:
-            st.session_state.last_update = current_time
-            st.session_state.next_update = current_time + timedelta(hours=1)
-            st.rerun()
+        if time_until_cache_update.total_seconds() <= 0:
+            # Устанавливаем новое время обновления кэша
+            st.session_state.cache_update_time = datetime.now() + timedelta(hours=1)
+            time_until_cache_update = st.session_state.cache_update_time - datetime.now()
         
-        minutes = int(time_remaining.total_seconds() // 60)
-        seconds = int(time_remaining.total_seconds() % 60)
+        minutes = int(time_until_cache_update.total_seconds() // 60)
+        seconds = int(time_until_cache_update.total_seconds() % 60)
         
         st.markdown(
             f"<div style='padding: 10px; background-color: #262730; border-radius: 5px;'>"
-            f"Reboot app in: {minutes:02d}:{seconds:02d}"
+            f"Cache update in: {minutes:02d}:{seconds:02d}"
             f"</div>",
             unsafe_allow_html=True
         )
@@ -95,7 +89,7 @@ def main():
             
             # Добавление скользящей средней
             if show_ma:
-                window = int(ma_period * 2)  # *2 так как точки каждые 30 минут
+                window = int(ma_period * 2)
                 ma = filtered_df[item].rolling(window=window).mean()
                 fig.add_trace(go.Scatter(
                     x=filtered_df['timestamp'],
