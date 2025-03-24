@@ -7,13 +7,13 @@ import time
 # Настройка страницы
 st.set_page_config(page_title="Price History Viewer", layout="wide")
 
+# Инициализация cache_update_time при первом запуске
+if 'cache_update_time' not in st.session_state:
+    st.session_state.cache_update_time = datetime.now() + timedelta(hours=1)
+
 # Функция загрузки данных с ограничением времени кэша
 @st.cache_data(ttl=3600)  # Кэш будет обновляться каждый час
 def load_data():
-    # При каждой загрузке данных обновляем время следующего обновления кэша
-    if 'cache_update_time' not in st.session_state:
-        st.session_state.cache_update_time = datetime.now() + timedelta(hours=1)
-    
     df = pd.read_csv("data/price_history.csv")
     df['timestamp'] = pd.to_datetime(df['timestamp'])
     return df
@@ -55,9 +55,9 @@ def main():
         time_until_cache_update = st.session_state.cache_update_time - datetime.now()
         
         if time_until_cache_update.total_seconds() <= 0:
-            # Устанавливаем новое время обновления кэша
             st.session_state.cache_update_time = datetime.now() + timedelta(hours=1)
             time_until_cache_update = st.session_state.cache_update_time - datetime.now()
+            st.experimental_rerun()  # Перезапуск при обновлении кэша
         
         minutes = int(time_until_cache_update.total_seconds() // 60)
         seconds = int(time_until_cache_update.total_seconds() % 60)
