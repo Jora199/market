@@ -26,22 +26,45 @@ def main():
         last_update = st.session_state.last_update
         next_update = last_update + timedelta(hours=1)
         
-        # Расчет оставшегося времени
-        time_left = next_update - datetime.now()
-        minutes = int(time_left.total_seconds() // 60)
-        seconds = int(time_left.total_seconds() % 60)
-        
-        # Отображение таймера
+        # Таймер с JavaScript для плавного обновления
         st.markdown(
-            f'<div style="color: white; font-size: 14px; padding: 0.5em 0;">До обновления: {minutes:02d}:{seconds:02d}</div>',
+            f"""
+            <div id="timer" style="color: white; font-size: 14px; padding: 0.5em 0;">
+                До обновления: <span id="countdown">59:59</span>
+            </div>
+
+            <script>
+                function updateTimer() {{
+                    const deadline = new Date('{next_update.strftime("%Y-%m-%d %H:%M:%S")}').getTime();
+                    
+                    function update() {{
+                        const now = new Date().getTime();
+                        const diff = deadline - now;
+                        
+                        if (diff > 0) {{
+                            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                            
+                            document.getElementById('countdown').innerHTML = 
+                                minutes.toString().padStart(2, '0') + ':' + 
+                                seconds.toString().padStart(2, '0');
+                        }} else {{
+                            document.getElementById('countdown').innerHTML = "00:00";
+                            window.location.reload();
+                        }}
+                    }}
+                    
+                    // Обновляем каждую секунду
+                    update();
+                    setInterval(update, 1000);
+                }}
+
+                // Запускаем таймер
+                updateTimer();
+            </script>
+            """,
             unsafe_allow_html=True
         )
-        
-        # Проверяем, нужно ли обновить страницу
-        if datetime.now() >= next_update:
-            st.session_state.last_update = datetime.now()
-            st.rerun()
-
     # Загрузка данных
     df = load_data()
     
