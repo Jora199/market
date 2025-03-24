@@ -26,77 +26,20 @@ def main():
         last_update = st.session_state.last_update
         next_update = last_update + timedelta(hours=1)
         
-        # Отладочная информация
-        st.write("Debug info:")
-        st.write(f"Last update: {last_update}")
-        st.write(f"Next update: {next_update}")
-        st.write(f"Current time: {datetime.now()}")
-        st.write(f"Time left: {(next_update - datetime.now()).total_seconds()} seconds")
+        # Расчет оставшегося времени
+        time_left = next_update - datetime.now()
+        minutes = int(time_left.total_seconds() // 60)
+        seconds = int(time_left.total_seconds() % 60)
         
-        placeholder = st.empty()
-        placeholder.markdown(
-            f"""
-            <div style='color: white; font-size: 14px; padding: 0.5em 0;'>
-                До обновления: <span id='countdown_timer'>00:00</span>
-            </div>
-            <script>
-                console.log('Script started');
-                console.log('Target date:', '{next_update.strftime("%Y-%m-%d %H:%M:%S")}');
-                
-                function updateCountdown() {{
-                    try {{
-                        const targetDate = new Date('{next_update.strftime("%Y-%m-%d %H:%M:%S")}');
-                        const currentDate = new Date();
-                        
-                        console.log('Target:', targetDate);
-                        console.log('Current:', currentDate);
-                        
-                        let timeLeft = targetDate - currentDate;
-                        console.log('Time left (ms):', timeLeft);
-                        
-                        if (timeLeft > 0) {{
-                            const minutes = Math.floor(timeLeft / (1000 * 60));
-                            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-                            
-                            const formattedTime = 
-                                minutes.toString().padStart(2, '0') + ':' + 
-                                seconds.toString().padStart(2, '0');
-                            
-                            console.log('Formatted time:', formattedTime);
-                            document.getElementById('countdown_timer').textContent = formattedTime;
-                        }} else {{
-                            console.log('Time expired');
-                            document.getElementById('countdown_timer').textContent = "00:00";
-                            window.location.reload();
-                        }}
-                    }} catch (e) {{
-                        console.error('Timer error:', e);
-                    }}
-                }}
-
-                // Попробуем разные способы запуска
-                window.addEventListener('load', function() {{
-                    console.log('Window loaded');
-                    updateCountdown();
-                    setInterval(updateCountdown, 1000);
-                }});
-                
-                document.addEventListener('DOMContentLoaded', function() {{
-                    console.log('DOM loaded');
-                    updateCountdown();
-                    setInterval(updateCountdown, 1000);
-                }});
-                
-                // Немедленный запуск с небольшой задержкой
-                setTimeout(function() {{
-                    console.log('Delayed start');
-                    updateCountdown();
-                    setInterval(updateCountdown, 1000);
-                }}, 100);
-            </script>
-            """,
+        # Отображение таймера
+        st.markdown(
+            f'<div style="color: white; font-size: 14px; padding: 0.5em 0;">До обновления: {minutes:02d}:{seconds:02d}</div>',
             unsafe_allow_html=True
         )
+        
+        # Автоматическое обновление каждую секунду
+        time.sleep(1)
+        st.experimental_rerun()
 
     # Загрузка данных
     df = load_data()
