@@ -18,38 +18,11 @@ def main():
     # Заголовок
     st.title("Price History Analysis")
     
-    # Информация об обновлениях в сайдбаре
-        # Информация об обновлениях в сайдбаре
-    with st.sidebar:
-        if 'last_update' not in st.session_state:
-            st.session_state.last_update = datetime.now()
-        
-        last_update = st.session_state.last_update
-        next_update = last_update + timedelta(hours=1)
-        
-        # Создаем placeholder для таймера
-        timer_placeholder = st.empty()
-        
-        # Функция для форматирования времени
-        def format_time(seconds):
-            minutes = seconds // 60
-            seconds = seconds % 60
-            return f"{minutes:02d}:{seconds:02d}"
-        
-        # Обновляем таймер
-        while True:
-            time_left = (next_update - datetime.now()).total_seconds()
-            if time_left <= 0:
-                st.session_state.last_update = datetime.now()
-                st.rerun()
-            
-            timer_placeholder.markdown(
-                f'<div style="color: white; font-size: 14px; padding: 0.5em 0;">'
-                f'До обновления: {format_time(int(time_left))}</div>',
-                unsafe_allow_html=True
-            )
-            time.sleep(1)
-                
+    # Инициализация времени последнего обновления
+    if 'last_update' not in st.session_state:
+        st.session_state.last_update = datetime.now()
+        st.session_state.next_update = st.session_state.last_update + timedelta(hours=1)
+
     # Загрузка данных
     df = load_data()
     
@@ -57,39 +30,44 @@ def main():
     items = [col for col in df.columns if col != 'timestamp']
     
     # Боковая панель с фильтрами
-        # Информация об обновлениях в сайдбаре
     with st.sidebar:
-        # Создаем placeholder для таймера
-        timer_placeholder = st.empty()
+        st.subheader("Filters")
         
-        # Расчет времени до следующего обновления кеша (3600 секунд = 1 час)
-        cache_ttl = 3600
-        app_start_time = st.session_state.get('app_start_time', datetime.now())
+        # Выбор предметов
+        selected_items = st.multiselect("Select items:", items)
         
-        if 'app_start_time' not in st.session_state:
-            st.session_state.app_start_time = app_start_time
+        # Выбор диапазона дат
+        min_date = df['timestamp'].dt.date.min()
+        max_date = df['timestamp'].dt.date.max()
+        date_range = st.date_input(
+            "Select date range:",
+            value=(min_date, max_date),
+            min_value=min_date,
+            max_value=max_date
+        )
         
-        time_elapsed = (datetime.now() - app_start_time).total_seconds()
-        time_left = cache_ttl - time_elapsed
+        # Настройки скользящей средней
+        show_ma = st.checkbox("Show Moving Average")
+        if show_ma:
+            ma_period = st.slider("MA Period (hours)", 1, 24, 4)
         
-        # Если время истекло, обновляем время старта
-        if time_left <= 0:
-            st.session_state.app_start_time = datetime.now()
-            time_left = cache_ttl
+        # Таймер обновления
+        st.subheader("Next Update")
+        time_remaining = st.session_state.next_update - datetime.now()
+        minutes = int(time_remaining.total_seconds() // 60)
+        seconds = int(time_remaining.total_seconds() % 60)
         
-        # Форматируем время
-        minutes = int(time_left // 60)
-        seconds = int(time_left % 60)
-        
-        # Обновляем таймер
-        timer_placeholder.markdown(
-            f'<div style="color: white; font-size: 14px; padding: 0.5em 0;">'
-            f'До обновления: {minutes:02d}:{seconds:02d}</div>',
+        st.markdown(
+            f"<div style='padding: 10px; background-color: #262730; border-radius: 5px;'>"
+            f"Reboot app in: {minutes:02d}:{seconds:02d}"
+            f"</div>",
             unsafe_allow_html=True
         )
-
-        # Добавляем автоматическое обновление страницы
-        if time.time() % 5 < 1:  # Обновляем каждые 5 секунд
+        
+        # Проверяем, нужно ли обновить кэш
+        if time_remaining.total_seconds() <= 0:
+            st.session_state.last_update = datetime.now()
+            st.session_state.next_update = st.session_state.last_update + timedelta(hours=1)
             st.rerun()
 
     # Основная область с графиком
@@ -125,8 +103,8 @@ def main():
         # Настройка макета графика
         fig.update_layout(
             height=600,
-            xaxis_title="Время",
-            yaxis_title="Цена",
+            xaxis_title="Time",
+            yaxis_title="Price",
             hovermode='x unified',
             legend=dict(
                 yanchor="top",
@@ -141,16 +119,16 @@ def main():
         
         # Статистика
         if len(selected_items) == 1:
-            st.subheader("Статистика")
+            st.subheader("Statistics")
             col1, col2, col3 = st.columns(3)
             
             current_price = filtered_df[selected_items[0]].iloc[-1]
             min_price = filtered_df[selected_items[0]].min()
             max_price = filtered_df[selected_items[0]].max()
             
-            col1.metric("Текущая цена", f"{current_price:.2f}")
-            col2.metric("Минимальная цена", f"{min_price:.2f}")
-            col3.metric("Максимальная цена", f"{max_price:.2f}")
+            col1.metric("Current Price", f"{current_price:.2f}")
+            col2.metric("Minimum Price", f"{min_price:.2f}")
+            col3.metric("Maximum Price", f"{max_price:.2f}")
 
 if __name__ == "__main__":
     main()
