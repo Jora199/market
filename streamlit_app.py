@@ -37,9 +37,10 @@ def main():
             unsafe_allow_html=True
         )
         
-        # Автоматическое обновление каждую секунду
-        time.sleep(1)
-        st.experimental_rerun()
+        # Проверяем, нужно ли обновить страницу
+        if datetime.now() >= next_update:
+            st.session_state.last_update = datetime.now()
+            st.rerun()
 
     # Загрузка данных
     df = load_data()
