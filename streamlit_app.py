@@ -42,7 +42,7 @@ def main():
                         const diff = deadline - now;
                         
                         if (diff > 0) {{
-                            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                            const minutes = Math.floor(diff / (1000 * 60));  // Изменили эту строку
                             const seconds = Math.floor((diff % (1000 * 60)) / 1000);
                             
                             document.getElementById('countdown').innerHTML = 
@@ -51,6 +51,7 @@ def main():
                         }} else {{
                             document.getElementById('countdown').innerHTML = "00:00";
                             window.location.reload();
+                            // После перезагрузки обновим last_update
                         }}
                     }}
                     
@@ -59,12 +60,13 @@ def main():
                     setInterval(update, 1000);
                 }}
 
-                // Запускаем таймер
-                updateTimer();
+                // Запускаем таймер сразу после загрузки страницы
+                document.addEventListener('DOMContentLoaded', updateTimer);
             </script>
             """,
             unsafe_allow_html=True
         )
+                
     # Загрузка данных
     df = load_data()
     
@@ -154,10 +156,6 @@ def main():
             col1.metric("Текущая цена", f"{current_price:.2f}")
             col2.metric("Минимальная цена", f"{min_price:.2f}")
             col3.metric("Максимальная цена", f"{max_price:.2f}")
-
-    if datetime.now() >= next_update:
-        st.session_state.last_update = datetime.now()
-        st.experimental_rerun()
 
 if __name__ == "__main__":
     main()
