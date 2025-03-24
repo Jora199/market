@@ -57,50 +57,40 @@ def main():
     items = [col for col in df.columns if col != 'timestamp']
     
     # Боковая панель с фильтрами
-        with st.sidebar:
-        if 'last_update' not in st.session_state:
-            st.session_state.last_update = datetime.now()
+        # Информация об обновлениях в сайдбаре
+    with st.sidebar:
+        # Создаем placeholder для таймера
+        timer_placeholder = st.empty()
         
-        last_update = st.session_state.last_update
-        next_update = last_update + timedelta(hours=1)
+        # Расчет времени до следующего обновления кеша (3600 секунд = 1 час)
+        cache_ttl = 3600
+        app_start_time = st.session_state.get('app_start_time', datetime.now())
         
-        # Таймер обратного отсчета
-        st.markdown(
-            f"""
-            <div style="color: white; font-size: 14px; padding: 0.5em 0;">
-                До обновления: <span id="countdown"></span>
-            </div>
-            <script>
-                function startTimer() {{
-                    const targetTime = new Date('{next_update.strftime("%Y-%m-%d %H:%M:%S")}').getTime();
-                    
-                    function updateTimer() {{
-                        const now = new Date().getTime();
-                        const timeLeft = targetTime - now;
-                        
-                        const minutes = Math.floor(timeLeft / (1000 * 60));
-                        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-                        
-                        if (timeLeft > 0) {{
-                            document.getElementById('countdown').textContent = 
-                                `${{minutes.toString().padStart(2, '0')}}:${{seconds.toString().padStart(2, '0')}}`;
-                        }} else {{
-                            document.getElementById('countdown').textContent = '00:00';
-                        }}
-                    }}
-                    
-                    // Первое обновление
-                    updateTimer();
-                    // Обновление каждую секунду
-                    return setInterval(updateTimer, 1000);
-                }}
-
-                // Запуск таймера при загрузке страницы
-                window.addEventListener('load', startTimer);
-            </script>
-            """,
+        if 'app_start_time' not in st.session_state:
+            st.session_state.app_start_time = app_start_time
+        
+        time_elapsed = (datetime.now() - app_start_time).total_seconds()
+        time_left = cache_ttl - time_elapsed
+        
+        # Если время истекло, обновляем время старта
+        if time_left <= 0:
+            st.session_state.app_start_time = datetime.now()
+            time_left = cache_ttl
+        
+        # Форматируем время
+        minutes = int(time_left // 60)
+        seconds = int(time_left % 60)
+        
+        # Обновляем таймер
+        timer_placeholder.markdown(
+            f'<div style="color: white; font-size: 14px; padding: 0.5em 0;">'
+            f'До обновления: {minutes:02d}:{seconds:02d}</div>',
             unsafe_allow_html=True
         )
+
+        # Добавляем автоматическое обновление страницы
+        if time.time() % 5 < 1:  # Обновляем каждые 5 секунд
+            st.rerun()
 
     # Основная область с графиком
     if selected_items:
