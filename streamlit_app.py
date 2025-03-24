@@ -4,16 +4,24 @@ import plotly.graph_objects as go
 from datetime import datetime, timedelta
 import time
 
+# Импорт функции автоперезагрузки
+from streamlit import st_autorefresh
+
 # Настройка страницы
 st.set_page_config(page_title="Price History Viewer", layout="wide")
 
-# Инициализация cache_update_time при первом запуске
-if 'cache_update_time' not in st.session_state:
-    st.session_state.cache_update_time = datetime.now() + timedelta(hours=1)
+# Функция автоперезагрузки страницы каждые 1 секунду (1000 миллисекунд)
+count = st_autorefresh(interval=1000, key="refresh_timer")
 
 # Функция загрузки данных с ограничением времени кэша
 @st.cache_data(ttl=3600)  # Кэш будет обновляться каждый час
 def load_data():
+    # Если данные находятся на GitHub, используйте прямую ссылку на raw-данные
+    # Пример:
+    # url = "https://raw.githubusercontent.com/username/repository/branch/data/price_history.csv"
+    # df = pd.read_csv(url)
+    
+    # В данном примере данные загружаются локально
     df = pd.read_csv("data/price_history.csv")
     df['timestamp'] = pd.to_datetime(df['timestamp'])
     return df
@@ -22,9 +30,12 @@ def main():
     # Заголовок
     st.title("Price History Analysis")
     
-    # Загрузка данных
+    # Загрузка данных и время последней загрузки
     df = load_data()
-    
+    load_time = datetime.now()
+    cache_update_time = load_time + timedelta(hours=1)
+    time_until_cache_update = cache_update_time - load_time  # Изначально 1 час
+
     # Получение списка предметов (исключая столбец timestamp)
     items = [col for col in df.columns if col != 'timestamp']
     
@@ -33,7 +44,7 @@ def main():
         st.subheader("Filters")
         
         # Выбор предметов
-        selected_items = st.multiselect("Select items:", items)
+        selected_items = st.multiselect("Select items:", items, default=items)
         
         # Выбор диапазона дат
         min_date = df['timestamp'].dt.date.min()
@@ -50,22 +61,30 @@ def main():
         if show_ma:
             ma_period = st.slider("MA Period (hours)", 1, 24, 4)
         
-        # Таймер обновления кэша
+        # Статистика обновления кэша
         st.subheader("Cache Update Timer")
-        time_until_cache_update = st.session_state.cache_update_time - datetime.now()
         
-        if time_until_cache_update.total_seconds() <= 0:
-            st.session_state.cache_update_time = datetime.now() + timedelta(hours=1)
-            time_until_cache_update = st.session_state.cache_update_time - datetime.now()
-            st.experimental_rerun()  # Перезапуск при обновлении кэша
+        # Текущее время
+        current_time = datetime.now()
         
-        minutes = int(time_until_cache_update.total_seconds() // 60)
-        seconds = int(time_until_cache_update.total_seconds() % 60)
+        # Рассчитываем оставшееся время до обновления кэша
+        time_remaining = cache_update_time - current_time
         
+        # Если время вышло, перезагружаем страницу для обновления кэша
+        if time_remaining.total_seconds() <= 0:
+            st.experimental_rerun()
+        
+        # Преобразуем оставшееся время в минуты и секунды
+        minutes = int(time_remaining.total_seconds() // 60)
+        seconds = int(time_remaining.total_seconds() % 60)
+        
+        # Отображение таймера
         st.markdown(
-            f"<div style='padding: 10px; background-color: #262730; border-radius: 5px;'>"
-            f"Cache update in: {minutes:02d}:{seconds:02d}"
-            f"</div>",
+            f"""
+            <div style='padding: 10px; background-color: #262730; border-radius: 5px; color: white; text-align: center;'>
+                <strong>Cache update in:</strong> {minutes:02d}:{seconds:02d}
+            </div>
+            """,
             unsafe_allow_html=True
         )
 
@@ -89,7 +108,7 @@ def main():
             
             # Добавление скользящей средней
             if show_ma:
-                window = int(ma_period * 2)
+                window = int(ma_period)
                 ma = filtered_df[item].rolling(window=window).mean()
                 fig.add_trace(go.Scatter(
                     x=filtered_df['timestamp'],
