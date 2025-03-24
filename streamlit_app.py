@@ -29,13 +29,10 @@ def main():
         last_update = st.session_state.last_update
         next_update = last_update + timedelta(hours=1)
         
-        st.write(f"Последнее обновление: {last_update.strftime('%Y-%m-%d %H:%M:%S')}")
-        st.write(f"Следующее обновление: {next_update.strftime('%Y-%m-%d %H:%M:%S')}")
-        
-        # Добавляем контейнер для таймера и JavaScript для его обновления
+        # Таймер обратного отсчета
         st.markdown(
             f"""
-            <div id='timer' style='color: rgb(49, 51, 63); font-size: 14px;'></div>
+            <div id='timer' style='color: rgb(49, 51, 63); font-size: 14px; padding: 0.5em 0;'></div>
             <script>
                 function updateTimer() {{
                     const now = new Date();
