@@ -19,6 +19,7 @@ def main():
     st.title("Price History Analysis")
     
     # Информация об обновлениях в сайдбаре
+        # Информация об обновлениях в сайдбаре
     with st.sidebar:
         if 'last_update' not in st.session_state:
             st.session_state.last_update = datetime.now()
@@ -26,46 +27,28 @@ def main():
         last_update = st.session_state.last_update
         next_update = last_update + timedelta(hours=1)
         
-        # Таймер с JavaScript для плавного обновления
-        st.markdown(
-            f"""
-            <div id="timer" style="color: white; font-size: 14px; padding: 0.5em 0;">
-                До обновления: <span id="countdown">59:59</span>
-            </div>
-
-            <script>
-                function updateTimer() {{
-                    const deadline = new Date('{next_update.strftime("%Y-%m-%d %H:%M:%S")}').getTime();
-                    
-                    function update() {{
-                        const now = new Date().getTime();
-                        const diff = deadline - now;
-                        
-                        if (diff > 0) {{
-                            const minutes = Math.floor(diff / (1000 * 60));  // Изменили эту строку
-                            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-                            
-                            document.getElementById('countdown').innerHTML = 
-                                minutes.toString().padStart(2, '0') + ':' + 
-                                seconds.toString().padStart(2, '0');
-                        }} else {{
-                            document.getElementById('countdown').innerHTML = "00:00";
-                            window.location.reload();
-                            // После перезагрузки обновим last_update
-                        }}
-                    }}
-                    
-                    // Обновляем каждую секунду
-                    update();
-                    setInterval(update, 1000);
-                }}
-
-                // Запускаем таймер сразу после загрузки страницы
-                document.addEventListener('DOMContentLoaded', updateTimer);
-            </script>
-            """,
-            unsafe_allow_html=True
-        )
+        # Создаем placeholder для таймера
+        timer_placeholder = st.empty()
+        
+        # Функция для форматирования времени
+        def format_time(seconds):
+            minutes = seconds // 60
+            seconds = seconds % 60
+            return f"{minutes:02d}:{seconds:02d}"
+        
+        # Обновляем таймер
+        while True:
+            time_left = (next_update - datetime.now()).total_seconds()
+            if time_left <= 0:
+                st.session_state.last_update = datetime.now()
+                st.rerun()
+            
+            timer_placeholder.markdown(
+                f'<div style="color: white; font-size: 14px; padding: 0.5em 0;">'
+                f'До обновления: {format_time(int(time_left))}</div>',
+                unsafe_allow_html=True
+            )
+            time.sleep(1)
                 
     # Загрузка данных
     df = load_data()
