@@ -20,7 +20,7 @@ def main():
     
     # Информация об обновлениях в сайдбаре
     with st.sidebar:
-        st.header("Информация об обновлениях")
+        # Убираем заголовок "Информация об обновлениях", так как нужен только таймер
         
         # Сохраняем время последнего обновления в session_state
         if 'last_update' not in st.session_state:
@@ -30,9 +30,12 @@ def main():
         next_update = last_update + timedelta(hours=1)
         
         # Таймер обратного отсчета
-        st.markdown(
+        placeholder = st.empty()
+        placeholder.markdown(
             f"""
-            <div id='timer' style='color: rgb(49, 51, 63); font-size: 14px; padding: 0.5em 0;'></div>
+            <div style='color: rgb(49, 51, 63); font-size: 14px; padding: 0.5em 0;'>
+                До обновления: <span id='timer'></span>
+            </div>
             <script>
                 function updateTimer() {{
                     const now = new Date();
@@ -45,7 +48,7 @@ def main():
                     const timer = document.getElementById('timer');
                     if (timer) {{
                         if (diff > 0) {{
-                            timer.innerHTML = `До обновления: ${{minutes.toString().padStart(2, '0')}}:${{seconds.toString().padStart(2, '0')}}`;
+                            timer.innerHTML = `${{minutes.toString().padStart(2, '0')}}:${{seconds.toString().padStart(2, '0')}}`;
                         }} else {{
                             timer.innerHTML = 'Обновление...';
                             window.location.reload();
