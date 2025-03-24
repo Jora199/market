@@ -32,18 +32,37 @@ def main():
         st.write(f"Последнее обновление: {last_update.strftime('%Y-%m-%d %H:%M:%S')}")
         st.write(f"Следующее обновление: {next_update.strftime('%Y-%m-%d %H:%M:%S')}")
         
-        # Таймер обратного отсчета
-        placeholder = st.empty()
-        
-        # Показываем время до следующего обновления
-        remaining = int((next_update - datetime.now()).total_seconds())
-        if remaining > 0:
-            minutes, seconds = divmod(remaining, 60)
-            placeholder.text(f"До обновления: {minutes:02d}:{seconds:02d}")
-        else:
-            placeholder.text("Обновление...")
-            st.session_state.last_update = datetime.now()
-            st.experimental_rerun()
+        # Добавляем контейнер для таймера и JavaScript для его обновления
+        st.markdown(
+            f"""
+            <div id='timer' style='color: rgb(49, 51, 63); font-size: 14px;'></div>
+            <script>
+                function updateTimer() {{
+                    const now = new Date();
+                    const next = new Date('{next_update.strftime('%Y-%m-%d %H:%M:%S')}');
+                    const diff = Math.max(0, (next - now) / 1000);
+                    
+                    const minutes = Math.floor(diff / 60);
+                    const seconds = Math.floor(diff % 60);
+                    
+                    const timer = document.getElementById('timer');
+                    if (timer) {{
+                        if (diff > 0) {{
+                            timer.innerHTML = `До обновления: ${{minutes.toString().padStart(2, '0')}}:${{seconds.toString().padStart(2, '0')}}`;
+                        }} else {{
+                            timer.innerHTML = 'Обновление...';
+                            window.location.reload();
+                        }}
+                    }}
+                }}
+                
+                // Обновляем таймер каждую секунду
+                setInterval(updateTimer, 1000);
+                updateTimer();
+            </script>
+            """,
+            unsafe_allow_html=True
+        )
 
     # Загрузка данных
     df = load_data()
