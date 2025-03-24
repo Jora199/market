@@ -19,7 +19,7 @@ def main():
     st.title("Price History Analysis")
     
     # Информация об обновлениях в сайдбаре
-        with st.sidebar:
+    with st.sidebar:
         if 'last_update' not in st.session_state:
             st.session_state.last_update = datetime.now()
         
