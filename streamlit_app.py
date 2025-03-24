@@ -2,12 +2,13 @@ import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
 from datetime import datetime, timedelta
+import time
 
 # Настройка страницы
 st.set_page_config(page_title="Price History Viewer", layout="wide")
 
-# Функция загрузки данных
-@st.cache_data
+# Функция загрузки данных с ограничением времени кэша
+@st.cache_data(ttl=3600)  # Кэш будет обновляться каждый час
 def load_data():
     df = pd.read_csv("data/price_history.csv")
     df['timestamp'] = pd.to_datetime(df['timestamp'])
@@ -17,6 +18,33 @@ def main():
     # Заголовок
     st.title("Price History Analysis")
     
+    # Информация об обновлениях в сайдбаре
+    with st.sidebar:
+        st.header("Информация об обновлениях")
+        
+        # Сохраняем время последнего обновления в session_state
+        if 'last_update' not in st.session_state:
+            st.session_state.last_update = datetime.now()
+        
+        last_update = st.session_state.last_update
+        next_update = last_update + timedelta(hours=1)
+        
+        st.write(f"Последнее обновление: {last_update.strftime('%Y-%m-%d %H:%M:%S')}")
+        st.write(f"Следующее обновление: {next_update.strftime('%Y-%m-%d %H:%M:%S')}")
+        
+        # Таймер обратного отсчета
+        placeholder = st.empty()
+        
+        # Показываем время до следующего обновления
+        remaining = int((next_update - datetime.now()).total_seconds())
+        if remaining > 0:
+            minutes, seconds = divmod(remaining, 60)
+            placeholder.text(f"До обновления: {minutes:02d}:{seconds:02d}")
+        else:
+            placeholder.text("Обновление...")
+            st.session_state.last_update = datetime.now()
+            st.experimental_rerun()
+
     # Загрузка данных
     df = load_data()
     
@@ -31,7 +59,7 @@ def main():
         selected_items = st.multiselect(
             "Выберите предметы",
             items,
-            default=[items[0]]  # По умолчанию выбран первый предмет
+            default=[items[0]]
         )
         
         # Выбор временного диапазона
@@ -106,6 +134,10 @@ def main():
             col1.metric("Текущая цена", f"{current_price:.2f}")
             col2.metric("Минимальная цена", f"{min_price:.2f}")
             col3.metric("Максимальная цена", f"{max_price:.2f}")
+
+    if datetime.now() >= next_update:
+        st.session_state.last_update = datetime.now()
+        st.experimental_rerun()
 
 if __name__ == "__main__":
     main()
