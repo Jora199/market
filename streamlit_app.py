@@ -19,7 +19,7 @@ def main():
     st.title("Price History Analysis")
     
     # Информация об обновлениях в сайдбаре
-    with st.sidebar:
+        with st.sidebar:
         if 'last_update' not in st.session_state:
             st.session_state.last_update = datetime.now()
         
@@ -35,32 +35,37 @@ def main():
             <script>
                 function updateCountdown() {{
                     try {{
-                        const now = new Date();
-                        const next = new Date('{next_update.strftime('%Y-%m-%d %H:%M:%S')}');
-                        const diff = Math.max(0, (next - now) / 1000);
+                        const targetDate = new Date('{next_update.strftime("%Y-%m-%d %H:%M:%S")}');
+                        const currentDate = new Date();
                         
-                        const minutes = Math.floor(diff / 60);
-                        const seconds = Math.floor(diff % 60);
+                        // Разница в миллисекундах
+                        let timeLeft = targetDate - currentDate;
                         
-                        document.getElementById('countdown_timer').textContent = 
-                            `${{minutes.toString().padStart(2, '0')}}:${{seconds.toString().padStart(2, '0')}}`;
-                        
-                        if (diff <= 0) {{
+                        if (timeLeft > 0) {{
+                            // Конвертируем в минуты и секунды
+                            const minutes = Math.floor(timeLeft / (1000 * 60));
+                            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                            
+                            // Форматируем вывод
+                            const formattedTime = 
+                                minutes.toString().padStart(2, '0') + ':' + 
+                                seconds.toString().padStart(2, '0');
+                            
+                            document.getElementById('countdown_timer').textContent = formattedTime;
+                        }} else {{
+                            document.getElementById('countdown_timer').textContent = "00:00";
                             window.location.reload();
                         }}
                     }} catch (e) {{
                         console.error('Timer error:', e);
                     }}
                 }}
-                
-                document.addEventListener('DOMContentLoaded', function() {{
-                    updateCountdown();
-                    setInterval(updateCountdown, 1000);
-                }});
-                
-                // Запускаем сразу на случай, если DOMContentLoaded уже произошел
+
+                // Обновляем сразу при загрузке
                 updateCountdown();
-                setInterval(updateCountdown, 1000);
+                
+                // Обновляем каждую секунду
+                const timerInterval = setInterval(updateCountdown, 1000);
             </script>
             """,
             unsafe_allow_html=True
