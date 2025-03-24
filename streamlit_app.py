@@ -19,9 +19,8 @@ def main():
     st.title("Price History Analysis")
     
     # Информация об обновлениях в сайдбаре
+        # Информация об обновлениях в сайдбаре
     with st.sidebar:
-        # Убираем заголовок "Информация об обновлениях", так как нужен только таймер
-        
         # Сохраняем время последнего обновления в session_state
         if 'last_update' not in st.session_state:
             st.session_state.last_update = datetime.now()
@@ -29,11 +28,11 @@ def main():
         last_update = st.session_state.last_update
         next_update = last_update + timedelta(hours=1)
         
-        # Таймер обратного отсчета
+        # Таймер обратного отсчета с белым текстом
         placeholder = st.empty()
         placeholder.markdown(
             f"""
-            <div style='color: rgb(49, 51, 63); font-size: 14px; padding: 0.5em 0;'>
+            <div style='color: white; font-size: 14px; padding: 0.5em 0;'>
                 До обновления: <span id='timer'></span>
             </div>
             <script>
