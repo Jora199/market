@@ -19,45 +19,48 @@ def main():
     st.title("Price History Analysis")
     
     # Информация об обновлениях в сайдбаре
-        # Информация об обновлениях в сайдбаре
     with st.sidebar:
-        # Сохраняем время последнего обновления в session_state
         if 'last_update' not in st.session_state:
             st.session_state.last_update = datetime.now()
         
         last_update = st.session_state.last_update
         next_update = last_update + timedelta(hours=1)
         
-        # Таймер обратного отсчета с белым текстом
         placeholder = st.empty()
         placeholder.markdown(
             f"""
             <div style='color: white; font-size: 14px; padding: 0.5em 0;'>
-                До обновления: <span id='timer'></span>
+                До обновления: <span id='countdown_timer'>00:00</span>
             </div>
             <script>
-                function updateTimer() {{
-                    const now = new Date();
-                    const next = new Date('{next_update.strftime('%Y-%m-%d %H:%M:%S')}');
-                    const diff = Math.max(0, (next - now) / 1000);
-                    
-                    const minutes = Math.floor(diff / 60);
-                    const seconds = Math.floor(diff % 60);
-                    
-                    const timer = document.getElementById('timer');
-                    if (timer) {{
-                        if (diff > 0) {{
-                            timer.innerHTML = `${{minutes.toString().padStart(2, '0')}}:${{seconds.toString().padStart(2, '0')}}`;
-                        }} else {{
-                            timer.innerHTML = 'Обновление...';
+                function updateCountdown() {{
+                    try {{
+                        const now = new Date();
+                        const next = new Date('{next_update.strftime('%Y-%m-%d %H:%M:%S')}');
+                        const diff = Math.max(0, (next - now) / 1000);
+                        
+                        const minutes = Math.floor(diff / 60);
+                        const seconds = Math.floor(diff % 60);
+                        
+                        document.getElementById('countdown_timer').textContent = 
+                            `${{minutes.toString().padStart(2, '0')}}:${{seconds.toString().padStart(2, '0')}}`;
+                        
+                        if (diff <= 0) {{
                             window.location.reload();
                         }}
+                    }} catch (e) {{
+                        console.error('Timer error:', e);
                     }}
                 }}
                 
-                // Обновляем таймер каждую секунду
-                setInterval(updateTimer, 1000);
-                updateTimer();
+                document.addEventListener('DOMContentLoaded', function() {{
+                    updateCountdown();
+                    setInterval(updateCountdown, 1000);
+                }});
+                
+                // Запускаем сразу на случай, если DOMContentLoaded уже произошел
+                updateCountdown();
+                setInterval(updateCountdown, 1000);
             </script>
             """,
             unsafe_allow_html=True
