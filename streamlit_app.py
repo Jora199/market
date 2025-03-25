@@ -2,30 +2,33 @@ import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
 from datetime import datetime, timedelta
+import os
 
 # Настройка страницы
 st.set_page_config(page_title="Price History Viewer", layout="wide")
 
-# Функция загрузки данных
-@st.cache_data
+# Функция загрузки данных с отслеживанием изменений файла
+@st.cache_data(ttl=60)  # Кеш истекает каждые 60 секунд
 def load_data():
-    df = pd.read_csv("data/price_history.csv")
+    file_path = "data/price_history.csv"
+    
+    # Получаем время последнего изменения файла
+    last_modified = os.path.getmtime(file_path)
+    
+    df = pd.read_csv(file_path)
     df['timestamp'] = pd.to_datetime(df['timestamp'])
-    return df
+    
+    # Добавляем время последнего изменения в кеш
+    return df, last_modified
 
 def main():
     # Заголовок
     st.title("Price History Analysis")
     
-    # Кнопка обновления данных
-    if st.button('🔄 Обновить данные'):
-        st.cache_data.clear()
-        st.success('Кэш очищен. Данные будут загружены заново.')
-    
     # Загрузка данных
-    df = load_data()
+    df, _ = load_data()
     
-    # Остальной код остается без изменений
+    # Получение списка предметов (исключая столбец timestamp)
     items = [col for col in df.columns if col != 'timestamp']
     
     # Боковая панель с фильтрами
