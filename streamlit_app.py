@@ -89,15 +89,24 @@ def main():
         if show_ma:
             ma_period = st.slider("Период скользящей средней (часов)", 1, 24, 6)
 
-    # Отображение изображений выбранных предметов
+        # Отображение изображений выбранных предметов
     if selected_items:
-        cols = st.columns(min(len(selected_items), 3))
+        # Всегда создаем 3 колонки, независимо от количества выбранных предметов
+        cols = st.columns(3)
         
-        for idx, item in enumerate(selected_items):
-            col_idx = idx % 3
-            with cols[col_idx]:
-                img_url = img_dict.get(item, default_img)
-                st.image(img_url, caption=item, use_container_width=True)
+        # Вычисляем центральную позицию для одного изображения
+        if len(selected_items) == 1:
+            # Если выбран один предмет, размещаем его в центральной колонке
+            with cols[1]:  # индекс 1 - это центральная колонка
+                img_url = img_dict.get(selected_items[0], default_img)
+                st.image(img_url, caption=selected_items[0], use_container_width=True)
+        else:
+            # Если выбрано несколько предметов, размещаем их последовательно
+            for idx, item in enumerate(selected_items):
+                if idx < 3:  # Показываем только первые три предмета
+                    with cols[idx]:
+                        img_url = img_dict.get(item, default_img)
+                        st.image(img_url, caption=item, use_container_width=True)
                 
         # График
         mask = (df['timestamp'].dt.date >= date_range[0]) & (df['timestamp'].dt.date <= date_range[1])
