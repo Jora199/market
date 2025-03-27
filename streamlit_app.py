@@ -45,6 +45,9 @@ def main():
     # Получение списка предметов (исключая столбец timestamp)
     items = [col for col in df.columns if col != 'timestamp']
     
+    # Показываем общее количество отслеживаемых предметов
+    st.sidebar.info(f"Total items tracked: {len(items)}") 
+    
     # Создаем список items_with_supply для отображения в селекторе
     items_with_supply = [f"{item} (Supply: {int(supply_dict.get(item, 0))})" for item in items]
     
