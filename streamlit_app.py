@@ -3,7 +3,6 @@ import pandas as pd
 import plotly.graph_objects as go
 from datetime import datetime, timedelta
 import os
-import requests
 
 # Настройка страницы
 st.set_page_config(page_title="Price History Viewer", layout="wide")
@@ -12,12 +11,29 @@ st.set_page_config(page_title="Price History Viewer", layout="wide")
 @st.cache_data
 def load_images():
     try:
-        img_dict = {}
-        df = pd.read_csv("data/img.csv")
+        # Используем специальные параметры для корректного чтения CSV
+        df = pd.read_csv("data/img.csv", 
+                        quotechar='"',  # использовать двойные кавычки как ограничители строк
+                        escapechar='\\',  # использовать обратный слэш как escape-символ
+                        encoding='utf-8')
+        
+        # Добавим отладочную информацию
+        st.write("Структура данных:")
+        st.write(df.columns)
+        st.write("Первые несколько строк:")
+        st.write(df.head())
+        
+        # Создаем словарь, очищая пробелы в ключах
         img_dict = dict(zip(df['name'].str.strip(), df['img']))
+        
+        # Проверим содержимое словаря
+        st.write("Количество загруженных изображений:", len(img_dict))
+        st.write("Пример записи:", list(img_dict.items())[0])
+        
         return img_dict
     except Exception as e:
         st.error(f"Ошибка при загрузке файла img.csv: {str(e)}")
+        st.error("Содержимое исключения:", e.__class__.__name__)
         return {}
 
 # Остальные функции загрузки данных остаются без изменений
