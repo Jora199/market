@@ -15,30 +15,13 @@ def load_image_data():
             lines = file.readlines()
         
         img_dict = {}
-        st.write("Загружено строк из CSV:", len(lines))
-        
         for line in lines[1:]:  # пропускаем заголовок
-            try:
-                # Ищем "https://" в строке для разделения имени и ссылки
-                split_index = line.find("https://")
-                if split_index != -1:
-                    name = line[:split_index].strip()
-                    img = line[split_index:].strip()
-                    img_dict[name] = img
-                    
-                    # Отладка для первых нескольких элементов
-                    if len(img_dict) < 3:
-                        st.write(f"Добавлено: {name} -> {img}")
+            split_index = line.find("https://")
+            if split_index != -1:
+                name = line[:split_index].strip()
+                img = line[split_index:].strip()
+                img_dict[name] = img
                 
-            except Exception as e:
-                st.write(f"Ошибка при обработке строки: {line}")
-                st.write(f"Ошибка: {str(e)}")
-                continue
-        
-        st.write("Количество загруженных изображений:", len(img_dict))
-        if len(img_dict) > 0:
-            st.write("Первые 5 ключей:", list(img_dict.keys())[:5])
-        
         return img_dict
         
     except FileNotFoundError:
@@ -47,8 +30,7 @@ def load_image_data():
     except Exception as e:
         st.error(f"Ошибка при чтении файла img.csv: {str(e)}")
         return {}
-    
-# Остальные функции загрузки данных остаются без изменений
+
 @st.cache_data(ttl=60)
 def load_data():
     file_path = "data/price_history.csv"
@@ -109,19 +91,15 @@ def main():
 
     # Отображение изображений выбранных предметов
     if selected_items:
-        # Создаем columns в зависимости от количества выбранных предметов
-        cols = st.columns(min(len(selected_items), 3))  # Максимум 3 колонки
+        cols = st.columns(min(len(selected_items), 3))
         
         for idx, item in enumerate(selected_items):
             col_idx = idx % 3
             with cols[col_idx]:
-                # Отладочная информация
-                st.write(f"Поиск изображения для: '{item}'")
                 img_url = img_dict.get(item, default_img)
-                st.write(f"Найденный URL: {img_url}")
                 st.image(img_url, caption=item, use_container_width=True)
                 
-        # Далее идет код для отображения графика
+        # График
         mask = (df['timestamp'].dt.date >= date_range[0]) & (df['timestamp'].dt.date <= date_range[1])
         filtered_df = df.loc[mask]
         
