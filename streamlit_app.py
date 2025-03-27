@@ -90,6 +90,7 @@ def main():
             ma_period = st.slider("Период скользящей средней (часов)", 1, 24, 6)
 
     # Отображение изображений выбранных предметов
+    # В части отображения изображений заменим код на:
     if selected_items:
         # Создаем сетку для изображений
         cols = st.columns(min(len(selected_items), 4))
@@ -97,23 +98,18 @@ def main():
             col_idx = idx % 4
             with cols[col_idx]:
                 img_url = img_dict.get(item, default_img)
-                # Добавляем отладочную информацию
-                st.write(f"Trying to display image for {item}")
-                st.write(f"URL: {img_url}")
                 try:
                     st.image(
                         img_url,
                         caption=item,
-                        use_column_width=True,
-                        # Добавляем обработку ошибок
-                        error='Изображение не загружено'
+                        use_container_width=True  # Используем новый параметр вместо use_column_width
                     )
                 except Exception as e:
-                    st.error(f"Ошибка загрузки изображения: {str(e)}")
+                    st.error(f"Ошибка загрузки изображения для {item}")
                     st.image(
                         default_img,
                         caption=f"{item} (default image)",
-                        use_column_width=True
+                        use_container_width=True
                     )
                 
     # Основная область с графиком
