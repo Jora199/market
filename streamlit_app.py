@@ -11,13 +11,17 @@ st.set_page_config(page_title="Price History Viewer", layout="wide")
 @st.cache_data
 def load_image_data():
     try:
-        img_df = pd.read_csv("data/img.csv")
+        img_df = pd.read_csv("data/img.csv", encoding='utf-8', quoting=1)  # добавлены параметры encoding и quoting
         # Создаем словарь {название предмета: ссылка}
         img_dict = dict(zip(img_df['name'].str.strip(), img_df['img']))
         return img_dict
     except FileNotFoundError:
         st.error("Файл img.csv не найден.")
         return {}
+    except Exception as e:
+        st.error(f"Ошибка при чтении файла img.csv: {str(e)}")
+        return {}
+
 
 # Остальные функции загрузки данных остаются без изменений
 @st.cache_data(ttl=60)
