@@ -7,44 +7,27 @@ import os
 # Настройка страницы
 st.set_page_config(page_title="Price History Viewer", layout="wide")
 
-# Добавляем функцию загрузки изображений
-@st.cache_data
-def load_images():
-    try:
-        # Пробуем простое чтение CSV
-        df = pd.read_csv("data/img.csv")
-        
-        # Проверяем наличие нужных колонок
-        if 'name' not in df.columns or 'img' not in df.columns:
-            st.error("В файле отсутствуют необходимые колонки 'name' и 'img'")
-            return {}
-            
-        # Создаем словарь
-        img_dict = dict(zip(df['name'].str.strip(), df['img']))
-        
-        # Отладочная информация
-        st.write(f"Загружено {len(img_dict)} изображений")
-        
-        return img_dict
-        
-    except Exception as e:
-        st.error(f"Ошибка при загрузке файла img.csv: {str(e)}")
-        return {}
-
-# Остальные функции загрузки данных остаются без изменений
-@st.cache_data(ttl=60)
+# Функция загрузки данных с отслеживанием изменений файла
+@st.cache_data(ttl=60)  # Кеш истекает каждые 60 секунд
 def load_data():
     file_path = "data/price_history.csv"
+    
+    # Получаем время последнего изменения файла
     last_modified = os.path.getmtime(file_path)
+    
     df = pd.read_csv(file_path)
     df['timestamp'] = pd.to_datetime(df['timestamp'])
+    
+    # Добавляем время последнего изменения в кеш
     return df, last_modified
 
+# Функция загрузки данных о supply
 @st.cache_data
 def load_supply_data():
     supply_path = "data/nft_supply_results.csv"
     try:
         supply_df = pd.read_csv(supply_path)
+        # Создаем словарь {название предмета: supply}
         supply_dict = dict(zip(supply_df['Item Name'], supply_df['Estimated Supply']))
         return supply_dict
     except FileNotFoundError:
@@ -58,31 +41,31 @@ def main():
     # Загрузка данных
     df, _ = load_data()
     supply_dict = load_supply_data()
-    img_dict = load_images()
     
-    # Дефолтное изображение
-    default_img = "https://i.ibb.co/default-image.png" 
-    
-    # Получение списка предметов
+    # Получение списка предметов (исключая столбец timestamp)
     items = [col for col in df.columns if col != 'timestamp']
-    
-    # Показываем общее количество отслеживаемых предметов
-    st.metric("Total Items Tracked", len(items))
     
     # Создаем список items_with_supply для отображения в селекторе
     items_with_supply = [f"{item} (Supply: {int(supply_dict.get(item, 0))})" for item in items]
+    
+    # Создаем словарь для обратного преобразования
     display_to_original = dict(zip(items_with_supply, items))
     
     # Боковая панель с фильтрами
     with st.sidebar:
         st.header("Фильтры")
+        
+        # Выбор предмета с отображением supply
         selected_items_with_supply = st.multiselect(
             "Выберите предметы",
             items_with_supply,
             default=[items_with_supply[0]] if items_with_supply else []
         )
+        
+        # Преобразование выбранных items обратно в оригинальные названия
         selected_items = [display_to_original[item] for item in selected_items_with_supply]
         
+        # Выбор временного диапазона
         date_range = st.date_input(
             "Выберите период",
             value=(df['timestamp'].min().date(), df['timestamp'].max().date()),
@@ -90,31 +73,11 @@ def main():
             max_value=df['timestamp'].max().date()
         )
         
+        # Показывать скользящую среднюю
         show_ma = st.checkbox("Показать скользящую среднюю", value=True)
         if show_ma:
             ma_period = st.slider("Период скользящей средней (часов)", 1, 24, 6)
 
-    # Отображение изображений выбранных предметов
-    if selected_items:
-        cols = st.columns(min(len(selected_items), 4))
-        for idx, item in enumerate(selected_items):
-            col_idx = idx % 4
-            with cols[col_idx]:
-                # Отладочная информация
-                st.write(f"Обработка элемента: '{item}'")
-                img_url = img_dict.get(item)
-                st.write(f"Найденный URL: {img_url}")
-                
-                if img_url:
-                    st.image(
-                        img_url,
-                        caption=item,
-                        use_container_width=True
-                    )
-                else:
-                    st.error(f"URL не найден для {item}")
-                    st.image(default_img, caption=f"{item} (default image)", use_container_width=True)
-                                
     # Основная область с графиком
     if selected_items:
         # Фильтрация по датам
@@ -125,6 +88,7 @@ def main():
         fig = go.Figure()
         
         for item in selected_items:
+            # Добавление линии цены
             fig.add_trace(go.Scatter(
                 x=filtered_df['timestamp'],
                 y=filtered_df[item],
@@ -132,8 +96,9 @@ def main():
                 name=f"{item} (Supply: {int(supply_dict.get(item, 0))})"
             ))
             
+            # Добавление скользящей средней
             if show_ma:
-                window = int(ma_period * 2)
+                window = int(ma_period * 2)  # *2 так как точки каждые 30 минут
                 ma = filtered_df[item].rolling(window=window).mean()
                 fig.add_trace(go.Scatter(
                     x=filtered_df['timestamp'],
@@ -143,6 +108,7 @@ def main():
                     name=f'{item} MA({ma_period}h)'
                 ))
         
+        # Настройка макета графика
         fig.update_layout(
             height=600,
             xaxis_title="Время",
@@ -156,6 +122,7 @@ def main():
             )
         )
         
+        # Отображение графика
         st.plotly_chart(fig, use_container_width=True)
         
         # Статистика
