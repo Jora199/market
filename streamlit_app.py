@@ -132,8 +132,12 @@ def main():
         st.plotly_chart(fig, use_container_width=True)
         
         if len(selected_items) == 1:
-            # Создаем две колонки: левая для статистики, правая для изображения
-            img_col, stats_col = st.columns([2, 1])
+            # Изображение слева
+            img_col, stats_col = st.columns([1, 2])  # [изображение, статистика]
+            
+            with img_col:
+                img_url = img_dict.get(item, default_img)
+                st.image(img_url, use_container_width=True)
             
             with stats_col:
                 st.subheader("Статистика")
