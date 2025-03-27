@@ -133,7 +133,7 @@ def main():
         
         if len(selected_items) == 1:
             # Создаем две колонки: левая для статистики, правая для изображения
-            stats_col, img_col = st.columns([2, 1])
+            img_col, stats_col = st.columns([2, 1])
             
             with stats_col:
                 st.subheader("Статистика")
