@@ -17,24 +17,18 @@ def load_image_data():
         img_dict = {}
         st.write("Загружено строк из CSV:", len(lines))
         
-        # Добавим отладку для первых нескольких строк
-        st.write("Первые 3 строки файла:")
-        for l in lines[:3]:
-            st.write(l)
-            
         for line in lines[1:]:  # пропускаем заголовок
             try:
-                # Изменяем способ разбора строки
-                line = line.strip()
-                if line.startswith('"') and line.endswith('"'):
-                    line = line[1:-1]  # убираем внешние кавычки
-                
-                name, img = line.split('","')
-                img_dict[name] = img
-                
-                # Отладка для первых нескольких элементов
-                if len(img_dict) < 3:
-                    st.write(f"Добавлено: {name} -> {img}")
+                # Ищем "https://" в строке для разделения имени и ссылки
+                split_index = line.find("https://")
+                if split_index != -1:
+                    name = line[:split_index].strip()
+                    img = line[split_index:].strip()
+                    img_dict[name] = img
+                    
+                    # Отладка для первых нескольких элементов
+                    if len(img_dict) < 3:
+                        st.write(f"Добавлено: {name} -> {img}")
                 
             except Exception as e:
                 st.write(f"Ошибка при обработке строки: {line}")
