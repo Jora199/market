@@ -18,7 +18,7 @@ Item Name,Estimated Supply
 2.5x - 4x Adjustable Advanced Combat Scope for Terikon,3476
 2.5x - 4x Adjustable Advanced Combat Scope for Vulture,8027
 2.5x - 4x Adjustable Advanced Combat Scope for Woodpecker,1604
-8x - 12x KAS Scope,5598
+8x - 12x KAS Scope,5609
 AZV 100,5036
 AZV 100 Doomed Zero,6449
 AZV 100 Heavy Barrel,2143
@@ -124,7 +124,7 @@ Enforcer Shorts,13154
 Enforcer Vest,17012
 Enhanced Compensator for the AZV 100,1814
 Enhanced Compensator for the Boomslang,1986
-Enhanced Compensator for the Hawk,2612
+Enhanced Compensator for the Hawk,2614
 Enhanced Compensator for the Ichnya,1877
 Enhanced Compensator for the Kasper,1788
 Enhanced Compensator for the Kelowna,1645
@@ -132,14 +132,14 @@ Enhanced Compensator for the Kestrel,2585
 Enhanced Compensator for the Kite,3331
 Enhanced Compensator for the Kochi,419
 Enhanced Compensator for the M4 Commodore,3888
-Enhanced Compensator for the Mavinga,2190
+Enhanced Compensator for the Mavinga,10992
 Enhanced Compensator for the Osprey,2172
 Enhanced Compensator for the Partisan,1850
 Enhanced Compensator for the Pierser,148
 Enhanced Compensator for the Proton,2497
 Enhanced Compensator for the TAP9,3803
 Enhanced Compensator for the Tacoma,2937
-Enhanced Compensator for the Terikon,2257
+Enhanced Compensator for the Terikon,3989
 Enhanced Compensator for the Type 227,1659
 Enhanced Compensator for the Vulture,2571
 Enhanced Compensator for the Woodpecker,2276
@@ -179,17 +179,17 @@ Impact Junkie Jetpack,5311
 Impact Junkie Mask,5352
 Impact Junkie Shorts,5094
 Impact Junkie T-shirt,5294
-Inferno Skin for the Kestrel,1038
+Inferno Skin for the Kestrel,1080
 Inferno Skin for the Mavinga,1403
 Inferno Skin for the Woodpecker,1379
 Influencer,15308
 Influencer Heavy Barrel,15331
-Influencer Tactical Foregrip,315
+Influencer Tactical Foregrip,316
 JAVELINA,5246
 Jungle Ops Tac-Vest,2013
 KINETIC SHIELD,4991
 Karmacide,1244
-Kasper,7809
+Kasper,15395
 Kasper Heavy Barrel,2002
 Kasper Jingle Jammer,5340
 Kasper Legacy,538
@@ -203,9 +203,9 @@ Kelowna Kiiro Shinobi,3390
 Kelowna Legacy,477
 Kelowna Retro,526
 Kelowna Tagger,4694
-Kestrel,6893
+Kestrel,10992
 Kestrel 4x - 8x Adjustable MR Scope,2695
-Kestrel 8x - 12x Adjustable LR Scope,2297
+Kestrel 8x - 12x Adjustable LR Scope,2711
 Kestrel Heavy Barrel,6101
 Kestrel Legacy,822
 Kestrel Retro,661
@@ -216,7 +216,7 @@ Kiiro Shinobi Jetpack,3095
 Kiiro Shinobi Mask,3466
 Kiiro Shinobi Pants,3363
 Kiiro Shinobi Vest,3680
-Kite,8587
+Kite,12556
 Kite Heavy Barrel,4703
 Kite Legacy,590
 Kite Liberalator,9624
@@ -254,7 +254,7 @@ Mad Biker Jetpack,4904
 Mad Biker Pants,5884
 Mad Biker Shirt,7184
 Mad Biker Vest,8075
-Mantis Mask,1984
+Mantis Mask,1987
 Mavinga,12909
 Mavinga Heavy Barrel,8650
 Mavinga Legacy,382
@@ -276,7 +276,7 @@ Osprey Tactical Foregrip,1588
 PARALYZER,8358
 PHOSPHOR FURY ,6605
 Pacifist Glasses,5174
-Pacifist Hoodie,6788
+Pacifist Hoodie,7857
 Pacifist Jetpack,5579
 Pacifist Mask,5449
 Pacifist Shorts,7021
@@ -306,7 +306,7 @@ Player Zero Cap,3120
 Player Zero Chest Rig,3209
 Player Zero Jetpack,2965
 Player Zero Mask,2870
-Player Zero Shades,2724
+Player Zero Shades,2782
 Player Zero Shorts,3040
 Player Zero Tank Top,3049
 Prankster Helmet,1088
@@ -333,7 +333,7 @@ Raverunner Chest Rig,89986
 Raverunner Jetpack,60117
 Raverunner Mask,87843
 Raverunner Shirt,70576
-Raverunner Shorts,72154
+Raverunner Shorts,72874
 Red Set,9789
 Retro Mop Cut,3258
 Retro Mop Cut - Blond,1321
@@ -366,7 +366,7 @@ Street Fighter Pants,4533
 TAP9,6897
 TAP9 Heavy Barrel,3391
 TAP9 Legacy,331
-TAP9 Pacifist,6834
+TAP9 Pacifist,7712
 TAP9 Retro,403
 THUMPERS,5986
 TRIPMINE,6273
@@ -375,7 +375,7 @@ Tacoma AVAX Gen 04,6562
 Tacoma Heavy Barrel,12511
 Tacoma Legacy,509
 Tacoma Retro,580
-Tacoma Westcol,153
+Tacoma Westcol,387
 Tagger Cap,4283
 Tagger Chest Rig,5102
 Tagger Face Cover,4855
@@ -420,7 +420,7 @@ Thor Beard - Green,1192
 Thor Beard - Pink,1167
 Thor Beard -Orange,1208
 Throne of Games,5387
-Toss My Fruit Salad,42872
+Toss My Fruit Salad,44742
 Type 227,4793
 Type 227 Heavy Barrel,15338
 Type 227 Impact Junkie,5350
@@ -434,8 +434,8 @@ Vulture Legacy,464
 Vulture Pink Fury,6540
 Vulture Retro,504
 Vulture Tactical Foregrip,1901
-Westcol Set,177
-Westcol Till I Die,145
+Westcol Set,303
+Westcol Till I Die,333
 Woodpecker,6454
 Woodpecker Heavy Barrel,3285
 Woodpecker Legacy,495
