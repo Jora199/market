@@ -112,6 +112,7 @@ def main():
                 img_url = img_dict.get(item, default_img)
                 st.write(f"Найденный URL: {img_url}")
                 st.image(img_url, caption=item, use_container_width=True)
+                
         # Далее идет код для отображения графика
         mask = (df['timestamp'].dt.date >= date_range[0]) & (df['timestamp'].dt.date <= date_range[1])
         filtered_df = df.loc[mask]
