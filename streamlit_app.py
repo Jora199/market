@@ -84,26 +84,26 @@ def main():
 
     # Отображение изображений выбранных предметов
     if selected_items:
-    cols = st.columns(min(len(selected_items), 4))
-    for idx, item in enumerate(selected_items):
-        col_idx = idx % 4
-        with cols[col_idx]:
-            img_url = img_dict.get(item, default_img)
-            try:
-                # Добавим проверку доступности изображения
-                response = requests.get(img_url)
-                if response.status_code == 200:
-                    st.image(
-                        img_url,
-                        caption=item,
-                        use_container_width=True
-                    )
-                else:
-                    st.error(f"Не удалось загрузить изображение для {item} (статус: {response.status_code})")
+        cols = st.columns(min(len(selected_items), 4))
+        for idx, item in enumerate(selected_items):
+            col_idx = idx % 4
+            with cols[col_idx]:
+                img_url = img_dict.get(item, default_img)
+                try:
+                    # Добавим проверку доступности изображения
+                    response = requests.get(img_url)
+                    if response.status_code == 200:
+                        st.image(
+                            img_url,
+                            caption=item,
+                            use_container_width=True
+                        )
+                    else:
+                        st.error(f"Не удалось загрузить изображение для {item} (статус: {response.status_code})")
+                        st.image(default_img, caption=f"{item} (default image)", use_container_width=True)
+                except Exception as e:
+                    st.error(f"Ошибка загрузки изображения для {item}: {str(e)}")
                     st.image(default_img, caption=f"{item} (default image)", use_container_width=True)
-            except Exception as e:
-                st.error(f"Ошибка загрузки изображения для {item}: {str(e)}")
-                st.image(default_img, caption=f"{item} (default image)", use_container_width=True)
                 
     # Основная область с графиком
     if selected_items:
