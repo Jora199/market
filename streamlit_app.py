@@ -61,7 +61,7 @@ def main():
     st.title("Price History Analysis")
     
     items = [col for col in df.columns if col != 'timestamp']
-    st.metric("Total Items Tracked", len(items))
+    # Убираем st.metric отсюда
     
     items_with_supply = [f"{item} (Supply: {int(supply_dict.get(item, 0))})" for item in items]
     display_to_original = dict(zip(items_with_supply, items))
@@ -71,7 +71,7 @@ def main():
         st.header("Фильтры")
         
         selected_items_with_supply = st.multiselect(
-            "Выберите предметы",
+            f"Выберите предметы (всего: {len(items)})",  # Добавляем количество предметов здесь
             items_with_supply,
             default=[items_with_supply[0]] if items_with_supply else []
         )
