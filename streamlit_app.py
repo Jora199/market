@@ -15,22 +15,36 @@ def load_image_data():
             lines = file.readlines()
         
         img_dict = {}
-        # Добавим отладочный вывод
         st.write("Загружено строк из CSV:", len(lines))
         
-        for line in lines[1:]:
+        # Добавим отладку для первых нескольких строк
+        st.write("Первые 3 строки файла:")
+        for l in lines[:3]:
+            st.write(l)
+            
+        for line in lines[1:]:  # пропускаем заголовок
             try:
-                parts = line.strip().split('","')
-                if len(parts) == 2:
-                    name = parts[0].strip('"')
-                    img = parts[1].strip('"')
-                    img_dict[name.strip()] = img.strip()
-            except:
+                # Изменяем способ разбора строки
+                line = line.strip()
+                if line.startswith('"') and line.endswith('"'):
+                    line = line[1:-1]  # убираем внешние кавычки
+                
+                name, img = line.split('","')
+                img_dict[name] = img
+                
+                # Отладка для первых нескольких элементов
+                if len(img_dict) < 3:
+                    st.write(f"Добавлено: {name} -> {img}")
+                
+            except Exception as e:
+                st.write(f"Ошибка при обработке строки: {line}")
+                st.write(f"Ошибка: {str(e)}")
                 continue
         
-        # Добавим отладочный вывод
         st.write("Количество загруженных изображений:", len(img_dict))
-        st.write("Пример ключей:", list(img_dict.keys())[:5])
+        if len(img_dict) > 0:
+            st.write("Первые 5 ключей:", list(img_dict.keys())[:5])
+        
         return img_dict
         
     except FileNotFoundError:
