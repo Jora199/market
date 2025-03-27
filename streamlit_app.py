@@ -140,10 +140,10 @@ def main():
                 st.image(img_url, use_container_width=True)
             
             with stats_col:
-                st.subheader("Статистика")
+                item = selected_items[0]
+                st.subheader(f"Статистика - {item}")  # Добавляем название предмета в заголовок
                 col1, col2, col3, col4 = st.columns(4)
                 
-                item = selected_items[0]
                 current_price = filtered_df[item].iloc[-1]
                 min_price = filtered_df[item].min()
                 max_price = filtered_df[item].max()
