@@ -11,30 +11,24 @@ st.set_page_config(page_title="Price History Viewer", layout="wide")
 @st.cache_data
 def load_images():
     try:
-        # Используем специальные параметры для корректного чтения CSV
-        df = pd.read_csv("data/img.csv", 
-                        quotechar='"',  
-                        escapechar='\\',  
-                        encoding='utf-8')
+        # Пробуем простое чтение CSV
+        df = pd.read_csv("data/img.csv")
         
-        # Добавим отладочную информацию
-        st.write("Структура данных:")
-        st.write(df.columns)
-        st.write("Первые несколько строк:")
-        st.write(df.head())
-        
-        # Создаем словарь, очищая пробелы в ключах
+        # Проверяем наличие нужных колонок
+        if 'name' not in df.columns or 'img' not in df.columns:
+            st.error("В файле отсутствуют необходимые колонки 'name' и 'img'")
+            return {}
+            
+        # Создаем словарь
         img_dict = dict(zip(df['name'].str.strip(), df['img']))
         
-        # Проверим содержимое словаря
-        st.write("Количество загруженных изображений:", len(img_dict))
-        st.write("Пример записи:", list(img_dict.items())[0])
+        # Отладочная информация
+        st.write(f"Загружено {len(img_dict)} изображений")
         
         return img_dict
         
     except Exception as e:
         st.error(f"Ошибка при загрузке файла img.csv: {str(e)}")
-        st.error(f"Тип ошибки: {type(e).__name__}")
         return {}
 
 # Остальные функции загрузки данных остаются без изменений
