@@ -92,13 +92,29 @@ def main():
     # Отображение изображений выбранных предметов
     if selected_items:
         # Создаем сетку для изображений
-        cols = st.columns(min(len(selected_items), 4))  # Максимум 4 колонки
+        cols = st.columns(min(len(selected_items), 4))
         for idx, item in enumerate(selected_items):
-            col_idx = idx % 4  # Определяем, в какую колонку поместить изображение
+            col_idx = idx % 4
             with cols[col_idx]:
-                # Получаем ссылку на изображение или используем дефолтное
                 img_url = img_dict.get(item, default_img)
-                st.image(img_url, caption=item, use_container_width=True)
+                # Добавляем отладочную информацию
+                st.write(f"Trying to display image for {item}")
+                st.write(f"URL: {img_url}")
+                try:
+                    st.image(
+                        img_url,
+                        caption=item,
+                        use_column_width=True,
+                        # Добавляем обработку ошибок
+                        error='Изображение не загружено'
+                    )
+                except Exception as e:
+                    st.error(f"Ошибка загрузки изображения: {str(e)}")
+                    st.image(
+                        default_img,
+                        caption=f"{item} (default image)",
+                        use_column_width=True
+                    )
                 
     # Основная область с графиком
     if selected_items:
