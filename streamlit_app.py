@@ -11,12 +11,22 @@ st.set_page_config(page_title="Price History Viewer", layout="wide")
 @st.cache_data
 def load_images():
     try:
-        img_df = pd.read_csv("data/img.csv")
-        # Создаем словарь {название предмета: ссылка на изображение}
-        img_dict = dict(zip(img_df.iloc[:, 0], img_df.iloc[:, 1]))
+        img_dict = {}
+        with open("data/img.csv", 'r', encoding='utf-8') as f:
+            for line in f:
+                # Разделяем строку по "https:"
+                parts = line.split('https:"')
+                if len(parts) == 2:
+                    # Очищаем название от лишних символов
+                    name = parts[0].replace('https', '').strip()
+                    # Очищаем URL от кавычек и пробелов
+                    url = parts[1].strip().strip('"')
+                    # Добавляем протокол обратно
+                    url = 'https://' + url
+                    img_dict[name] = url
         return img_dict
-    except FileNotFoundError:
-        st.error("Файл img.csv не найден.")
+    except Exception as e:
+        st.error(f"Ошибка при загрузке файла img.csv: {str(e)}")
         return {}
 
 # Остальные функции загрузки данных остаются без изменений
