@@ -13,8 +13,8 @@ def load_images():
     try:
         # Используем специальные параметры для корректного чтения CSV
         df = pd.read_csv("data/img.csv", 
-                        quotechar='"',  # использовать двойные кавычки как ограничители строк
-                        escapechar='\\',  # использовать обратный слэш как escape-символ
+                        quotechar='"',  
+                        escapechar='\\',  
                         encoding='utf-8')
         
         # Добавим отладочную информацию
@@ -31,9 +31,10 @@ def load_images():
         st.write("Пример записи:", list(img_dict.items())[0])
         
         return img_dict
+        
     except Exception as e:
         st.error(f"Ошибка при загрузке файла img.csv: {str(e)}")
-        st.error("Содержимое исключения:", e.__class__.__name__)
+        st.error(f"Тип ошибки: {type(e).__name__}")
         return {}
 
 # Остальные функции загрузки данных остаются без изменений
