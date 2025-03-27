@@ -59,7 +59,7 @@ def main():
     img_dict = load_images()
     
     # Дефолтное изображение
-    default_img = "https://ibb.co/Qv84JNZY"
+    default_img = "https://i.ibb.co/default-image.png" 
     
     # Получение списка предметов
     items = [col for col in df.columns if col != 'timestamp']
