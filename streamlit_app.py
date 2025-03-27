@@ -153,10 +153,5 @@ def main():
                 col2.metric("Минимальная цена", f"{min_price:.2f}")
                 col3.metric("Максимальная цена", f"{max_price:.2f}")
                 col4.metric("Supply", f"{int(supply)}")
-            
-            with img_col:
-                img_url = img_dict.get(item, default_img)
-                st.image(img_url, use_container_width=True)
-
 if __name__ == "__main__":
     main()
