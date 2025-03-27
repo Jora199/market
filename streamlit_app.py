@@ -48,7 +48,7 @@ def main():
     df, _ = load_data()
     supply_dict = load_supply_data()
     img_dict = load_image_data()
-    default_img = "https://i.ibb.co/tBNqn8G/no-image.png"
+    default_img = "https://i.ibb.co/Qv84JNZY/photo-2023-12-23-09-42-33.jpg"
 
     # Заголовок
     st.title("Price History Analysis")
