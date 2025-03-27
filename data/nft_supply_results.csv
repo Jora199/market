@@ -4,7 +4,7 @@ Item Name,Estimated Supply
 2.5x - 4x Adjustable Advanced Combat Scope for AZV 100,1672
 2.5x - 4x Adjustable Advanced Combat Scope for Boomslang,1936
 2.5x - 4x Adjustable Advanced Combat Scope for Hawk,1881
-2.5x - 4x Adjustable Advanced Combat Scope for Ichnya,1802
+2.5x - 4x Adjustable Advanced Combat Scope for Ichnya,2749
 2.5x - 4x Adjustable Advanced Combat Scope for Kasper,1681
 2.5x - 4x Adjustable Advanced Combat Scope for Kestrel,2897
 2.5x - 4x Adjustable Advanced Combat Scope for Kite,1674
@@ -13,7 +13,7 @@ Item Name,Estimated Supply
 2.5x - 4x Adjustable Advanced Combat Scope for Mavinga,2137
 2.5x - 4x Adjustable Advanced Combat Scope for Partisan,1495
 2.5x - 4x Adjustable Advanced Combat Scope for Pierser,12
-2.5x - 4x Adjustable Advanced Combat Scope for Proton,2746
+2.5x - 4x Adjustable Advanced Combat Scope for Proton,2750
 2.5x - 4x Adjustable Advanced Combat Scope for Tacoma,1586
 2.5x - 4x Adjustable Advanced Combat Scope for Terikon,3476
 2.5x - 4x Adjustable Advanced Combat Scope for Vulture,8027
@@ -74,7 +74,7 @@ Combat DJ Helmet,34969
 Combat DJ Jacket,32793
 Combat DJ Jetpack,23366
 Combat DJ Pants,43840
-Combat Maniac Bandana,5872
+Combat Maniac Bandana,6285
 Combat Maniac Cap,5419
 Combat Maniac Jetpack,5251
 Combat Maniac Shirt,3340
@@ -102,7 +102,7 @@ Doomed Zero Jetpack,5663
 Doomed Zero Mask,7845
 Doomed Zero Shorts,5733
 Doomed Zero Tac Vest,7910
-Double Braided Beard,5076
+Double Braided Beard,5089
 Double Braided Beard - Blond,2771
 Double Braided Beard - Brown,1154
 Double Braided Beard - Cyan,1193
@@ -124,25 +124,25 @@ Enforcer Shorts,13154
 Enforcer Vest,17012
 Enhanced Compensator for the AZV 100,1814
 Enhanced Compensator for the Boomslang,1986
-Enhanced Compensator for the Hawk,2614
+Enhanced Compensator for the Hawk,2615
 Enhanced Compensator for the Ichnya,1877
 Enhanced Compensator for the Kasper,1788
 Enhanced Compensator for the Kelowna,1645
 Enhanced Compensator for the Kestrel,2585
 Enhanced Compensator for the Kite,3331
-Enhanced Compensator for the Kochi,419
-Enhanced Compensator for the M4 Commodore,3888
+Enhanced Compensator for the Kochi,428
+Enhanced Compensator for the M4 Commodore,10993
 Enhanced Compensator for the Mavinga,10992
 Enhanced Compensator for the Osprey,2172
 Enhanced Compensator for the Partisan,1850
 Enhanced Compensator for the Pierser,148
 Enhanced Compensator for the Proton,2497
 Enhanced Compensator for the TAP9,3803
-Enhanced Compensator for the Tacoma,2938
+Enhanced Compensator for the Tacoma,8349
 Enhanced Compensator for the Terikon,3989
 Enhanced Compensator for the Type 227,1659
 Enhanced Compensator for the Vulture,2571
-Enhanced Compensator for the Woodpecker,2276
+Enhanced Compensator for the Woodpecker,2283
 Flenser,15386
 Flenser Heavy Barrel,2869
 Flenser Legacy,517
@@ -230,7 +230,7 @@ Kochi Heavy Barrel,1858
 Kochi Tactical Flash Hider,10225
 Kochi Tactical Foregrip,394
 Kochi Tinsel Terror ,5344
-LEAPERS,12558
+LEAPERS,12561
 Lazer,1481
 Light the Fire,9422
 Logan Mutton Chops,1246
@@ -285,7 +285,7 @@ Partisan,12061
 Partisan Heavy Barrel,8545
 Partisan Raverunner,57651
 Partisan Tactical Foregrip,1376
-Pierser,1400
+Pierser,1465
 Pierser 4x - 8x Adjustable MR Scope,156
 Pierser 8x - 12x Adjustable LR Scope,140
 Pierser Heavy Barrel,136
@@ -326,7 +326,7 @@ Proton Retro,560
 Proton Tactical Foregrip,1674
 RECON DRONE,12542
 RIPPER,12542
-ROADRUNNERS,15406
+ROADRUNNERS,15407
 Raptor Goggles,4530
 Raverunner Cap,59594
 Raverunner Chest Rig,89986
@@ -369,13 +369,13 @@ TAP9 Legacy,331
 TAP9 Pacifist,7712
 TAP9 Retro,403
 THUMPERS,5986
-TRIPMINE,6273
+TRIPMINE,6280
 Tacoma,15308
-Tacoma AVAX Gen 04,6562
+Tacoma AVAX Gen 04,6571
 Tacoma Heavy Barrel,12511
 Tacoma Legacy,509
 Tacoma Retro,580
-Tacoma Westcol,387
+Tacoma Westcol,482
 Tagger Cap,4283
 Tagger Chest Rig,5102
 Tagger Face Cover,4855
@@ -392,7 +392,7 @@ Techno Goth Mohawk - Cyan,1087
 Techno Goth Mohawk - Green,1064
 Techno Goth Mohawk - Orange,1093
 Techno Goth Mohawk - Pink,1209
-Techno Tantrum,68511
+Techno Tantrum,72697
 Templar Helmet,4556
 Templar Jetpack,4089
 Templar Mask,5009
@@ -400,11 +400,11 @@ Templar Shorts,4592
 Templar T-shirt,4138
 Templar Tac Vest,5136
 Terikon,12541
-Terikon Heavy Barrel,2809
+Terikon Heavy Barrel,2814
 Terikon Legacy,588
 Terikon Maniac,4355
 Terikon Retro,620
-Terikon Tactical Foregrip,1799
+Terikon Tactical Foregrip,9121
 Thick Stitch Cornrows,1433
 Thick Stitch Cornrows - Blond,1187
 Thick Stitch Cornrows - Brown,1221
@@ -434,10 +434,10 @@ Vulture Legacy,464
 Vulture Pink Fury,6540
 Vulture Retro,504
 Vulture Tactical Foregrip,1901
-Westcol Set,303
+Westcol Set,467
 Westcol Till I Die,411
 Woodpecker,6454
-Woodpecker Heavy Barrel,3285
+Woodpecker Heavy Barrel,3286
 Woodpecker Legacy,495
 Woodpecker Prankster,1106
 Woodpecker Retro,490
