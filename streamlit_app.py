@@ -12,15 +12,8 @@ st.set_page_config(page_title="Price History Viewer", layout="wide")
 def load_images():
     try:
         img_dict = {}
-        with open("data/img.csv", 'r', encoding='utf-8') as f:
-            for line in f:
-                parts = line.split('https:"')
-                if len(parts) == 2:
-                    name = parts[0].replace('https', '').strip()
-                    url = 'https://' + parts[1].strip().strip('"')
-                    # Добавляем отладочную информацию
-                    st.write(f"Loaded image URL for {name}: {url}")
-                    img_dict[name] = url
+        df = pd.read_csv("data/img.csv")
+        img_dict = dict(zip(df['name'].str.strip(), df['img']))
         return img_dict
     except Exception as e:
         st.error(f"Ошибка при загрузке файла img.csv: {str(e)}")
