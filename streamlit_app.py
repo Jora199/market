@@ -89,25 +89,8 @@ def main():
         if show_ma:
             ma_period = st.slider("Период скользящей средней (часов)", 1, 24, 6)
 
-        # Отображение изображений выбранных предметов
+        # Отображение графика и статистики
     if selected_items:
-        # Всегда создаем 3 колонки, независимо от количества выбранных предметов
-        cols = st.columns(3)
-        
-        # Вычисляем центральную позицию для одного изображения
-        if len(selected_items) == 1:
-            # Если выбран один предмет, размещаем его в центральной колонке
-            with cols[1]:  # индекс 1 - это центральная колонка
-                img_url = img_dict.get(selected_items[0], default_img)
-                st.image(img_url, caption=selected_items[0], use_container_width=True)
-        else:
-            # Если выбрано несколько предметов, размещаем их последовательно
-            for idx, item in enumerate(selected_items):
-                if idx < 3:  # Показываем только первые три предмета
-                    with cols[idx]:
-                        img_url = img_dict.get(item, default_img)
-                        st.image(img_url, caption=item, use_container_width=True)
-                
         # График
         mask = (df['timestamp'].dt.date >= date_range[0]) & (df['timestamp'].dt.date <= date_range[1])
         filtered_df = df.loc[mask]
@@ -149,19 +132,27 @@ def main():
         st.plotly_chart(fig, use_container_width=True)
         
         if len(selected_items) == 1:
-            st.subheader("Статистика")
-            col1, col2, col3, col4 = st.columns(4)
+            # Создаем две колонки: левая для статистики, правая для изображения
+            stats_col, img_col = st.columns([2, 1])
             
-            item = selected_items[0]
-            current_price = filtered_df[item].iloc[-1]
-            min_price = filtered_df[item].min()
-            max_price = filtered_df[item].max()
-            supply = supply_dict.get(item, 0)
+            with stats_col:
+                st.subheader("Статистика")
+                col1, col2, col3, col4 = st.columns(4)
+                
+                item = selected_items[0]
+                current_price = filtered_df[item].iloc[-1]
+                min_price = filtered_df[item].min()
+                max_price = filtered_df[item].max()
+                supply = supply_dict.get(item, 0)
+                
+                col1.metric("Текущая цена", f"{current_price:.2f}")
+                col2.metric("Минимальная цена", f"{min_price:.2f}")
+                col3.metric("Максимальная цена", f"{max_price:.2f}")
+                col4.metric("Supply", f"{int(supply)}")
             
-            col1.metric("Текущая цена", f"{current_price:.2f}")
-            col2.metric("Минимальная цена", f"{min_price:.2f}")
-            col3.metric("Максимальная цена", f"{max_price:.2f}")
-            col4.metric("Supply", f"{int(supply)}")
+            with img_col:
+                img_url = img_dict.get(item, default_img)
+                st.image(img_url, use_container_width=True)
 
 if __name__ == "__main__":
     main()
