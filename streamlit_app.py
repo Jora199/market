@@ -11,18 +11,32 @@ st.set_page_config(page_title="Price History Viewer", layout="wide")
 @st.cache_data
 def load_image_data():
     try:
-        img_df = pd.read_csv("data/img.csv", encoding='utf-8', quoting=1)  # добавлены параметры encoding и quoting
-        # Создаем словарь {название предмета: ссылка}
-        img_dict = dict(zip(img_df['name'].str.strip(), img_df['img']))
+        # Читаем файл как текст и обрабатываем его вручную
+        with open("data/img.csv", 'r', encoding='utf-8') as file:
+            lines = file.readlines()
+        
+        # Пропускаем заголовок и создаем словарь
+        img_dict = {}
+        for line in lines[1:]:  # пропускаем первую строку (заголовок)
+            try:
+                # Разбиваем строку на имя и ссылку, учитывая кавычки
+                parts = line.strip().split('","')
+                if len(parts) == 2:
+                    name = parts[0].strip('"')
+                    img = parts[1].strip('"')
+                    img_dict[name.strip()] = img.strip()
+            except:
+                continue
+                
         return img_dict
+        
     except FileNotFoundError:
         st.error("Файл img.csv не найден.")
         return {}
     except Exception as e:
         st.error(f"Ошибка при чтении файла img.csv: {str(e)}")
         return {}
-
-
+    
 # Остальные функции загрузки данных остаются без изменений
 @st.cache_data(ttl=60)
 def load_data():
@@ -92,7 +106,7 @@ def main():
             with cols[col_idx]:
                 # Получаем ссылку на изображение или используем дефолтное
                 img_url = img_dict.get(item, default_img)
-                st.image(img_url, caption=item, use_column_width=True)
+                st.image(img_url, caption=item, use_container_width=True)
 
         # Далее идет код для отображения графика
         mask = (df['timestamp'].dt.date >= date_range[0]) & (df['timestamp'].dt.date <= date_range[1])
