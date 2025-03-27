@@ -6,7 +6,7 @@ Item Name,Estimated Supply
 2.5x - 4x Adjustable Advanced Combat Scope for Hawk,1881
 2.5x - 4x Adjustable Advanced Combat Scope for Ichnya,2749
 2.5x - 4x Adjustable Advanced Combat Scope for Kasper,1681
-2.5x - 4x Adjustable Advanced Combat Scope for Kestrel,2897
+2.5x - 4x Adjustable Advanced Combat Scope for Kestrel,12574
 2.5x - 4x Adjustable Advanced Combat Scope for Kite,1674
 2.5x - 4x Adjustable Advanced Combat Scope for Kochi,366
 2.5x - 4x Adjustable Advanced Combat Scope for M4 Commodore ,3245
@@ -130,7 +130,7 @@ Enhanced Compensator for the Kasper,1788
 Enhanced Compensator for the Kelowna,1645
 Enhanced Compensator for the Kestrel,2585
 Enhanced Compensator for the Kite,3331
-Enhanced Compensator for the Kochi,428
+Enhanced Compensator for the Kochi,2872
 Enhanced Compensator for the M4 Commodore,10993
 Enhanced Compensator for the Mavinga,10992
 Enhanced Compensator for the Osprey,2172
@@ -144,7 +144,7 @@ Enhanced Compensator for the Type 227,1659
 Enhanced Compensator for the Vulture,2571
 Enhanced Compensator for the Woodpecker,2283
 Flenser,15386
-Flenser Heavy Barrel,2869
+Flenser Heavy Barrel,2872
 Flenser Legacy,517
 Flenser Mad Biker,7372
 Flenser Retro,554
@@ -156,8 +156,8 @@ HAMMERHEADS,7750
 HOOKSHOT,8182
 Hawk,8099
 Hawk 4x - 8x Adjustable MR Scope,1606
-Hawk Anarchist,933
-Hawk Heavy Barrel,3066
+Hawk Anarchist,1273
+Hawk Heavy Barrel,3067
 Hawk Legacy,549
 Hawk Retro,473
 Hawk Tactical Foregrip,1776
@@ -184,7 +184,7 @@ Inferno Skin for the Mavinga,1403
 Inferno Skin for the Woodpecker,1379
 Influencer,15308
 Influencer Heavy Barrel,15331
-Influencer Tactical Foregrip,316
+Influencer Tactical Foregrip,6110
 JAVELINA,5246
 Jungle Ops Tac-Vest,2013
 KINETIC SHIELD,4991
@@ -206,7 +206,7 @@ Kelowna Tagger,4694
 Kestrel,10992
 Kestrel 4x - 8x Adjustable MR Scope,2695
 Kestrel 8x - 12x Adjustable LR Scope,2711
-Kestrel Heavy Barrel,6101
+Kestrel Heavy Barrel,6717
 Kestrel Legacy,822
 Kestrel Retro,661
 Kestrel Tactical Foregrip,12518
@@ -230,7 +230,7 @@ Kochi Heavy Barrel,1858
 Kochi Tactical Flash Hider,10225
 Kochi Tactical Foregrip,394
 Kochi Tinsel Terror ,5344
-LEAPERS,12563
+LEAPERS,12574
 Lazer,1481
 Light the Fire,9422
 Logan Mutton Chops,1246
@@ -286,9 +286,9 @@ Partisan Heavy Barrel,8545
 Partisan Raverunner,57651
 Partisan Tactical Foregrip,1376
 Pierser,1465
-Pierser 4x - 8x Adjustable MR Scope,156
+Pierser 4x - 8x Adjustable MR Scope,160
 Pierser 8x - 12x Adjustable LR Scope,140
-Pierser Heavy Barrel,136
+Pierser Heavy Barrel,139
 Pierser Hybrid Compensator,1025
 Pierser Smart Scope,1005
 Pink Fury Cap,5915
@@ -326,7 +326,7 @@ Proton Retro,560
 Proton Tactical Foregrip,1674
 RECON DRONE,12563
 RIPPER,12542
-ROADRUNNERS,15407
+ROADRUNNERS,15408
 Raptor Goggles,4530
 Raverunner Cap,59594
 Raverunner Chest Rig,89986
@@ -375,7 +375,7 @@ Tacoma AVAX Gen 04,6571
 Tacoma Heavy Barrel,12511
 Tacoma Legacy,509
 Tacoma Retro,580
-Tacoma Westcol,482
+Tacoma Westcol,625
 Tagger Cap,4283
 Tagger Chest Rig,5102
 Tagger Face Cover,4855
@@ -435,8 +435,8 @@ Vulture Pink Fury,6540
 Vulture Retro,504
 Vulture Tactical Foregrip,1901
 Westcol Set,499
-Westcol Till I Die,411
-Woodpecker,6454
+Westcol Till I Die,615
+Woodpecker,6461
 Woodpecker Heavy Barrel,3286
 Woodpecker Legacy,495
 Woodpecker Prankster,1106
