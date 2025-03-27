@@ -14,15 +14,12 @@ def load_images():
         img_dict = {}
         with open("data/img.csv", 'r', encoding='utf-8') as f:
             for line in f:
-                # Разделяем строку по "https:"
                 parts = line.split('https:"')
                 if len(parts) == 2:
-                    # Очищаем название от лишних символов
                     name = parts[0].replace('https', '').strip()
-                    # Очищаем URL от кавычек и пробелов
-                    url = parts[1].strip().strip('"')
-                    # Добавляем протокол обратно
-                    url = 'https://' + url
+                    url = 'https://' + parts[1].strip().strip('"')
+                    # Добавляем отладочную информацию
+                    st.write(f"Loaded image URL for {name}: {url}")
                     img_dict[name] = url
         return img_dict
     except Exception as e:
