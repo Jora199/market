@@ -101,7 +101,7 @@ def main():
             with cols[col_idx]:
                 # Получаем ссылку на изображение или используем дефолтное
                 img_url = img_dict.get(item, default_img)
-                st.image(img_url, caption=item, use_column_width=True)
+                st.image(img_url, caption=item, use_container_width=True)
                 
     # Основная область с графиком
     if selected_items:
