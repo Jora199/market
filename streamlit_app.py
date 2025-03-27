@@ -3,6 +3,8 @@ import pandas as pd
 import plotly.graph_objects as go
 from datetime import datetime, timedelta
 import os
+import React from 'react';
+import Image from 'next/image';
 
 # Настройка страницы
 st.set_page_config(page_title="Price History Viewer", layout="wide")
