@@ -119,10 +119,7 @@ def main():
                 else:
                     st.error(f"URL не найден для {item}")
                     st.image(default_img, caption=f"{item} (default image)", use_container_width=True)
-                except Exception as e:
-                    st.error(f"Ошибка загрузки изображения для {item}: {str(e)}")
-                    st.image(default_img, caption=f"{item} (default image)", use_container_width=True)
-                
+                                
     # Основная область с графиком
     if selected_items:
         # Фильтрация по датам
