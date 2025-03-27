@@ -11,15 +11,15 @@ st.set_page_config(page_title="Price History Viewer", layout="wide")
 @st.cache_data
 def load_image_data():
     try:
-        # Читаем файл как текст и обрабатываем его вручную
         with open("data/img.csv", 'r', encoding='utf-8') as file:
             lines = file.readlines()
         
-        # Пропускаем заголовок и создаем словарь
         img_dict = {}
-        for line in lines[1:]:  # пропускаем первую строку (заголовок)
+        # Добавим отладочный вывод
+        st.write("Загружено строк из CSV:", len(lines))
+        
+        for line in lines[1:]:
             try:
-                # Разбиваем строку на имя и ссылку, учитывая кавычки
                 parts = line.strip().split('","')
                 if len(parts) == 2:
                     name = parts[0].strip('"')
@@ -27,7 +27,10 @@ def load_image_data():
                     img_dict[name.strip()] = img.strip()
             except:
                 continue
-                
+        
+        # Добавим отладочный вывод
+        st.write("Количество загруженных изображений:", len(img_dict))
+        st.write("Пример ключей:", list(img_dict.keys())[:5])
         return img_dict
         
     except FileNotFoundError:
