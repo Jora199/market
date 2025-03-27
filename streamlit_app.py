@@ -105,12 +105,13 @@ def main():
         cols = st.columns(min(len(selected_items), 3))  # Максимум 3 колонки
         
         for idx, item in enumerate(selected_items):
-            col_idx = idx % 3  # Определяем, в какую колонку поместить изображение
+            col_idx = idx % 3
             with cols[col_idx]:
-                # Получаем ссылку на изображение или используем дефолтное
+                # Отладочная информация
+                st.write(f"Поиск изображения для: '{item}'")
                 img_url = img_dict.get(item, default_img)
+                st.write(f"Найденный URL: {img_url}")
                 st.image(img_url, caption=item, use_container_width=True)
-
         # Далее идет код для отображения графика
         mask = (df['timestamp'].dt.date >= date_range[0]) & (df['timestamp'].dt.date <= date_range[1])
         filtered_df = df.loc[mask]
