@@ -13,7 +13,7 @@ Item Name,Estimated Supply
 2.5x - 4x Adjustable Advanced Combat Scope for Mavinga,4333
 2.5x - 4x Adjustable Advanced Combat Scope for Partisan,1495
 2.5x - 4x Adjustable Advanced Combat Scope for Pierser,12
-2.5x - 4x Adjustable Advanced Combat Scope for Proton,2751
+2.5x - 4x Adjustable Advanced Combat Scope for Proton,4579
 2.5x - 4x Adjustable Advanced Combat Scope for Tacoma,1594
 2.5x - 4x Adjustable Advanced Combat Scope for Terikon,3476
 2.5x - 4x Adjustable Advanced Combat Scope for Vulture,8042
@@ -157,7 +157,7 @@ HOOKSHOT,8182
 Hawk,8104
 Hawk 4x - 8x Adjustable MR Scope,1619
 Hawk Anarchist,1273
-Hawk Heavy Barrel,3070
+Hawk Heavy Barrel,3072
 Hawk Legacy,549
 Hawk Retro,473
 Hawk Tactical Foregrip,9139
@@ -190,7 +190,7 @@ Jungle Ops Tac-Vest,4569
 KINETIC SHIELD,4991
 Karmacide,1244
 Kasper,15395
-Kasper Heavy Barrel,2022
+Kasper Heavy Barrel,2023
 Kasper Jingle Jammer,5340
 Kasper Legacy,538
 Kasper Retro,544
@@ -230,7 +230,7 @@ Kochi Heavy Barrel,2016
 Kochi Tactical Flash Hider,10225
 Kochi Tactical Foregrip,394
 Kochi Tinsel Terror ,5344
-LEAPERS,12637
+LEAPERS,12642
 Lazer,1487
 Light the Fire,9422
 Logan Mutton Chops,1246
@@ -273,7 +273,7 @@ Osprey Legacy,579
 Osprey Retro,559
 Osprey Smart Scope,2076
 Osprey Tactical Foregrip,1588
-PARALYZER,8388
+PARALYZER,8407
 PHOSPHOR FURY ,6628
 Pacifist Glasses,5995
 Pacifist Hoodie,7857
@@ -318,15 +318,15 @@ Prankster T-Shirt,1077
 Prankster Tac Vest,1101
 Proton,10307
 Proton 4x - 8x Adjustable MR Scope,2207
-Proton 8x - 12x Adjustable LR Scope,2125
-Proton Heavy Barrel,3112
+Proton 8x - 12x Adjustable LR Scope,2127
+Proton Heavy Barrel,3147
 Proton Legacy,538
 Proton OpenSea,32
 Proton Retro,560
 Proton Tactical Foregrip,1674
 RECON DRONE,12563
 RIPPER,12635
-ROADRUNNERS,15455
+ROADRUNNERS,15472
 Raptor Goggles,4978
 Raverunner Cap,63587
 Raverunner Chest Rig,92752
@@ -369,7 +369,7 @@ TAP9 Legacy,331
 TAP9 Pacifist,7712
 TAP9 Retro,544
 THUMPERS,5986
-TRIPMINE,6280
+TRIPMINE,6333
 Tacoma,15308
 Tacoma AVAX Gen 04,6571
 Tacoma Heavy Barrel,12511
@@ -388,7 +388,7 @@ Tap9 All Stars,1742
 Techno Goth Mohawk,1079
 Techno Goth Mohawk - Blond,1082
 Techno Goth Mohawk - Brown,5708
-Techno Goth Mohawk - Cyan,1097
+Techno Goth Mohawk - Cyan,1099
 Techno Goth Mohawk - Green,1064
 Techno Goth Mohawk - Orange,1093
 Techno Goth Mohawk - Pink,1209
@@ -408,7 +408,7 @@ Terikon Tactical Foregrip,9121
 Thick Stitch Cornrows,1444
 Thick Stitch Cornrows - Blond,1187
 Thick Stitch Cornrows - Brown,1225
-Thick Stitch Cornrows - Cyan,1196
+Thick Stitch Cornrows - Cyan,1216
 Thick Stitch Cornrows - Green,1189
 Thick Stitch Cornrows - Orange,1167
 Thick Stitch Cornrows - Pink,1349
@@ -435,7 +435,7 @@ Vulture Pink Fury,6540
 Vulture Retro,504
 Vulture Tactical Foregrip,1901
 Westcol Set,1432
-Westcol Till I Die,1392
+Westcol Till I Die,1411
 Woodpecker,6461
 Woodpecker Heavy Barrel,3291
 Woodpecker Legacy,495
