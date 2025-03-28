@@ -7,8 +7,8 @@ Item Name,Estimated Supply
 2.5x - 4x Adjustable Advanced Combat Scope for Ichnya,2749
 2.5x - 4x Adjustable Advanced Combat Scope for Kasper,1703
 2.5x - 4x Adjustable Advanced Combat Scope for Kestrel,12574
-2.5x - 4x Adjustable Advanced Combat Scope for Kite,1674
-2.5x - 4x Adjustable Advanced Combat Scope for Kochi,378
+2.5x - 4x Adjustable Advanced Combat Scope for Kite,1682
+2.5x - 4x Adjustable Advanced Combat Scope for Kochi,520
 2.5x - 4x Adjustable Advanced Combat Scope for M4 Commodore ,3245
 2.5x - 4x Adjustable Advanced Combat Scope for Mavinga,4333
 2.5x - 4x Adjustable Advanced Combat Scope for Partisan,1495
@@ -35,7 +35,7 @@ Anarchist T-shirt,1510
 Anarchist Tac Vest,1472
 BOUNCEBOMBER,6895
 BUZZKILLA,7428
-Bagged and Tagged,3721
+Bagged and Tagged,3732
 Berserker Beard,1381
 Berserker Beard - Blond,1308
 Berserker Beard - Brown,1335
@@ -61,7 +61,7 @@ Chinese Pirate Beard - Cyan,1194
 Chinese Pirate Beard - Green,1222
 Chinese Pirate Beard - Orange,1220
 Chinese Pirate Beard - Pink,1133
-Circuit Breaker,38526
+Circuit Breaker,40021
 Clawmark Beard,4896
 Clawmark Beard - Blond,1155
 Clawmark Beard - Brown,1162
@@ -69,7 +69,7 @@ Clawmark Beard - Cyan,1207
 Clawmark Beard - Green,1116
 Clawmark Beard - Orange,1154
 Clawmark Beard - Pink,1236
-Cog,1326
+Cog,1327
 Combat DJ Helmet,42983
 Combat DJ Jacket,40547
 Combat DJ Jetpack,27662
@@ -123,14 +123,14 @@ Enforcer Shirt,10151
 Enforcer Shorts,13154
 Enforcer Vest,17012
 Enhanced Compensator for the AZV 100,15424
-Enhanced Compensator for the Boomslang,2010
+Enhanced Compensator for the Boomslang,2014
 Enhanced Compensator for the Hawk,2625
 Enhanced Compensator for the Ichnya,1887
-Enhanced Compensator for the Kasper,1788
+Enhanced Compensator for the Kasper,1804
 Enhanced Compensator for the Kelowna,1660
 Enhanced Compensator for the Kestrel,2605
 Enhanced Compensator for the Kite,12699
-Enhanced Compensator for the Kochi,2872
+Enhanced Compensator for the Kochi,4521
 Enhanced Compensator for the M4 Commodore,10993
 Enhanced Compensator for the Mavinga,10992
 Enhanced Compensator for the Osprey,2172
@@ -142,7 +142,7 @@ Enhanced Compensator for the Tacoma,8354
 Enhanced Compensator for the Terikon,7589
 Enhanced Compensator for the Type 227,1674
 Enhanced Compensator for the Vulture,2571
-Enhanced Compensator for the Woodpecker,2290
+Enhanced Compensator for the Woodpecker,4915
 Flenser,15386
 Flenser Heavy Barrel,9146
 Flenser Legacy,517
@@ -153,7 +153,7 @@ GHOST,7216
 Give Peace a Chance,1620
 Green Maze,3429
 HAMMERHEADS,7750
-HOOKSHOT,8234
+HOOKSHOT,8274
 Hawk,8104
 Hawk 4x - 8x Adjustable MR Scope,1619
 Hawk Anarchist,1273
@@ -190,7 +190,7 @@ Jungle Ops Tac-Vest,4569
 KINETIC SHIELD,4991
 Karmacide,1244
 Kasper,15395
-Kasper Heavy Barrel,2023
+Kasper Heavy Barrel,2074
 Kasper Jingle Jammer,5340
 Kasper Legacy,538
 Kasper Retro,544
@@ -225,12 +225,12 @@ Kite Retro,546
 Kite Scumpocalypse,6891
 Kochi,3343
 Kochi El Diablo,49108
-Kochi Ergo Foregrip,5030
-Kochi Heavy Barrel,2016
+Kochi Ergo Foregrip,10748
+Kochi Heavy Barrel,4521
 Kochi Tactical Flash Hider,10225
 Kochi Tactical Foregrip,400
 Kochi Tinsel Terror ,5344
-LEAPERS,12700
+LEAPERS,12701
 Lazer,1489
 Light the Fire,9422
 Logan Mutton Chops,1246
@@ -256,7 +256,7 @@ Mad Biker Shirt,7917
 Mad Biker Vest,9017
 Mantis Mask,4492
 Mavinga,12910
-Mavinga Heavy Barrel,8663
+Mavinga Heavy Barrel,12701
 Mavinga Legacy,382
 Mavinga Retro,530
 Mavinga Tactical Foregrip,1608
@@ -331,8 +331,8 @@ Raptor Goggles,5030
 Raverunner Cap,63587
 Raverunner Chest Rig,92752
 Raverunner Jetpack,64121
-Raverunner Mask,91922
-Raverunner Shirt,79460
+Raverunner Mask,97730
+Raverunner Shirt,80509
 Raverunner Shorts,79810
 Red Set,9789
 Retro Mop Cut,3258
@@ -392,7 +392,7 @@ Techno Goth Mohawk - Cyan,1099
 Techno Goth Mohawk - Green,1064
 Techno Goth Mohawk - Orange,1093
 Techno Goth Mohawk - Pink,1209
-Techno Tantrum,78102
+Techno Tantrum,78568
 Templar Helmet,4556
 Templar Jetpack,4089
 Templar Mask,5009
