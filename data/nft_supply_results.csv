@@ -16,7 +16,7 @@ Item Name,Estimated Supply
 2.5x - 4x Adjustable Advanced Combat Scope for Proton,2751
 2.5x - 4x Adjustable Advanced Combat Scope for Tacoma,1594
 2.5x - 4x Adjustable Advanced Combat Scope for Terikon,3476
-2.5x - 4x Adjustable Advanced Combat Scope for Vulture,8027
+2.5x - 4x Adjustable Advanced Combat Scope for Vulture,8042
 2.5x - 4x Adjustable Advanced Combat Scope for Woodpecker,1604
 8x - 12x KAS Scope,5609
 AZV 100,5042
@@ -155,24 +155,24 @@ Green Maze,3426
 HAMMERHEADS,7750
 HOOKSHOT,8182
 Hawk,8104
-Hawk 4x - 8x Adjustable MR Scope,1616
+Hawk 4x - 8x Adjustable MR Scope,1619
 Hawk Anarchist,1273
 Hawk Heavy Barrel,3070
 Hawk Legacy,549
 Hawk Retro,473
 Hawk Tactical Foregrip,9139
-"Hear That, B*tch?",3109
+"Hear That, B*tch?",3121
 I'm Fine Skin for the Kelowna,972
 I'm Fine Skin for the Kestrel,131
 I'm Fine Skin for the Proton,425
 Ichnya ,5333
-Ichnya 4x - 8x Adjustable MR Scope,1803
+Ichnya 4x - 8x Adjustable MR Scope,1813
 Ichnya 8x - 12x Adjustable LR Scope,1616
 Ichnya Covfefe,9612
 Ichnya Heavy Barrel,1907
 Ichnya Legacy,561
 Ichnya Retro,575
-Ichnya Tactical Foregrip,1665
+Ichnya Tactical Foregrip,8042
 Impact Junkie Chest Rig,5316
 Impact Junkie Helmet,5309
 Impact Junkie Jetpack,5311
@@ -226,11 +226,11 @@ Kite Scumpocalypse,6891
 Kochi,3343
 Kochi El Diablo,46771
 Kochi Ergo Foregrip,1754
-Kochi Heavy Barrel,2009
+Kochi Heavy Barrel,2016
 Kochi Tactical Flash Hider,10225
 Kochi Tactical Foregrip,394
 Kochi Tinsel Terror ,5344
-LEAPERS,12629
+LEAPERS,12637
 Lazer,1487
 Light the Fire,9422
 Logan Mutton Chops,1246
@@ -319,16 +319,16 @@ Prankster Tac Vest,1101
 Proton,10307
 Proton 4x - 8x Adjustable MR Scope,2207
 Proton 8x - 12x Adjustable LR Scope,2125
-Proton Heavy Barrel,3101
+Proton Heavy Barrel,3112
 Proton Legacy,538
 Proton OpenSea,32
 Proton Retro,560
 Proton Tactical Foregrip,1674
 RECON DRONE,12563
-RIPPER,12542
+RIPPER,12635
 ROADRUNNERS,15455
 Raptor Goggles,4978
-Raverunner Cap,62785
+Raverunner Cap,63587
 Raverunner Chest Rig,92752
 Raverunner Jetpack,63159
 Raverunner Mask,91922
@@ -375,7 +375,7 @@ Tacoma AVAX Gen 04,6571
 Tacoma Heavy Barrel,12511
 Tacoma Legacy,509
 Tacoma Retro,580
-Tacoma Westcol,1285
+Tacoma Westcol,1434
 Tagger Cap,4283
 Tagger Chest Rig,5102
 Tagger Face Cover,4855
@@ -434,8 +434,8 @@ Vulture Legacy,464
 Vulture Pink Fury,6540
 Vulture Retro,504
 Vulture Tactical Foregrip,1901
-Westcol Set,1272
-Westcol Till I Die,1246
+Westcol Set,1432
+Westcol Till I Die,1392
 Woodpecker,6461
 Woodpecker Heavy Barrel,3291
 Woodpecker Legacy,495
