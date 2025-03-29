@@ -7,8 +7,8 @@ Item Name,Estimated Supply
 2.5x - 4x Adjustable Advanced Combat Scope for Ichnya,2749
 2.5x - 4x Adjustable Advanced Combat Scope for Kasper,8071
 2.5x - 4x Adjustable Advanced Combat Scope for Kestrel,12574
-2.5x - 4x Adjustable Advanced Combat Scope for Kite,1682
-2.5x - 4x Adjustable Advanced Combat Scope for Kochi,520
+2.5x - 4x Adjustable Advanced Combat Scope for Kite,1686
+2.5x - 4x Adjustable Advanced Combat Scope for Kochi,894
 2.5x - 4x Adjustable Advanced Combat Scope for M4 Commodore ,3245
 2.5x - 4x Adjustable Advanced Combat Scope for Mavinga,4333
 2.5x - 4x Adjustable Advanced Combat Scope for Partisan,1508
@@ -18,7 +18,7 @@ Item Name,Estimated Supply
 2.5x - 4x Adjustable Advanced Combat Scope for Terikon,3520
 2.5x - 4x Adjustable Advanced Combat Scope for Vulture,8054
 2.5x - 4x Adjustable Advanced Combat Scope for Woodpecker,1609
-8x - 12x KAS Scope,5623
+8x - 12x KAS Scope,5626
 AZV 100,15633
 AZV 100 Doomed Zero,6493
 AZV 100 Heavy Barrel,15540
@@ -34,7 +34,7 @@ Anarchist Shorts,1490
 Anarchist T-shirt,1510
 Anarchist Tac Vest,1472
 BOUNCEBOMBER,12729
-BUZZKILLA,7563
+BUZZKILLA,7580
 Bagged and Tagged,3732
 Berserker Beard,1381
 Berserker Beard - Blond,1331
@@ -47,7 +47,7 @@ Blue Set,9546
 Blue Walker,11112
 Boogie Down,18204
 Boomslang,15579
-Boomslang 4x - 8x Adjustable MR Scope,1715
+Boomslang 4x - 8x Adjustable MR Scope,1717
 Boomslang Heavy Barrel,2443
 Boomslang Legacy,454
 Boomslang Player Zero,2828
@@ -61,7 +61,7 @@ Chinese Pirate Beard - Cyan,1196
 Chinese Pirate Beard - Green,1236
 Chinese Pirate Beard - Orange,1222
 Chinese Pirate Beard - Pink,1133
-Circuit Breaker,42273
+Circuit Breaker,44435
 Clawmark Beard,4896
 Clawmark Beard - Blond,1155
 Clawmark Beard - Brown,1162
@@ -71,7 +71,7 @@ Clawmark Beard - Orange,1154
 Clawmark Beard - Pink,1236
 Cog,1331
 Combat DJ Helmet,45683
-Combat DJ Jacket,43068
+Combat DJ Jacket,45339
 Combat DJ Jetpack,29587
 Combat DJ Pants,54290
 Combat Maniac Bandana,6285
@@ -124,7 +124,7 @@ Enforcer Shorts,13154
 Enforcer Vest,17012
 Enhanced Compensator for the AZV 100,15424
 Enhanced Compensator for the Boomslang,2016
-Enhanced Compensator for the Hawk,2643
+Enhanced Compensator for the Hawk,10435
 Enhanced Compensator for the Ichnya,1887
 Enhanced Compensator for the Kasper,1805
 Enhanced Compensator for the Kelowna,1660
@@ -138,7 +138,7 @@ Enhanced Compensator for the Partisan,1860
 Enhanced Compensator for the Pierser,153
 Enhanced Compensator for the Proton,2512
 Enhanced Compensator for the TAP9,3826
-Enhanced Compensator for the Tacoma,8354
+Enhanced Compensator for the Tacoma,15652
 Enhanced Compensator for the Terikon,7589
 Enhanced Compensator for the Type 227,1674
 Enhanced Compensator for the Vulture,2586
@@ -198,7 +198,7 @@ Kasper Tactical Foregrip,1612
 Keep 'em out,9504
 Kelowna,21124
 Kelowna El Diablo,49418
-Kelowna Heavy Barrel,4563
+Kelowna Heavy Barrel,15649
 Kelowna Kiiro Shinobi,3390
 Kelowna Legacy,548
 Kelowna Retro,526
@@ -209,7 +209,7 @@ Kestrel 8x - 12x Adjustable LR Scope,12809
 Kestrel Heavy Barrel,12587
 Kestrel Legacy,822
 Kestrel Retro,661
-Kestrel Tactical Foregrip,12518
+Kestrel Tactical Foregrip,15647
 Kiiro Shinobi,3003
 Kiiro Shinobi Hoodie,3414
 Kiiro Shinobi Jetpack,3095
@@ -226,11 +226,11 @@ Kite Scumpocalypse,6891
 Kochi,15577
 Kochi El Diablo,49108
 Kochi Ergo Foregrip,10748
-Kochi Heavy Barrel,4521
+Kochi Heavy Barrel,6125
 Kochi Tactical Flash Hider,10225
 Kochi Tactical Foregrip,405
 Kochi Tinsel Terror ,5344
-LEAPERS,12826
+LEAPERS,12828
 Lazer,1494
 Light the Fire,9437
 Logan Mutton Chops,1246
@@ -255,13 +255,13 @@ Mad Biker Pants,6903
 Mad Biker Shirt,7917
 Mad Biker Vest,9017
 Mantis Mask,4495
-Mavinga,12952
+Mavinga,12954
 Mavinga Heavy Barrel,12701
 Mavinga Legacy,517
 Mavinga Retro,530
 Mavinga Tactical Foregrip,10486
 Move To Live,3546
-Nightrider,3785
+Nightrider,3786
 Ninja Kestrel,18344
 Ninja Set,18169
 Nuestros Diablos Set,49012
@@ -273,7 +273,7 @@ Osprey Legacy,595
 Osprey Retro,559
 Osprey Smart Scope,2089
 Osprey Tactical Foregrip,10486
-PARALYZER,8533
+PARALYZER,8534
 PHOSPHOR FURY ,6742
 Pacifist Glasses,5995
 Pacifist Hoodie,7857
@@ -323,10 +323,10 @@ Proton Heavy Barrel,8069
 Proton Legacy,538
 Proton OpenSea,32
 Proton Retro,560
-Proton Tactical Foregrip,1687
+Proton Tactical Foregrip,1690
 RECON DRONE,12731
 RIPPER,12790
-ROADRUNNERS,15636
+ROADRUNNERS,15658
 Raptor Goggles,5030
 Raverunner Cap,67985
 Raverunner Chest Rig,101805
@@ -347,7 +347,7 @@ SKUNKPAW,7901
 SLAMFIST,8469
 SLUGGER,5037
 Scump Set,5522
-Shuriken,4825
+Shuriken,4830
 Snow and Blow ,5334
 Squall,9350
 Squall Combat DJ,29417
@@ -358,17 +358,17 @@ Squall Tactical Foregrip,2375
 Star-Shaped Beard,1212
 Star-Shaped Beard - Blond,1198
 Star-Shaped Beard - Brown,1198
-Star-Shaped Beard - Cyan,1225
+Star-Shaped Beard - Cyan,1239
 Star-Shaped Beard - Green,1187
 Star-Shaped Beard - Orange,6212
 Star-Shaped Beard - Pink,1197
 Street Fighter Pants,6113
 TAP9,14493
-TAP9 Heavy Barrel,15596
+TAP9 Heavy Barrel,15654
 TAP9 Legacy,331
 TAP9 Pacifist,7712
 TAP9 Retro,544
-THUMPERS,6084
+THUMPERS,6122
 TRIPMINE,10433
 Tacoma,15308
 Tacoma AVAX Gen 04,6601
@@ -437,7 +437,7 @@ Vulture Tactical Foregrip,1920
 Westcol Set,2043
 Westcol Till I Die,1999
 Woodpecker,15578
-Woodpecker Heavy Barrel,3305
+Woodpecker Heavy Barrel,3307
 Woodpecker Legacy,495
 Woodpecker Prankster,1106
 Woodpecker Retro,490
