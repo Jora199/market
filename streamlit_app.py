@@ -14,14 +14,21 @@ def load_image_data():
     file_path = "data/img.csv"
     
     try:
-        # Используем pandas для чтения CSV файла
-        df = pd.read_csv(file_path, encoding='utf-8')
+        # Используем pandas с явным указанием разделителя и обработкой кавычек
+        df = pd.read_csv(
+            file_path,
+            encoding='utf-8',
+            sep=',',          # явно указываем разделитель
+            quotechar='"',    # символ кавычек
+            quoting=csv.QUOTE_ALL,  # режим цитирования
+            escapechar='\\',  # экранирующий символ
+        )
         
         # Создаем словарь с разными вариантами написания имен
         img_dict = {}
         for _, row in df.iterrows():
-            name = str(row['name'])  # Убедимся, что имя - строка
-            url = str(row['img'])    # Убедимся, что URL - строка
+            name = str(row['name'])  # имя предмета
+            url = str(row['img'])    # URL изображения
             
             # Создаем различные варианты написания имени
             variants = [
@@ -41,9 +48,11 @@ def load_image_data():
         
         # Отладочная информация
         st.write(f"Total images loaded: {len(df)}")
-        st.write("Sample of original names from CSV:")
-        for name in df['name'].head().tolist():
-            st.write(f"- {repr(name)}")
+        st.write("First few rows from CSV:")
+        st.write(df.head())
+        st.write("Sample of dictionary keys:")
+        for key in list(img_dict.keys())[:5]:
+            st.write(f"- {repr(key)}")
             
         return img_dict
         
@@ -52,8 +61,11 @@ def load_image_data():
         return {}
     except Exception as e:
         st.error(f"Error reading file {file_path}: {str(e)}")
+        # Добавляем более подробную информацию об ошибке
+        st.error("Full error details:")
+        st.exception(e)
         return {}
-
+    
 @st.cache_data(ttl=60)
 def load_data():
     file_path = "data/price_history.csv"
