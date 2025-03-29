@@ -3,6 +3,7 @@ import pandas as pd
 import plotly.graph_objects as go
 from datetime import datetime, timedelta
 import os
+import csv
 
 # Page configuration
 st.set_page_config(page_title="Price History Viewer", layout="wide")
@@ -24,10 +25,14 @@ def load_image_data():
             parts = line.split(',', 1)
             if len(parts) == 2:
                 name = parts[0].strip().strip('"')
-                url = parts[1].strip().strip('"')
+                url = parts[1].strip().strip('"').strip()  # Удаляем лишние пробелы и кавычки
+                
+                # Добавляем различные варианты написания имени
                 img_dict[name] = url
                 img_dict[name.strip()] = url
                 img_dict[name.replace('"', '')] = url
+                img_dict[name.lower()] = url  # Добавляем вариант в нижнем регистре
+                img_dict[name.strip().lower()] = url  # Добавляем очищенный вариант в нижнем регистре
                 
         return img_dict
         
