@@ -3,7 +3,6 @@ import pandas as pd
 import plotly.graph_objects as go
 from datetime import datetime, timedelta
 import os
-import csv
 
 # Page configuration
 st.set_page_config(page_title="Price History Viewer", layout="wide")
@@ -11,47 +10,25 @@ st.set_page_config(page_title="Price History Viewer", layout="wide")
 # Image data loading function
 @st.cache_data
 def load_image_data():
-    file_path = "data/img.csv"
-    
     try:
-        # Используем pandas для чтения CSV файла
-        df = pd.read_csv(file_path, encoding='utf-8')
+        with open("data/img.csv", 'r', encoding='utf-8') as file:
+            lines = file.readlines()
         
-        # Создаем словарь с разными вариантами написания имен
         img_dict = {}
-        for _, row in df.iterrows():
-            name = str(row['name'])  # Убедимся, что имя - строка
-            url = str(row['img'])    # Убедимся, что URL - строка
-            
-            # Создаем различные варианты написания имени
-            variants = [
-                name,
-                name.strip(),
-                name.strip('"'),
-                name.lower().strip(),
-                name.lower().strip('"'),
-                ' '.join(name.split()),  # нормализация пробелов
-                ' '.join(name.split()).lower(),  # нормализация пробелов + нижний регистр
-            ]
-            
-            # Добавляем все варианты в словарь
-            for variant in set(variants):  # используем set для удаления дубликатов
-                if variant:  # проверяем, что вариант не пустой
-                    img_dict[variant] = url
-        
-        # Отладочная информация
-        st.write(f"Total images loaded: {len(df)}")
-        st.write("Sample of original names from CSV:")
-        for name in df['name'].head().tolist():
-            st.write(f"- {repr(name)}")
-            
+        for line in lines[1:]:  # skip header
+            split_index = line.find("https://")
+            if split_index != -1:
+                name = line[:split_index].strip()
+                img = line[split_index:].strip()
+                img_dict[name] = img
+                
         return img_dict
         
     except FileNotFoundError:
-        st.error(f"File not found: {file_path}")
+        st.error("File img.csv not found.")
         return {}
     except Exception as e:
-        st.error(f"Error reading file {file_path}: {str(e)}")
+        st.error(f"Error reading img.csv file: {str(e)}")
         return {}
 
 @st.cache_data(ttl=60)
@@ -72,14 +49,6 @@ def load_supply_data():
     except FileNotFoundError:
         st.error(f"File {supply_path} not found.")
         return {}
-    
-# Функция для получения последнего непустого значения
-def get_last_valid_price(df, item):
-    # Получаем все непустые значения
-    valid_prices = df[item].dropna()
-    if len(valid_prices) > 0:
-        return valid_prices.iloc[-1]
-    return None
 
 def main():
     # Load all data
@@ -88,7 +57,11 @@ def main():
     img_dict = load_image_data()
     default_img = "https://i.ibb.co/tpZ9HsSY/photo-2023-12-23-09-42-33.jpg"
 
-    # Проверка соответствия имен
+    # Title and percentage change in one line
+    col1, col2 = st.columns([2, 1])
+    with col1:
+        st.title("Price History Analysis")
+    
     items = [col for col in df.columns if col != 'timestamp']
     items_with_supply = [f"{item} (Supply: {int(supply_dict.get(item, 0))})" for item in items]
     display_to_original = dict(zip(items_with_supply, items))
@@ -116,43 +89,25 @@ def main():
         if show_ma:
             ma_period = st.slider("Moving average period (hours)", 1, 24, 6)
 
-        # Создаем колонки для заголовка и процента
-    title_col, percent_col = st.columns([2, 1])
-    
-    # Добавляем заголовок в левую колонку
-    with title_col:
-        st.title("Price History Analysis")
-
-    # Check date_range
-    if len(date_range) != 2:
-        st.error("Please select two dates to define the period")
-        return
-
-    # Display chart and statistics
-    if selected_items:
-        mask = (df['timestamp'].dt.date >= date_range[0]) & (df['timestamp'].dt.date <= date_range[1])
-        filtered_df = df.loc[mask]
-        
-        # Теперь добавляем процентное изменение в правую колонку
-        with percent_col:
-            if len(selected_items) == 1:
-                item = selected_items[0]
-                start_price = filtered_df[item].dropna().iloc[0] if not filtered_df[item].dropna().empty else None
-                end_price = get_last_valid_price(filtered_df, item)
-                
-                if start_price is not None and end_price is not None:
-                    percent_change = ((end_price - start_price) / start_price) * 100
-                    color = "green" if percent_change >= 0 else "red"
-                    arrow = "↑" if percent_change >= 0 else "↓"
-                    st.markdown(f"""
-                        <div style='text-align: right; padding-top: 1rem;'>
-                            <span style='font-size: 32px; color: {color}; font-weight: bold;'>
-                                {arrow} {abs(percent_change):.2f}%
-                            </span>
-                        </div>
-                        """, 
-                        unsafe_allow_html=True
-                    )
+    # Add percentage change after selected_items and date_range definition
+    with col2:
+        if selected_items and len(selected_items) == 1:
+            item = selected_items[0]
+            mask = (df['timestamp'].dt.date >= date_range[0]) & (df['timestamp'].dt.date <= date_range[1])
+            filtered_df = df.loc[mask]
+            
+            start_price = filtered_df[item].iloc[0]
+            end_price = filtered_df[item].iloc[-1]
+            price_change = end_price - start_price
+            price_change_percent = (price_change / start_price) * 100
+            
+            price_change_color = "green" if price_change >= 0 else "red"
+            price_change_arrow = "↑" if price_change >= 0 else "↓"
+            
+            st.markdown(
+                f"<h2 style='color: {price_change_color}; text-align: right; margin-top: 15px;'>{price_change_arrow} {abs(price_change_percent):.2f}%</h2>",
+                unsafe_allow_html=True
+            )
 
     # Check date_range
     if len(date_range) != 2:
@@ -204,63 +159,24 @@ def main():
             item = selected_items[0]
             
             # Calculate percentage change
-            start_price = filtered_df[item].dropna().iloc[0] if not filtered_df[item].dropna().empty else None
-            end_price = get_last_valid_price(filtered_df, item)
+            start_price = filtered_df[item].iloc[0]  # Price at start of period
+            end_price = filtered_df[item].iloc[-1]   # Price at end of period
+            price_change = end_price - start_price
+            price_change_percent = (price_change / start_price) * 100
 
-            img_col, stats_col = st.columns([0.5, 2])
+            img_col, stats_col = st.columns([1, 2])
             
             with img_col:
-                # Сначала добавляем CSS для отступа
-                st.markdown("""
-                    <style>
-                    [data-testid="stImage"] {
-                        margin-top: -10px;
-                    }
-                    </style>
-                    """, unsafe_allow_html=True)
-                
-                # Нормализация имени и создание вариантов
-            item_clean = ' '.join(item.split())  # нормализация пробелов
-            item_variants = [
-                item,
-                item_clean,
-                item_clean.lower(),
-                item.strip('"'),
-                item.strip().strip('"'),
-                item.lower().strip(),
-            ]
-
-            # Отладочная информация
-            st.write("Original item name:", repr(item))
-            st.write("Trying variants:")
-            for variant in item_variants:
-                st.write(f"- {repr(variant)}")
-            st.write("Available keys (first 5):")
-            for key in list(img_dict.keys())[:5]:
-                st.write(f"- {repr(key)}")
-
-            # Поиск изображения по всем вариантам
-            img_url = None
-            for variant in item_variants:
-                if variant in img_dict:
-                    img_url = img_dict[variant]
-                    st.success(f"Found image using variant: {repr(variant)}")
-                    break
-
-            if img_url is None:
-                img_url = default_img
-                st.warning(f"No image found for item: '{item}'. Tried variants: {[repr(v) for v in item_variants]}")
-
-            # Отображаем изображение
-            st.image(img_url, use_container_width=True)
-                
+                img_url = img_dict.get(item, default_img)
+                st.image(img_url, use_container_width=True)
+            
             with stats_col:
                 st.subheader(f"Statistics - {item}")
                 col1, col2, col3, col4, col5 = st.columns(5)
                 
-                current_price = get_last_valid_price(filtered_df, item)
-                min_price = filtered_df[item].dropna().min() if not filtered_df[item].dropna().empty else None
-                max_price = filtered_df[item].dropna().max() if not filtered_df[item].dropna().empty else None
+                current_price = filtered_df[item].iloc[-1]
+                min_price = filtered_df[item].min()
+                max_price = filtered_df[item].max()
                 supply = supply_dict.get(item, 0)
                 
                 # Display metrics with responsive font size and theme-aware colors
@@ -268,39 +184,16 @@ def main():
                     <style>
                     .metric-container {
                         text-align: center;
-                        padding: 0.5rem;
                     }
                     .metric-label {
-                        font-size: 0.8rem;
+                        font-size: 1vw;
                         color: var(--text-color-secondary);
-                        margin-bottom: 0.3rem;
-                        white-space: nowrap;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
+                        margin-bottom: 0.5vw;
                     }
                     .metric-value {
-                        font-size: 1rem;
+                        font-size: 1.5vw;
                         font-weight: bold;
                         color: var(--text-color-primary);
-                        white-space: nowrap;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                    }
-
-                    /* Адаптивные стили для разных размеров экрана */
-                    @media (min-width: 1200px) {
-                        .metric-label { font-size: 1rem; }
-                        .metric-value { font-size: 1.2rem; }
-                    }
-
-                    @media (max-width: 768px) {
-                        .metric-label { font-size: 0.7rem; }
-                        .metric-value { font-size: 0.9rem; }
-                    }
-
-                    @media (max-width: 480px) {
-                        .metric-label { font-size: 0.6rem; }
-                        .metric-value { font-size: 0.8rem; }
                     }
 
                     /* Light theme colors */
@@ -316,7 +209,6 @@ def main():
                     }
                     </style>
                 """
-
                 st.markdown(metric_style, unsafe_allow_html=True)
 
                 # Add theme detection script
@@ -338,19 +230,12 @@ def main():
                         <div class="metric-label">{label}</div>
                         <div class="metric-value">{value}</div>
                     </div>
-                    """                    
-                
-                # И обновите отображение метрик:
-                def format_value(value):
-                    if value is None:
-                        return "Нет данных"
-                    return f"{value:.2f}"
+                    """
 
-
-                col1.markdown(custom_metric("Current Price", format_value(current_price)), unsafe_allow_html=True)
-                col2.markdown(custom_metric("Minimum Price", format_value(min_price)), unsafe_allow_html=True)
-                col3.markdown(custom_metric("Maximum Price", format_value(max_price)), unsafe_allow_html=True)
+                col1.markdown(custom_metric("Current Price", f"{current_price:.2f}"), unsafe_allow_html=True)
+                col2.markdown(custom_metric("Minimum Price", f"{min_price:.2f}"), unsafe_allow_html=True)
+                col3.markdown(custom_metric("Maximum Price", f"{max_price:.2f}"), unsafe_allow_html=True)
                 col4.markdown(custom_metric("Supply", f"{int(supply)}"), unsafe_allow_html=True)
-                
+                                
 if __name__ == "__main__":
     main()
