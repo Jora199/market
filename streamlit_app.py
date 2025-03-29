@@ -16,12 +16,12 @@ def load_image_data():
     
     try:
         img_dict = {}
-        df = pd.read_csv(file_path, encoding='utf-8')
+        # Явно указываем имена столбцов
+        df = pd.read_csv(file_path, encoding='utf-8', names=['name', 'img'])
         
-        # Предполагаем, что в CSV есть столбцы для имени и URL
         for _, row in df.iterrows():
-            name = str(row.iloc[0]).strip()  # Получаем имя из первого столбца
-            url = str(row.iloc[1]).strip()   # Получаем URL из второго столбца
+            name = str(row['name']).strip()  # Используем именованный столбец 'name'
+            url = str(row['img']).strip()    # Используем именованный столбец 'img'
             
             # Создаем варианты имени для сопоставления
             variations = [
@@ -31,12 +31,21 @@ def load_image_data():
                 ' '.join(name.split()),  # нормализация пробелов
                 ' '.join(name.split()).upper(),
                 ' '.join(name.split()).lower(),
+                name.strip('"'),  # удаляем кавычки
+                name.strip().strip('"'),  # удаляем пробелы и кавычки
             ]
             
             # Добавляем все варианты в словарь
             for variant in variations:
-                img_dict[variant] = url
+                if variant:  # проверяем, что вариант не пустой
+                    img_dict[variant] = url
         
+        # Отладочная информация
+        st.write(f"Загружено {len(img_dict)} вариантов имен")
+        st.write("Примеры загруженных ключей:")
+        for key in list(img_dict.keys())[:5]:
+            st.write(f"- '{key}' -> '{img_dict[key]}'")
+            
         return img_dict
         
     except Exception as e:
