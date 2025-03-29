@@ -54,6 +54,7 @@ def load_image_data():
 
 # Модифицированный поиск изображений в основной функции
 def find_image_url(item, img_dict, default_img):
+    # Создаем варианты поиска для конкретного предмета
     search_variations = [
         item,
         item.upper(),
@@ -61,16 +62,20 @@ def find_image_url(item, img_dict, default_img):
         ' '.join(item.split()),
         ' '.join(item.split()).upper(),
         ' '.join(item.split()).lower(),
+        item.strip('"'),
+        item.strip().strip('"'),
     ]
     
-    # Пробуем все варианты
-    for variation in search_variations:
-        if variation in img_dict:
-            return img_dict[variation]
+    # Отладочная информация
+    st.write("Ищем изображение для:", item)
+    st.write("Пробуем варианты:")
+    for variant in search_variations:
+        st.write(f"- '{variant}'")
+        if variant in img_dict:
+            st.write(f"Найдено соответствие: '{variant}' -> '{img_dict[variant]}'")
+            return img_dict[variant]
     
-    # Если совпадений не найдено, записываем попытки и возвращаем изображение по умолчанию
     st.warning(f"Изображение не найдено для предмета: '{item}'")
-    st.write("Попробованные варианты:", search_variations)
     return default_img
 
 # В основной функции замените код поиска изображения на:
