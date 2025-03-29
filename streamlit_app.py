@@ -178,7 +178,7 @@ def main():
             with img_col:
                 img_url = img_dict.get(item, default_img)
                 st.image(img_url, use_container_width=True)
-            
+                
             with stats_col:
                 st.subheader(f"Statistics - {item}")
                 col1, col2, col3, col4, col5 = st.columns(5)
