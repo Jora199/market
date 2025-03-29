@@ -221,13 +221,13 @@ def main():
                 
                 # В функции main(), где происходит поиск изображения:
                 # В месте использования изображения:
-                    item_clean = item.strip().strip('"')
-                    st.write("Original item name:", repr(item))
-                    st.write("Cleaned item name:", repr(item_clean))
-                    st.write("Normalized item name:", repr(' '.join(item_clean.split())))
-                    st.write("Available keys (first 5):")
-                    for key in list(img_dict.keys())[:5]:
-                        st.write(f"- {repr(key)}")
+                item_clean = item.strip().strip('"')
+                st.write("Original item name:", repr(item))
+                st.write("Cleaned item name:", repr(item_clean))
+                st.write("Normalized item name:", repr(' '.join(item_clean.split())))
+                st.write("Available keys (first 5):")
+                for key in list(img_dict.keys())[:5]:
+                    st.write(f"- {repr(key)}")
 
                 img_url = img_dict.get(item_clean, None)
                 if img_url is None:
