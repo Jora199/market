@@ -7,28 +7,33 @@ import os
 # Page configuration
 st.set_page_config(page_title="Price History Viewer", layout="wide")
 
+if st.button('Clear Cache'):
+    st.cache_data.clear()
+
 # Image data loading function
 @st.cache_data
 def load_image_data():
+    file_path = "data/img.csv"
+    
     try:
-        with open("data/img.csv", 'r', encoding='utf-8') as file:
-            lines = file.readlines()
+        # Используем pandas для чтения CSV
+        df_img = pd.read_csv(file_path)
         
+        # Создаем словарь с несколькими вариантами ключей для каждого изображения
         img_dict = {}
-        for line in lines[1:]:  # skip header
-            split_index = line.find("https://")
-            if split_index != -1:
-                name = line[:split_index].strip()
-                img = line[split_index:].strip()
-                img_dict[name] = img
-                
+        for name, url in zip(df_img['name'], df_img['img']):
+            clean_name = name.strip().strip('"')  # Удаляем пробелы и кавычки
+            img_dict[clean_name] = url
+            img_dict[clean_name.strip()] = url  # Дополнительная очистка
+            img_dict[clean_name.replace('"', '')] = url  # Удаляем все кавычки
+            
         return img_dict
         
     except FileNotFoundError:
-        st.error("File img.csv not found.")
+        st.error(f"File not found: {file_path}")
         return {}
     except Exception as e:
-        st.error(f"Error reading img.csv file: {str(e)}")
+        st.error(f"Error reading file {file_path}: {str(e)}")
         return {}
 
 @st.cache_data(ttl=60)
@@ -64,11 +69,17 @@ def main():
     supply_dict = load_supply_data()
     img_dict = load_image_data()
     default_img = "https://i.ibb.co/tpZ9HsSY/photo-2023-12-23-09-42-33.jpg"
-    
+
+    # Проверка соответствия имен
     items = [col for col in df.columns if col != 'timestamp']
     items_with_supply = [f"{item} (Supply: {int(supply_dict.get(item, 0))})" for item in items]
     display_to_original = dict(zip(items_with_supply, items))
     
+    # Проверка несоответствий
+    missing_images = [item for item in items if item not in img_dict]
+    if missing_images:
+        st.warning(f"Missing images for items: {missing_images}")
+
     # Sidebar with filters
     with st.sidebar:
         st.header("Filters")
@@ -186,7 +197,27 @@ def main():
             img_col, stats_col = st.columns([0.5, 2])
             
             with img_col:
-                img_url = img_dict.get(item, default_img)
+                # Сначала добавляем CSS для отступа
+                st.markdown("""
+                    <style>
+                    [data-testid="stImage"] {
+                        margin-top: -10px;
+                    }
+                    </style>
+                    """, unsafe_allow_html=True)
+                
+                # Ищем изображение с разными вариантами очистки имени
+                item_clean = item.strip().strip('"')
+                img_url = img_dict.get(item_clean, None)
+                if img_url is None:
+                    img_url = img_dict.get(item.strip(), None)
+                if img_url is None:
+                    img_url = img_dict.get(item.replace('"', '').strip(), None)
+                if img_url is None:
+                    img_url = default_img
+                    st.warning(f"No image found for item: '{item}'")
+                
+                # Отображаем изображение один раз
                 st.image(img_url, use_container_width=True)
                 
             with stats_col:
@@ -203,16 +234,39 @@ def main():
                     <style>
                     .metric-container {
                         text-align: center;
+                        padding: 0.5rem;
                     }
                     .metric-label {
-                        font-size: 1vw;
+                        font-size: 0.8rem;
                         color: var(--text-color-secondary);
-                        margin-bottom: 0.5vw;
+                        margin-bottom: 0.3rem;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
                     }
                     .metric-value {
-                        font-size: 1.5vw;
+                        font-size: 1rem;
                         font-weight: bold;
                         color: var(--text-color-primary);
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+
+                    /* Адаптивные стили для разных размеров экрана */
+                    @media (min-width: 1200px) {
+                        .metric-label { font-size: 1rem; }
+                        .metric-value { font-size: 1.2rem; }
+                    }
+
+                    @media (max-width: 768px) {
+                        .metric-label { font-size: 0.7rem; }
+                        .metric-value { font-size: 0.9rem; }
+                    }
+
+                    @media (max-width: 480px) {
+                        .metric-label { font-size: 0.6rem; }
+                        .metric-value { font-size: 0.8rem; }
                     }
 
                     /* Light theme colors */
@@ -228,6 +282,7 @@ def main():
                     }
                     </style>
                 """
+
                 st.markdown(metric_style, unsafe_allow_html=True)
 
                 # Add theme detection script
