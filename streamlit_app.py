@@ -14,46 +14,49 @@ def load_image_data():
     file_path = "data/img.csv"
     
     try:
-        # Используем pandas с явным указанием разделителя и обработкой кавычек
-        df = pd.read_csv(
-            file_path,
-            encoding='utf-8',
-            sep=',',          # явно указываем разделитель
-            quotechar='"',    # символ кавычек
-            quoting=csv.QUOTE_ALL,  # режим цитирования
-            escapechar='\\',  # экранирующий символ
-        )
-        
-        # Создаем словарь с разными вариантами написания имен
+        # Читаем файл построчно
         img_dict = {}
-        for _, row in df.iterrows():
-            name = str(row['name'])  # имя предмета
-            url = str(row['img'])    # URL изображения
+        with open(file_path, 'r', encoding='utf-8') as f:
+            # Пропускаем заголовок
+            next(f)
             
-            # Создаем различные варианты написания имени
-            variants = [
-                name,
-                name.strip(),
-                name.strip('"'),
-                name.lower().strip(),
-                name.lower().strip('"'),
-                ' '.join(name.split()),  # нормализация пробелов
-                ' '.join(name.split()).lower(),  # нормализация пробелов + нижний регистр
-            ]
-            
-            # Добавляем все варианты в словарь
-            for variant in set(variants):  # используем set для удаления дубликатов
-                if variant:  # проверяем, что вариант не пустой
-                    img_dict[variant] = url
+            for line in f:
+                # Разделяем строку на имя и URL по первой запятой
+                try:
+                    # Находим индекс первой запятой
+                    first_comma = line.find(',')
+                    if first_comma != -1:
+                        name = line[:first_comma].strip().strip('"')
+                        url = line[first_comma + 1:].strip().strip('"')
+                        
+                        # Создаем варианты написания имени
+                        variants = [
+                            name,
+                            name.strip(),
+                            name.strip('"'),
+                            name.lower().strip(),
+                            name.lower().strip('"'),
+                            ' '.join(name.split()),
+                            ' '.join(name.split()).lower(),
+                        ]
+                        
+                        # Добавляем все варианты в словарь
+                        for variant in set(variants):
+                            if variant:
+                                img_dict[variant] = url
+                
+                except Exception as e:
+                    st.warning(f"Skipping problematic line: {line.strip()}\nError: {str(e)}")
+                    continue
         
         # Отладочная информация
-        st.write(f"Total images loaded: {len(df)}")
-        st.write("First few rows from CSV:")
-        st.write(df.head())
-        st.write("Sample of dictionary keys:")
-        for key in list(img_dict.keys())[:5]:
-            st.write(f"- {repr(key)}")
-            
+        st.write(f"Total images loaded: {len(img_dict)}")
+        st.write("Sample of loaded items:")
+        for i, (key, value) in enumerate(list(img_dict.items())[:5]):
+            st.write(f"Item {i+1}:")
+            st.write(f"  Key: {repr(key)}")
+            st.write(f"  URL: {value}")
+        
         return img_dict
         
     except FileNotFoundError:
@@ -61,7 +64,6 @@ def load_image_data():
         return {}
     except Exception as e:
         st.error(f"Error reading file {file_path}: {str(e)}")
-        # Добавляем более подробную информацию об ошибке
         st.error("Full error details:")
         st.exception(e)
         return {}
