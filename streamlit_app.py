@@ -65,10 +65,10 @@ def main():
     img_dict = load_image_data()
     default_img = "https://i.ibb.co/tpZ9HsSY/photo-2023-12-23-09-42-33.jpg"
 
-    # Title and percentage change in one line
-    col1, col2 = st.columns([2, 1])
-    with col1:
-        st.title("Price History Analysis")
+    # Удалить эти строки
+    # col1, col2 = st.columns([2, 1])
+    # with col1:
+    #     st.title("Price History Analysis")
     
     items = [col for col in df.columns if col != 'timestamp']
     items_with_supply = [f"{item} (Supply: {int(supply_dict.get(item, 0))})" for item in items]
@@ -97,28 +97,39 @@ def main():
         if show_ma:
             ma_period = st.slider("Moving average period (hours)", 1, 24, 6)
 
-    # Add percentage change after selected_items and date_range definition
-    if selected_items and len(selected_items) == 1:
-        item = selected_items[0]
-        mask = (df['timestamp'].dt.date >= date_range[0]) & (df['timestamp'].dt.date <= date_range[1])
-        filtered_df = df.loc[mask]
+    # Добавить новый код здесь
+    # Создаем колонки для заголовка и процента
+    title_col, percent_col = st.columns([2, 1])
+    
+    # Добавляем заголовок в левую колонку
+    with title_col:
+        st.title("Price History Analysis")
+
+    # # Add percentage change
+    # if selected_items and len(selected_items) == 1:
+    #     item = selected_items[0]
+    #     mask = (df['timestamp'].dt.date >= date_range[0]) & (df['timestamp'].dt.date <= date_range[1])
+    #     filtered_df = df.loc[mask]
         
-        start_price = filtered_df[item].dropna().iloc[0] if not filtered_df[item].dropna().empty else None
-        end_price = get_last_valid_price(filtered_df, item)
-            
-        if start_price is not None and end_price is not None:
-            price_change = end_price - start_price
-            price_change_percent = (price_change / start_price) * 100
-            
-            price_change_color = "green" if price_change >= 0 else "red"
-            price_change_arrow = "↑" if price_change >= 0 else "↓"
-            
-            st.markdown(
-                f"<h2 style='color: {price_change_color}; text-align: right; margin-top: 15px;'>{price_change_arrow} {abs(price_change_percent):.2f}%</h2>",
-                unsafe_allow_html=True
-            )
-        else:
-            st.markdown("<h2>Нет данных</h2>", unsafe_allow_html=True)
+    #     with percent_col:
+    #         start_price = filtered_df[item].dropna().iloc[0] if not filtered_df[item].dropna().empty else None
+    #         end_price = get_last_valid_price(filtered_df, item)
+                
+    #         if start_price is not None and end_price is not None:
+    #             price_change = end_price - start_price
+    #             price_change_percent = (price_change / start_price) * 100
+                
+    #             price_change_color = "green" if price_change >= 0 else "red"
+    #             price_change_arrow = "↑" if price_change >= 0 else "↓"
+                
+    #             st.markdown(
+    #                 f"<h2 style='color: {price_change_color}; text-align: right; margin-top: 15px;'>{price_change_arrow} {abs(price_change_percent):.2f}%</h2>",
+    #                 unsafe_allow_html=True
+    #             )
+    #         else:
+    #             st.markdown("<h2>Нет данных</h2>", unsafe_allow_html=True)
+
+    # Удалить или закомментировать старый код процентного изменения
 
     # Check date_range
     if len(date_range) != 2:
