@@ -168,15 +168,16 @@ def main():
         
         if len(selected_items) == 1:
             item = selected_items[0]
-            
             # Calculate percentage change
-            start_price = filtered_df[item].iloc[0]  # Price at start of period
-            end_price = filtered_df[item].iloc[-1]   # Price at end of period
-            price_change = end_price - start_price
-            price_change_percent = (price_change / start_price) * 100
+            start_price = filtered_df[item].dropna().iloc[0] if not filtered_df[item].dropna().empty else None
+            end_price = get_last_valid_price(filtered_df, item)
 
-            img_col, stats_col = st.columns([1, 2])
-            
+            if start_price is not None and end_price is not None:
+                price_change = end_price - start_price
+                price_change_percent = (price_change / start_price) * 100
+
+                img_col, stats_col = st.columns([1, 2])
+                        
             with img_col:
                 img_url = img_dict.get(item, default_img)
                 st.image(img_url, use_container_width=True)
