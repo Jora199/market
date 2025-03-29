@@ -208,15 +208,6 @@ def main():
                 item.lower().strip(),
             ]
 
-            # Отладочная информация
-            st.write("Original item name:", repr(item))
-            st.write("Trying variants:")
-            for variant in item_variants:
-                st.write(f"- {repr(variant)}")
-            st.write("Available keys (first 5):")
-            for key in list(img_dict.keys())[:5]:
-                st.write(f"- {repr(key)}")
-
             # Поиск изображения по всем вариантам
             img_url = None
             for variant in item_variants:
