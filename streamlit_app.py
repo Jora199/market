@@ -14,49 +14,47 @@ def load_image_data():
     file_path = "data/img.csv"
     
     try:
-        # Читаем файл построчно
         img_dict = {}
-        with open(file_path, 'r', encoding='utf-8') as f:
-            # Пропускаем заголовок
-            next(f)
+        with open(file_path, 'r', encoding='utf-8', newline='') as csvfile:
+            reader = csv.reader(csvfile, quotechar='"', delimiter=',')
+            next(reader)  # Пропускаем заголовок
             
-            for line in f:
-                # Разделяем строку на имя и URL по первой запятой
-                try:
-                    # Находим индекс первой запятой
-                    first_comma = line.find(',')
-                    if first_comma != -1:
-                        name = line[:first_comma].strip().strip('"')
-                        url = line[first_comma + 1:].strip().strip('"')
-                        
-                        # Создаем варианты написания имени
-                        variants = [
-                            name,
-                            name.strip(),
-                            name.strip('"'),
-                            name.lower().strip(),
-                            name.lower().strip('"'),
-                            ' '.join(name.split()),
-                            ' '.join(name.split()).lower(),
-                        ]
-                        
-                        # Добавляем все варианты в словарь
-                        for variant in set(variants):
-                            if variant:
-                                img_dict[variant] = url
-                
-                except Exception as e:
-                    st.warning(f"Skipping problematic line: {line.strip()}\nError: {str(e)}")
-                    continue
-        
+            for row in reader:
+                if len(row) >= 2:  # Проверяем, что есть как минимум 2 столбца
+                    name = row[0].strip()
+                    url = row[1].strip()
+                    
+                    # Создаем варианты написания имени
+                    variants = [
+                        name,
+                        name.strip(),
+                        name.strip('"'),
+                        name.lower().strip(),
+                        name.lower().strip('"'),
+                        ' '.join(name.split()),  # нормализация пробелов
+                        ' '.join(name.split()).lower(),  # нормализация пробелов + нижний регистр
+                    ]
+                    
+                    # Добавляем все варианты в словарь
+                    for variant in set(variants):
+                        if variant:  # проверяем, что вариант не пустой
+                            img_dict[variant] = url
+                            
         # Отладочная информация
         st.write(f"Total images loaded: {len(img_dict)}")
-        st.write("Sample of loaded items:")
-        for i, (key, value) in enumerate(list(img_dict.items())[:5]):
-            st.write(f"Item {i+1}:")
+        st.write("First few entries in dictionary:")
+        for i, (key, url) in enumerate(list(img_dict.items())[:5]):
+            st.write(f"Entry {i+1}:")
             st.write(f"  Key: {repr(key)}")
-            st.write(f"  URL: {value}")
-        
+            st.write(f"  URL: {url}")
+            
+        # Показываем содержимое CSV файла
+        st.write("Raw CSV content (first 5 lines):")
+        with open(file_path, 'r', encoding='utf-8') as f:
+            for i, line in enumerate(f):
+                if i < 5:  # Показываем только первые 5 строк
+                    st.write(f"Line {i+1}: {repr(line)}")
+                    
         return img_dict
         
     except FileNotFoundError:
@@ -245,12 +243,11 @@ def main():
                 ]
 
                 # Отладочная информация
+                st.write("Debug information:")
                 st.write("Original item name:", repr(item))
-                st.write("Trying variants:")
-                for variant in item_variants:
-                    st.write(f"- {repr(variant)}")
-                st.write("Available keys (first 5):")
-                for key in list(img_dict.keys())[:5]:
+                st.write("Available images:", len(img_dict))
+                st.write("All image keys:")
+                for key in img_dict.keys():
                     st.write(f"- {repr(key)}")
 
                 # Поиск изображения по всем вариантам
@@ -263,10 +260,13 @@ def main():
 
                 if img_url is None:
                     img_url = default_img
-                    st.warning(f"No image found for item: '{item}'. Tried variants: {[repr(v) for v in item_variants]}")
+                    st.warning(f"No image found for item: {repr(item)}")
+                    st.write("Tried variants:")
+                    for variant in item_variants:
+                        st.write(f"- {repr(variant)}")
 
-                # Отображаем изображение
-                st.image(img_url, use_container_width=True)
+            # Отображаем изображение
+            st.image(img_url, use_container_width=True)
                 
             with stats_col:
                 st.subheader(f"Statistics - {item}")
