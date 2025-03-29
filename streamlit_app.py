@@ -14,44 +14,44 @@ def load_image_data():
     file_path = "data/img.csv"
     
     try:
-        with open(file_path, 'r', encoding='utf-8') as f:
-            lines = f.readlines()
-            
+        # Используем pandas для чтения CSV файла
+        df = pd.read_csv(file_path, encoding='utf-8')
+        
+        # Создаем словарь с разными вариантами написания имен
         img_dict = {}
-        for line in lines[1:]:
-            parts = line.split(',', 1)
-            if len(parts) == 2:
-                name = parts[0].strip().strip('"')
-                url = parts[1].strip().strip('"').strip()
-                
-                # Нормализация имени
-                variants = [
-                    name,  # оригинальное имя
-                    name.strip(),  # без пробелов по краям
-                    name.strip('"'),  # без кавычек
-                    name.strip().strip('"'),  # без пробелов и кавычек
-                    name.lower(),  # нижний регистр
-                    name.lower().strip(),  # нижний регистр без пробелов
-                    name.lower().strip('"'),  # нижний регистр без кавычек
-                    ' '.join(name.split()),  # нормализация пробелов
-                ]
-                
-                # Добавляем все варианты в словарь
-                for variant in variants:
+        for _, row in df.iterrows():
+            name = str(row['name'])  # Убедимся, что имя - строка
+            url = str(row['img'])    # Убедимся, что URL - строка
+            
+            # Создаем различные варианты написания имени
+            variants = [
+                name,
+                name.strip(),
+                name.strip('"'),
+                name.lower().strip(),
+                name.lower().strip('"'),
+                ' '.join(name.split()),  # нормализация пробелов
+                ' '.join(name.split()).lower(),  # нормализация пробелов + нижний регистр
+            ]
+            
+            # Добавляем все варианты в словарь
+            for variant in set(variants):  # используем set для удаления дубликатов
+                if variant:  # проверяем, что вариант не пустой
                     img_dict[variant] = url
-                
+        
         # Отладочная информация
-        st.write("Total images loaded:", len(img_dict))
-        st.write("Sample of loaded keys:")
-        for key in list(img_dict.keys())[:5]:
-            st.write(f"Key: '{key}'")
+        st.write(f"Total images loaded: {len(df)}")
+        st.write("Sample of original names from CSV:")
+        for name in df['name'].head().tolist():
+            st.write(f"- {repr(name)}")
+            
         return img_dict
         
     except FileNotFoundError:
-        st.error(f"Файл не найден: {file_path}")
+        st.error(f"File not found: {file_path}")
         return {}
     except Exception as e:
-        st.error(f"Ошибка чтения файла {file_path}: {str(e)}")
+        st.error(f"Error reading file {file_path}: {str(e)}")
         return {}
 
 @st.cache_data(ttl=60)
