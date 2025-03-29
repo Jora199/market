@@ -24,17 +24,27 @@ def load_image_data():
                 name = parts[0].strip().strip('"')
                 url = parts[1].strip().strip('"').strip()
                 
-                # Добавляем больше вариантов нормализации
-                normalized_name = name.lower().strip().replace('"', '').replace('  ', ' ')
-                img_dict[name] = url
-                img_dict[normalized_name] = url
-                img_dict[name.strip()] = url
-                img_dict[name.replace('"', '')] = url
-                img_dict[name.lower()] = url
-                img_dict[name.strip().lower()] = url
+                # Нормализация имени
+                variants = [
+                    name,  # оригинальное имя
+                    name.strip(),  # без пробелов по краям
+                    name.strip('"'),  # без кавычек
+                    name.strip().strip('"'),  # без пробелов и кавычек
+                    name.lower(),  # нижний регистр
+                    name.lower().strip(),  # нижний регистр без пробелов
+                    name.lower().strip('"'),  # нижний регистр без кавычек
+                    ' '.join(name.split()),  # нормализация пробелов
+                ]
+                
+                # Добавляем все варианты в словарь
+                for variant in variants:
+                    img_dict[variant] = url
                 
         # Отладочная информация
-        st.write("Loaded image dictionary:", list(img_dict.keys()))
+        st.write("Total images loaded:", len(img_dict))
+        st.write("Sample of loaded keys:")
+        for key in list(img_dict.keys())[:5]:
+            st.write(f"Key: '{key}'")
         return img_dict
         
     except FileNotFoundError:
@@ -210,10 +220,14 @@ def main():
                     """, unsafe_allow_html=True)
                 
                 # В функции main(), где происходит поиск изображения:
+                # В месте использования изображения:
                 item_clean = item.strip().strip('"')
-                st.write("Searching for item:", item)
-                st.write("Cleaned item name:", item_clean)
-                st.write("Available keys:", list(img_dict.keys())[:5])  # Показать первые 5 ключей для примера
+                st.write("Original item name:", repr(item))
+                st.write("Cleaned item name:", repr(item_clean))
+                st.write("Normalized item name:", repr(' '.join(item_clean.split())))
+                st.write("Available keys (first 5):")
+                for key in list(img_dict.keys())[:5]:
+                    st.write(f"- {repr(key)}")
 
                 img_url = img_dict.get(item_clean, None)
                 if img_url is None:
