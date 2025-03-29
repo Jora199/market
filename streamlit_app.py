@@ -188,38 +188,48 @@ def main():
             img_col, stats_col = st.columns([0.5, 2])
             
             with img_col:
-                # Сначала добавляем CSS для отступа
+                # CSS для контроля размера изображения
                 st.markdown("""
                     <style>
                     [data-testid="stImage"] {
                         margin-top: -10px;
+                        max-width: 150px !important;  /* фиксированная максимальная ширина */
+                        width: 100% !important;
+                        margin-left: auto !important;
+                        margin-right: auto !important;
+                        display: block !important;
+                    }
+                    [data-testid="stImage"] > img {
+                        max-width: 150px !important;  /* контроль размера самого изображения */
+                        width: 100% !important;
+                        object-fit: contain !important;
                     }
                     </style>
                     """, unsafe_allow_html=True)
-                
+
                 # Нормализация имени и создание вариантов
-            item_clean = ' '.join(item.split())  # нормализация пробелов
-            item_variants = [
-                item,
-                item_clean,
-                item_clean.lower(),
-                item.strip('"'),
-                item.strip().strip('"'),
-                item.lower().strip(),
-            ]
+                item_clean = ' '.join(item.split())
+                item_variants = [
+                    item,
+                    item_clean,
+                    item_clean.lower(),
+                    item.strip('"'),
+                    item.strip().strip('"'),
+                    item.lower().strip(),
+                ]
 
-            # Поиск изображения по всем вариантам
-            img_url = None
-            for variant in item_variants:
-                if variant in img_dict:
-                    img_url = img_dict[variant]
-                    break
+                # Поиск изображения по всем вариантам
+                img_url = None
+                for variant in item_variants:
+                    if variant in img_dict:
+                        img_url = img_dict[variant]
+                        break
 
-            if img_url is None:
-                img_url = default_img
+                if img_url is None:
+                    img_url = default_img
 
-            # Отображаем изображение
-            st.image(img_url, use_container_width=True)
+                # Отображаем изображение
+                st.image(img_url, use_container_width=True)
                 
             with stats_col:
                 st.subheader(f"Statistics - {item}")
