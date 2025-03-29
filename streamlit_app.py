@@ -9,50 +9,64 @@ import csv
 st.set_page_config(page_title="Price History Viewer", layout="wide")
 
 # Image data loading function
+# Модифицированная функция загрузки данных изображений
 @st.cache_data
 def load_image_data():
     file_path = "data/img.csv"
     
     try:
-        with open(file_path, 'r', encoding='utf-8') as f:
-            lines = f.readlines()
-            
         img_dict = {}
-        for line in lines[1:]:
-            parts = line.split(',', 1)
-            if len(parts) == 2:
-                name = parts[0].strip().strip('"')
-                url = parts[1].strip().strip('"').strip()
-                
-                # Нормализация имени
-                variants = [
-                    name,  # оригинальное имя
-                    name.strip(),  # без пробелов по краям
-                    name.strip('"'),  # без кавычек
-                    name.strip().strip('"'),  # без пробелов и кавычек
-                    name.lower(),  # нижний регистр
-                    name.lower().strip(),  # нижний регистр без пробелов
-                    name.lower().strip('"'),  # нижний регистр без кавычек
-                    ' '.join(name.split()),  # нормализация пробелов
-                ]
-                
-                # Добавляем все варианты в словарь
-                for variant in variants:
-                    img_dict[variant] = url
-                
-        # Отладочная информация
-        st.write("Total images loaded:", len(img_dict))
-        st.write("Sample of loaded keys:")
-        for key in list(img_dict.keys())[:5]:
-            st.write(f"Key: '{key}'")
+        df = pd.read_csv(file_path, encoding='utf-8')
+        
+        # Предполагаем, что в CSV есть столбцы для имени и URL
+        for _, row in df.iterrows():
+            name = str(row.iloc[0]).strip()  # Получаем имя из первого столбца
+            url = str(row.iloc[1]).strip()   # Получаем URL из второго столбца
+            
+            # Создаем варианты имени для сопоставления
+            variations = [
+                name,
+                name.upper(),
+                name.lower(),
+                ' '.join(name.split()),  # нормализация пробелов
+                ' '.join(name.split()).upper(),
+                ' '.join(name.split()).lower(),
+            ]
+            
+            # Добавляем все варианты в словарь
+            for variant in variations:
+                img_dict[variant] = url
+        
         return img_dict
         
-    except FileNotFoundError:
-        st.error(f"Файл не найден: {file_path}")
-        return {}
     except Exception as e:
-        st.error(f"Ошибка чтения файла {file_path}: {str(e)}")
+        st.error(f"Ошибка загрузки данных изображений: {str(e)}")
         return {}
+
+# Модифицированный поиск изображений в основной функции
+def find_image_url(item, img_dict, default_img):
+    search_variations = [
+        item,
+        item.upper(),
+        item.lower(),
+        ' '.join(item.split()),
+        ' '.join(item.split()).upper(),
+        ' '.join(item.split()).lower(),
+    ]
+    
+    # Пробуем все варианты
+    for variation in search_variations:
+        if variation in img_dict:
+            return img_dict[variation]
+    
+    # Если совпадений не найдено, записываем попытки и возвращаем изображение по умолчанию
+    st.warning(f"Изображение не найдено для предмета: '{item}'")
+    st.write("Попробованные варианты:", search_variations)
+    return default_img
+
+# В основной функции замените код поиска изображения на:
+item_img_url = find_image_url(item_clean, img_dict, default_img)
+st.image(item_img_url, use_container_width=True)
 
 @st.cache_data(ttl=60)
 def load_data():
