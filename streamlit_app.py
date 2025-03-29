@@ -217,7 +217,6 @@ def main():
 
             if img_url is None:
                 img_url = default_img
-                st.warning(f"No image found for item: '{item}'. Tried variants: {[repr(v) for v in item_variants]}")
 
             # Отображаем изображение
             st.image(img_url, use_container_width=True)
