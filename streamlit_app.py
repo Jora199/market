@@ -49,6 +49,14 @@ def load_supply_data():
     except FileNotFoundError:
         st.error(f"File {supply_path} not found.")
         return {}
+    
+# Функция для получения последнего непустого значения
+def get_last_valid_price(df, item):
+    # Получаем все непустые значения
+    valid_prices = df[item].dropna()
+    if len(valid_prices) > 0:
+        return valid_prices.iloc[-1]
+    return None
 
 def main():
     # Load all data
@@ -90,14 +98,15 @@ def main():
             ma_period = st.slider("Moving average period (hours)", 1, 24, 6)
 
     # Add percentage change after selected_items and date_range definition
-    with col2:
-        if selected_items and len(selected_items) == 1:
-            item = selected_items[0]
-            mask = (df['timestamp'].dt.date >= date_range[0]) & (df['timestamp'].dt.date <= date_range[1])
-            filtered_df = df.loc[mask]
+    if selected_items and len(selected_items) == 1:
+        item = selected_items[0]
+        mask = (df['timestamp'].dt.date >= date_range[0]) & (df['timestamp'].dt.date <= date_range[1])
+        filtered_df = df.loc[mask]
+        
+        start_price = filtered_df[item].dropna().iloc[0] if not filtered_df[item].dropna().empty else None
+        end_price = get_last_valid_price(filtered_df, item)
             
-            start_price = filtered_df[item].iloc[0]
-            end_price = filtered_df[item].iloc[-1]
+        if start_price is not None and end_price is not None:
             price_change = end_price - start_price
             price_change_percent = (price_change / start_price) * 100
             
@@ -108,6 +117,8 @@ def main():
                 f"<h2 style='color: {price_change_color}; text-align: right; margin-top: 15px;'>{price_change_arrow} {abs(price_change_percent):.2f}%</h2>",
                 unsafe_allow_html=True
             )
+        else:
+            st.markdown("<h2>Нет данных</h2>", unsafe_allow_html=True)
 
     # Check date_range
     if len(date_range) != 2:
@@ -174,9 +185,9 @@ def main():
                 st.subheader(f"Statistics - {item}")
                 col1, col2, col3, col4, col5 = st.columns(5)
                 
-                current_price = filtered_df[item].iloc[-1]
-                min_price = filtered_df[item].min()
-                max_price = filtered_df[item].max()
+                current_price = get_last_valid_price(filtered_df, item)
+                min_price = filtered_df[item].dropna().min() if not filtered_df[item].dropna().empty else None
+                max_price = filtered_df[item].dropna().max() if not filtered_df[item].dropna().empty else None
                 supply = supply_dict.get(item, 0)
                 
                 # Display metrics with responsive font size and theme-aware colors
@@ -230,12 +241,19 @@ def main():
                         <div class="metric-label">{label}</div>
                         <div class="metric-value">{value}</div>
                     </div>
-                    """
+                    """                    
+                
+                # И обновите отображение метрик:
+                def format_value(value):
+                    if value is None:
+                        return "Нет данных"
+                    return f"{value:.2f}"
 
-                col1.markdown(custom_metric("Current Price", f"{current_price:.2f}"), unsafe_allow_html=True)
-                col2.markdown(custom_metric("Minimum Price", f"{min_price:.2f}"), unsafe_allow_html=True)
-                col3.markdown(custom_metric("Maximum Price", f"{max_price:.2f}"), unsafe_allow_html=True)
+
+                col1.markdown(custom_metric("Current Price", format_value(current_price)), unsafe_allow_html=True)
+                col2.markdown(custom_metric("Minimum Price", format_value(min_price)), unsafe_allow_html=True)
+                col3.markdown(custom_metric("Maximum Price", format_value(max_price)), unsafe_allow_html=True)
                 col4.markdown(custom_metric("Supply", f"{int(supply)}"), unsafe_allow_html=True)
-                                
+                
 if __name__ == "__main__":
     main()
