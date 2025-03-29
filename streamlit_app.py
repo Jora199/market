@@ -193,7 +193,7 @@ def main():
                     <style>
                     [data-testid="stImage"] {
                         margin-top: -10px;
-                        max-width: 50px !important;  /* фиксированная максимальная ширина */
+                        max-width: 350px !important;  /* фиксированная максимальная ширина */
                         width: 100% !important;
                         margin-left: auto !important;
                         margin-right: auto !important;
