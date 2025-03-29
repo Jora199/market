@@ -7,33 +7,35 @@ import os
 # Page configuration
 st.set_page_config(page_title="Price History Viewer", layout="wide")
 
-if st.button('Clear Cache'):
-    st.cache_data.clear()
-
 # Image data loading function
 @st.cache_data
 def load_image_data():
     file_path = "data/img.csv"
     
     try:
-        # Используем pandas для чтения CSV
-        df_img = pd.read_csv(file_path)
-        
-        # Создаем словарь с несколькими вариантами ключей для каждого изображения
-        img_dict = {}
-        for name, url in zip(df_img['name'], df_img['img']):
-            clean_name = name.strip().strip('"')  # Удаляем пробелы и кавычки
-            img_dict[clean_name] = url
-            img_dict[clean_name.strip()] = url  # Дополнительная очистка
-            img_dict[clean_name.replace('"', '')] = url  # Удаляем все кавычки
+        # Читаем файл вручную
+        with open(file_path, 'r', encoding='utf-8') as f:
+            lines = f.readlines()
             
+        img_dict = {}
+        # Пропускаем заголовок
+        for line in lines[1:]:
+            # Разделяем строку по запятой, но только на первое вхождение
+            parts = line.split(',', 1)
+            if len(parts) == 2:
+                name = parts[0].strip().strip('"')
+                url = parts[1].strip().strip('"')
+                img_dict[name] = url
+                img_dict[name.strip()] = url
+                img_dict[name.replace('"', '')] = url
+                
         return img_dict
         
     except FileNotFoundError:
-        st.error(f"File not found: {file_path}")
+        st.error(f"Файл не найден: {file_path}")
         return {}
     except Exception as e:
-        st.error(f"Error reading file {file_path}: {str(e)}")
+        st.error(f"Ошибка чтения файла {file_path}: {str(e)}")
         return {}
 
 @st.cache_data(ttl=60)
@@ -75,11 +77,6 @@ def main():
     items_with_supply = [f"{item} (Supply: {int(supply_dict.get(item, 0))})" for item in items]
     display_to_original = dict(zip(items_with_supply, items))
     
-    # Проверка несоответствий
-    missing_images = [item for item in items if item not in img_dict]
-    if missing_images:
-        st.warning(f"Missing images for items: {missing_images}")
-
     # Sidebar with filters
     with st.sidebar:
         st.header("Filters")
