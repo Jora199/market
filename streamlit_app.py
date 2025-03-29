@@ -92,32 +92,42 @@ def main():
         if show_ma:
             ma_period = st.slider("Moving average period (hours)", 1, 24, 6)
 
-    # Создаем колонки для заголовка и процента
+        # Создаем колонки для заголовка и процента
     title_col, percent_col = st.columns([2, 1])
     
     # Добавляем заголовок в левую колонку
     with title_col:
         st.title("Price History Analysis")
 
-    # Добавляем процентное изменение в правую колонку
-    with percent_col:
-        if selected_items and len(selected_items) == 1:
-            item = selected_items[0]
-            start_price = filtered_df[item].dropna().iloc[0] if not filtered_df[item].dropna().empty else None
-            end_price = get_last_valid_price(filtered_df, item)
-            
-            if start_price is not None and end_price is not None:
-                percent_change = ((end_price - start_price) / start_price) * 100
-                color = "green" if percent_change >= 0 else "red"
-                st.markdown(f"""
-                    <div style='text-align: right; padding-top: 1rem;'>
-                        <span style='font-size: 24px; color: {color};'>
-                            {percent_change:+.2f}%
-                        </span>
-                    </div>
-                    """, 
-                    unsafe_allow_html=True
-                )
+    # Check date_range
+    if len(date_range) != 2:
+        st.error("Please select two dates to define the period")
+        return
+
+    # Display chart and statistics
+    if selected_items:
+        mask = (df['timestamp'].dt.date >= date_range[0]) & (df['timestamp'].dt.date <= date_range[1])
+        filtered_df = df.loc[mask]
+        
+        # Теперь добавляем процентное изменение в правую колонку
+        with percent_col:
+            if len(selected_items) == 1:
+                item = selected_items[0]
+                start_price = filtered_df[item].dropna().iloc[0] if not filtered_df[item].dropna().empty else None
+                end_price = get_last_valid_price(filtered_df, item)
+                
+                if start_price is not None and end_price is not None:
+                    percent_change = ((end_price - start_price) / start_price) * 100
+                    color = "green" if percent_change >= 0 else "red"
+                    st.markdown(f"""
+                        <div style='text-align: right; padding-top: 1rem;'>
+                            <span style='font-size: 24px; color: {color};'>
+                                {percent_change:+.2f}%
+                            </span>
+                        </div>
+                        """, 
+                        unsafe_allow_html=True
+                    )
 
     # Check date_range
     if len(date_range) != 2:
