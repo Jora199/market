@@ -14,47 +14,37 @@ def load_image_data():
     file_path = "data/img.csv"
     
     try:
+        # Используем pandas для чтения CSV файла
+        df = pd.read_csv(file_path, encoding='utf-8')
+        
+        # Создаем словарь с разными вариантами написания имен
         img_dict = {}
-        with open(file_path, 'r', encoding='utf-8', newline='') as csvfile:
-            reader = csv.reader(csvfile, quotechar='"', delimiter=',')
-            next(reader)  # Пропускаем заголовок
+        for _, row in df.iterrows():
+            name = str(row['name'])  # Убедимся, что имя - строка
+            url = str(row['img'])    # Убедимся, что URL - строка
             
-            for row in reader:
-                if len(row) >= 2:  # Проверяем, что есть как минимум 2 столбца
-                    name = row[0].strip()
-                    url = row[1].strip()
-                    
-                    # Создаем варианты написания имени
-                    variants = [
-                        name,
-                        name.strip(),
-                        name.strip('"'),
-                        name.lower().strip(),
-                        name.lower().strip('"'),
-                        ' '.join(name.split()),  # нормализация пробелов
-                        ' '.join(name.split()).lower(),  # нормализация пробелов + нижний регистр
-                    ]
-                    
-                    # Добавляем все варианты в словарь
-                    for variant in set(variants):
-                        if variant:  # проверяем, что вариант не пустой
-                            img_dict[variant] = url
-                            
+            # Создаем различные варианты написания имени
+            variants = [
+                name,
+                name.strip(),
+                name.strip('"'),
+                name.lower().strip(),
+                name.lower().strip('"'),
+                ' '.join(name.split()),  # нормализация пробелов
+                ' '.join(name.split()).lower(),  # нормализация пробелов + нижний регистр
+            ]
+            
+            # Добавляем все варианты в словарь
+            for variant in set(variants):  # используем set для удаления дубликатов
+                if variant:  # проверяем, что вариант не пустой
+                    img_dict[variant] = url
+        
         # Отладочная информация
-        st.write(f"Total images loaded: {len(img_dict)}")
-        st.write("First few entries in dictionary:")
-        for i, (key, url) in enumerate(list(img_dict.items())[:5]):
-            st.write(f"Entry {i+1}:")
-            st.write(f"  Key: {repr(key)}")
-            st.write(f"  URL: {url}")
+        st.write(f"Total images loaded: {len(df)}")
+        st.write("Sample of original names from CSV:")
+        for name in df['name'].head().tolist():
+            st.write(f"- {repr(name)}")
             
-        # Показываем содержимое CSV файла
-        st.write("Raw CSV content (first 5 lines):")
-        with open(file_path, 'r', encoding='utf-8') as f:
-            for i, line in enumerate(f):
-                if i < 5:  # Показываем только первые 5 строк
-                    st.write(f"Line {i+1}: {repr(line)}")
-                    
         return img_dict
         
     except FileNotFoundError:
@@ -62,10 +52,8 @@ def load_image_data():
         return {}
     except Exception as e:
         st.error(f"Error reading file {file_path}: {str(e)}")
-        st.error("Full error details:")
-        st.exception(e)
         return {}
-    
+
 @st.cache_data(ttl=60)
 def load_data():
     file_path = "data/price_history.csv"
@@ -232,38 +220,36 @@ def main():
                     """, unsafe_allow_html=True)
                 
                 # Нормализация имени и создание вариантов
-                item_clean = ' '.join(item.split())  # нормализация пробелов
-                item_variants = [
-                    item,
-                    item_clean,
-                    item_clean.lower(),
-                    item.strip('"'),
-                    item.strip().strip('"'),
-                    item.lower().strip(),
-                ]
+            item_clean = ' '.join(item.split())  # нормализация пробелов
+            item_variants = [
+                item,
+                item_clean,
+                item_clean.lower(),
+                item.strip('"'),
+                item.strip().strip('"'),
+                item.lower().strip(),
+            ]
 
-                # Отладочная информация
-                st.write("Debug information:")
-                st.write("Original item name:", repr(item))
-                st.write("Available images:", len(img_dict))
-                st.write("All image keys:")
-                for key in img_dict.keys():
-                    st.write(f"- {repr(key)}")
+            # Отладочная информация
+            st.write("Original item name:", repr(item))
+            st.write("Trying variants:")
+            for variant in item_variants:
+                st.write(f"- {repr(variant)}")
+            st.write("Available keys (first 5):")
+            for key in list(img_dict.keys())[:5]:
+                st.write(f"- {repr(key)}")
 
-                # Поиск изображения по всем вариантам
-                img_url = None
-                for variant in item_variants:
-                    if variant in img_dict:
-                        img_url = img_dict[variant]
-                        st.success(f"Found image using variant: {repr(variant)}")
-                        break
+            # Поиск изображения по всем вариантам
+            img_url = None
+            for variant in item_variants:
+                if variant in img_dict:
+                    img_url = img_dict[variant]
+                    st.success(f"Found image using variant: {repr(variant)}")
+                    break
 
-                if img_url is None:
-                    img_url = default_img
-                    st.warning(f"No image found for item: {repr(item)}")
-                    st.write("Tried variants:")
-                    for variant in item_variants:
-                        st.write(f"- {repr(variant)}")
+            if img_url is None:
+                img_url = default_img
+                st.warning(f"No image found for item: '{item}'. Tried variants: {[repr(v) for v in item_variants]}")
 
             # Отображаем изображение
             st.image(img_url, use_container_width=True)
