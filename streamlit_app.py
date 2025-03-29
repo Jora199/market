@@ -9,78 +9,50 @@ import csv
 st.set_page_config(page_title="Price History Viewer", layout="wide")
 
 # Image data loading function
-# Модифицированная функция загрузки данных изображений
 @st.cache_data
 def load_image_data():
     file_path = "data/img.csv"
     
     try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            lines = f.readlines()
+            
         img_dict = {}
-        # Явно указываем имена столбцов
-        df = pd.read_csv(file_path, encoding='utf-8', names=['name', 'img'])
-        
-        for _, row in df.iterrows():
-            name = str(row['name']).strip()  # Используем именованный столбец 'name'
-            url = str(row['img']).strip()    # Используем именованный столбец 'img'
-            
-            # Создаем варианты имени для сопоставления
-            variations = [
-                name,
-                name.upper(),
-                name.lower(),
-                ' '.join(name.split()),  # нормализация пробелов
-                ' '.join(name.split()).upper(),
-                ' '.join(name.split()).lower(),
-                name.strip('"'),  # удаляем кавычки
-                name.strip().strip('"'),  # удаляем пробелы и кавычки
-            ]
-            
-            # Добавляем все варианты в словарь
-            for variant in variations:
-                if variant:  # проверяем, что вариант не пустой
+        for line in lines[1:]:
+            parts = line.split(',', 1)
+            if len(parts) == 2:
+                name = parts[0].strip().strip('"')
+                url = parts[1].strip().strip('"').strip()
+                
+                # Нормализация имени
+                variants = [
+                    name,  # оригинальное имя
+                    name.strip(),  # без пробелов по краям
+                    name.strip('"'),  # без кавычек
+                    name.strip().strip('"'),  # без пробелов и кавычек
+                    name.lower(),  # нижний регистр
+                    name.lower().strip(),  # нижний регистр без пробелов
+                    name.lower().strip('"'),  # нижний регистр без кавычек
+                    ' '.join(name.split()),  # нормализация пробелов
+                ]
+                
+                # Добавляем все варианты в словарь
+                for variant in variants:
                     img_dict[variant] = url
-        
+                
         # Отладочная информация
-        st.write(f"Загружено {len(img_dict)} вариантов имен")
-        st.write("Примеры загруженных ключей:")
+        st.write("Total images loaded:", len(img_dict))
+        st.write("Sample of loaded keys:")
         for key in list(img_dict.keys())[:5]:
-            st.write(f"- '{key}' -> '{img_dict[key]}'")
-            
+            st.write(f"Key: '{key}'")
         return img_dict
         
-    except Exception as e:
-        st.error(f"Ошибка загрузки данных изображений: {str(e)}")
+    except FileNotFoundError:
+        st.error(f"Файл не найден: {file_path}")
         return {}
-
-# Модифицированный поиск изображений в основной функции
-def find_image_url(item, img_dict, default_img):
-    # Создаем варианты поиска для конкретного предмета
-    search_variations = [
-        item,
-        item.upper(),
-        item.lower(),
-        ' '.join(item.split()),
-        ' '.join(item.split()).upper(),
-        ' '.join(item.split()).lower(),
-        item.strip('"'),
-        item.strip().strip('"'),
-    ]
-    
-    # Отладочная информация
-    st.write("Ищем изображение для:", item)
-    st.write("Пробуем варианты:")
-    for variant in search_variations:
-        st.write(f"- '{variant}'")
-        if variant in img_dict:
-            st.write(f"Найдено соответствие: '{variant}' -> '{img_dict[variant]}'")
-            return img_dict[variant]
-    
-    st.warning(f"Изображение не найдено для предмета: '{item}'")
-    return default_img
-
-# В основной функции замените код поиска изображения на:
-item_img_url = find_image_url(item_clean, img_dict, default_img)
-st.image(item_img_url, use_container_width=True)
+    except Exception as e:
+        st.error(f"Ошибка чтения файла {file_path}: {str(e)}")
+        return {}
 
 @st.cache_data(ttl=60)
 def load_data():
@@ -249,13 +221,13 @@ def main():
                 
                 # В функции main(), где происходит поиск изображения:
                 # В месте использования изображения:
-                item_clean = item.strip().strip('"')
-                st.write("Original item name:", repr(item))
-                st.write("Cleaned item name:", repr(item_clean))
-                st.write("Normalized item name:", repr(' '.join(item_clean.split())))
-                st.write("Available keys (first 5):")
-                for key in list(img_dict.keys())[:5]:
-                    st.write(f"- {repr(key)}")
+                    item_clean = item.strip().strip('"')
+                    st.write("Original item name:", repr(item))
+                    st.write("Cleaned item name:", repr(item_clean))
+                    st.write("Normalized item name:", repr(' '.join(item_clean.split())))
+                    st.write("Available keys (first 5):")
+                    for key in list(img_dict.keys())[:5]:
+                        st.write(f"- {repr(key)}")
 
                 img_url = img_dict.get(item_clean, None)
                 if img_url is None:
