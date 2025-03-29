@@ -213,7 +213,6 @@ def main():
             for variant in item_variants:
                 if variant in img_dict:
                     img_url = img_dict[variant]
-                    st.success(f"Found image using variant: {repr(variant)}")
                     break
 
             if img_url is None:
