@@ -173,7 +173,7 @@ def main():
             start_price = filtered_df[item].dropna().iloc[0] if not filtered_df[item].dropna().empty else None
             end_price = get_last_valid_price(filtered_df, item)
 
-            img_col, stats_col = st.columns([1, 2])
+            img_col, stats_col = st.columns([0.7, 2])
             
             with img_col:
                 img_url = img_dict.get(item, default_img)
