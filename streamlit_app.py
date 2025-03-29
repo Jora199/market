@@ -232,20 +232,16 @@ def main():
                 st.image(img_url, use_container_width=True)
                 
             with stats_col:
-                st.subheader(f"Statistics - {item}")
-                col1, col2, col3, col4, col5 = st.columns(5)
-                
-                current_price = get_last_valid_price(filtered_df, item)
-                min_price = filtered_df[item].dropna().min() if not filtered_df[item].dropna().empty else None
-                max_price = filtered_df[item].dropna().max() if not filtered_df[item].dropna().empty else None
-                supply = supply_dict.get(item, 0)
-                
-                # Display metrics with responsive font size and theme-aware colors
-                metric_style = """
+                # CSS для выравнивания заголовка и метрик
+                st.markdown("""
                     <style>
+                    [data-testid="stMarkdownContainer"] h3 {
+                        margin-left: 0.5rem !important;
+                    }
                     .metric-container {
                         text-align: center;
                         padding: 0.5rem;
+                        margin-left: 0.5rem !important;
                     }
                     .metric-label {
                         font-size: 0.8rem;
@@ -264,7 +260,7 @@ def main():
                         text-overflow: ellipsis;
                     }
 
-                    /* Адаптивные стили для разных размеров экрана */
+                    /* Адаптивные стили */
                     @media (min-width: 1200px) {
                         .metric-label { font-size: 1rem; }
                         .metric-value { font-size: 1.2rem; }
@@ -280,24 +276,21 @@ def main():
                         .metric-value { font-size: 0.8rem; }
                     }
 
-                    /* Light theme colors */
+                    /* Цвета тем */
                     [data-theme="light"] {
                         --text-color-primary: #0f0f0f;
                         --text-color-secondary: #888;
                     }
 
-                    /* Dark theme colors */
                     [data-theme="dark"] {
                         --text-color-primary: #ffffff;
                         --text-color-secondary: #cccccc;
                     }
                     </style>
-                """
+                """, unsafe_allow_html=True)
 
-                st.markdown(metric_style, unsafe_allow_html=True)
-
-                # Add theme detection script
-                theme_script = """
+                # Скрипт определения темы
+                st.markdown("""
                     <script>
                         if (document.documentElement.classList.contains('dark')) {
                             document.documentElement.setAttribute('data-theme', 'dark');
@@ -305,29 +298,35 @@ def main():
                             document.documentElement.setAttribute('data-theme', 'light');
                         }
                     </script>
-                """
-                st.markdown(theme_script, unsafe_allow_html=True)
+                """, unsafe_allow_html=True)
 
-                # Custom metric display function remains the same
+                # Заголовок и колонки
+                st.subheader(f"Statistics - {item}")
+                col1, col2, col3, col4, col5 = st.columns(5)
+
+                # Получение данных
+                current_price = get_last_valid_price(filtered_df, item)
+                min_price = filtered_df[item].dropna().min() if not filtered_df[item].dropna().empty else None
+                max_price = filtered_df[item].dropna().max() if not filtered_df[item].dropna().empty else None
+                supply = supply_dict.get(item, 0)
+
+                # Функция форматирования значений
+                def format_value(value):
+                    if value is None:
+                        return "Нет данных"
+                    return f"{value:.2f}"
+
+                # Функция создания метрики
                 def custom_metric(label, value):
                     return f"""
                     <div class="metric-container">
                         <div class="metric-label">{label}</div>
                         <div class="metric-value">{value}</div>
                     </div>
-                    """                    
-                
-                # И обновите отображение метрик:
-                def format_value(value):
-                    if value is None:
-                        return "Нет данных"
-                    return f"{value:.2f}"
+                    """
 
-
+                # Отображение метрик
                 col1.markdown(custom_metric("Current Price", format_value(current_price)), unsafe_allow_html=True)
                 col2.markdown(custom_metric("Minimum Price", format_value(min_price)), unsafe_allow_html=True)
                 col3.markdown(custom_metric("Maximum Price", format_value(max_price)), unsafe_allow_html=True)
                 col4.markdown(custom_metric("Supply", f"{int(supply)}"), unsafe_allow_html=True)
-                
-if __name__ == "__main__":
-    main()
