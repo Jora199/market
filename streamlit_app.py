@@ -219,26 +219,39 @@ def main():
                     </style>
                     """, unsafe_allow_html=True)
                 
-                # В функции main(), где происходит поиск изображения:
-                # В месте использования изображения:
-                item_clean = item.strip().strip('"')
+                # Нормализация имени и создание вариантов
+                item_clean = ' '.join(item.split())  # нормализация пробелов
+                item_variants = [
+                    item,
+                    item_clean,
+                    item_clean.lower(),
+                    item.strip('"'),
+                    item.strip().strip('"'),
+                    item.lower().strip(),
+                ]
+
+                # Отладочная информация
                 st.write("Original item name:", repr(item))
-                st.write("Cleaned item name:", repr(item_clean))
-                st.write("Normalized item name:", repr(' '.join(item_clean.split())))
+                st.write("Trying variants:")
+                for variant in item_variants:
+                    st.write(f"- {repr(variant)}")
                 st.write("Available keys (first 5):")
                 for key in list(img_dict.keys())[:5]:
                     st.write(f"- {repr(key)}")
 
-                img_url = img_dict.get(item_clean, None)
-                if img_url is None:
-                    img_url = img_dict.get(item.strip(), None)
-                if img_url is None:
-                    img_url = img_dict.get(item.replace('"', '').strip(), None)
+                # Поиск изображения по всем вариантам
+                img_url = None
+                for variant in item_variants:
+                    if variant in img_dict:
+                        img_url = img_dict[variant]
+                        st.success(f"Found image using variant: {repr(variant)}")
+                        break
+
                 if img_url is None:
                     img_url = default_img
-                    st.warning(f"No image found for item: '{item}'. Tried keys: ['{item_clean}', '{item.strip()}', '{item.replace('\"', '').strip()}']")
-                
-                # Отображаем изображение один раз
+                    st.warning(f"No image found for item: '{item}'. Tried variants: {[repr(v) for v in item_variants]}")
+
+                # Отображаем изображение
                 st.image(img_url, use_container_width=True)
                 
             with stats_col:
