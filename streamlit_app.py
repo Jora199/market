@@ -92,13 +92,32 @@ def main():
         if show_ma:
             ma_period = st.slider("Moving average period (hours)", 1, 24, 6)
 
-    # Добавить новый код здесь
     # Создаем колонки для заголовка и процента
     title_col, percent_col = st.columns([2, 1])
     
     # Добавляем заголовок в левую колонку
     with title_col:
         st.title("Price History Analysis")
+
+    # Добавляем процентное изменение в правую колонку
+    with percent_col:
+        if selected_items and len(selected_items) == 1:
+            item = selected_items[0]
+            start_price = filtered_df[item].dropna().iloc[0] if not filtered_df[item].dropna().empty else None
+            end_price = get_last_valid_price(filtered_df, item)
+            
+            if start_price is not None and end_price is not None:
+                percent_change = ((end_price - start_price) / start_price) * 100
+                color = "green" if percent_change >= 0 else "red"
+                st.markdown(f"""
+                    <div style='text-align: right; padding-top: 1rem;'>
+                        <span style='font-size: 24px; color: {color};'>
+                            {percent_change:+.2f}%
+                        </span>
+                    </div>
+                    """, 
+                    unsafe_allow_html=True
+                )
 
     # Check date_range
     if len(date_range) != 2:
@@ -153,7 +172,7 @@ def main():
             start_price = filtered_df[item].dropna().iloc[0] if not filtered_df[item].dropna().empty else None
             end_price = get_last_valid_price(filtered_df, item)
 
-            img_col, stats_col = st.columns([0.3, 2])
+            img_col, stats_col = st.columns([0.5, 2])
             
             with img_col:
                 img_url = img_dict.get(item, default_img)
