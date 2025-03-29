@@ -14,26 +14,27 @@ def load_image_data():
     file_path = "data/img.csv"
     
     try:
-        # Читаем файл вручную
         with open(file_path, 'r', encoding='utf-8') as f:
             lines = f.readlines()
             
         img_dict = {}
-        # Пропускаем заголовок
         for line in lines[1:]:
-            # Разделяем строку по запятой, но только на первое вхождение
             parts = line.split(',', 1)
             if len(parts) == 2:
                 name = parts[0].strip().strip('"')
-                url = parts[1].strip().strip('"').strip()  # Удаляем лишние пробелы и кавычки
+                url = parts[1].strip().strip('"').strip()
                 
-                # Добавляем различные варианты написания имени
+                # Добавляем больше вариантов нормализации
+                normalized_name = name.lower().strip().replace('"', '').replace('  ', ' ')
                 img_dict[name] = url
+                img_dict[normalized_name] = url
                 img_dict[name.strip()] = url
                 img_dict[name.replace('"', '')] = url
-                img_dict[name.lower()] = url  # Добавляем вариант в нижнем регистре
-                img_dict[name.strip().lower()] = url  # Добавляем очищенный вариант в нижнем регистре
+                img_dict[name.lower()] = url
+                img_dict[name.strip().lower()] = url
                 
+        # Отладочная информация
+        st.write("Loaded image dictionary:", list(img_dict.keys()))
         return img_dict
         
     except FileNotFoundError:
@@ -208,8 +209,12 @@ def main():
                     </style>
                     """, unsafe_allow_html=True)
                 
-                # Ищем изображение с разными вариантами очистки имени
+                # В функции main(), где происходит поиск изображения:
                 item_clean = item.strip().strip('"')
+                st.write("Searching for item:", item)
+                st.write("Cleaned item name:", item_clean)
+                st.write("Available keys:", list(img_dict.keys())[:5])  # Показать первые 5 ключей для примера
+
                 img_url = img_dict.get(item_clean, None)
                 if img_url is None:
                     img_url = img_dict.get(item.strip(), None)
@@ -217,7 +222,7 @@ def main():
                     img_url = img_dict.get(item.replace('"', '').strip(), None)
                 if img_url is None:
                     img_url = default_img
-                    st.warning(f"No image found for item: '{item}'")
+                    st.warning(f"No image found for item: '{item}'. Tried keys: ['{item_clean}', '{item.strip()}', '{item.replace('\"', '').strip()}']")
                 
                 # Отображаем изображение один раз
                 st.image(img_url, use_container_width=True)
