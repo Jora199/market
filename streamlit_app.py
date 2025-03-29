@@ -187,105 +187,147 @@ def main():
 
             img_col, stats_col = st.columns([0.5, 2])
             
+            with img_col:
+                # CSS для контроля размера изображения
+                st.markdown("""
+                    <style>
+                    [data-testid="stImage"] {
+                        margin-top: -10px;
+                        max-width: 50px !important;  /* фиксированная максимальная ширина */
+                        width: 100% !important;
+                        margin-left: auto !important;
+                        margin-right: auto !important;
+                        display: block !important;
+                    }
+                    [data-testid="stImage"] > img {
+                        max-width: 400px !important;  /* контроль размера самого изображения */
+                        width: 100% !important;
+                        object-fit: contain !important;
+                    }
+                    </style>
+                    """, unsafe_allow_html=True)
+
+                # Нормализация имени и создание вариантов
+                item_clean = ' '.join(item.split())
+                item_variants = [
+                    item,
+                    item_clean,
+                    item_clean.lower(),
+                    item.strip('"'),
+                    item.strip().strip('"'),
+                    item.lower().strip(),
+                ]
+
+                # Поиск изображения по всем вариантам
+                img_url = None
+                for variant in item_variants:
+                    if variant in img_dict:
+                        img_url = img_dict[variant]
+                        break
+
+                if img_url is None:
+                    img_url = default_img
+
+                # Отображаем изображение
+                st.image(img_url, use_container_width=True)
+                
             with stats_col:
-    # CSS для выравнивания заголовка и метрик
-    st.markdown("""
-        <style>
-        [data-testid="stMarkdownContainer"] h3 {
-            margin-left: 0.5rem !important;
-        }
-        .metric-container {
-            text-align: center;
-            padding: 0.5rem;
-            margin-left: 0.5rem !important;
-        }
-        .metric-label {
-            font-size: 0.8rem;
-            color: var(--text-color-secondary);
-            margin-bottom: 0.3rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .metric-value {
-            font-size: 1rem;
-            font-weight: bold;
-            color: var(--text-color-primary);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+                st.subheader(f"Statistics - {item}")
+                col1, col2, col3, col4, col5 = st.columns(5)
+                
+                current_price = get_last_valid_price(filtered_df, item)
+                min_price = filtered_df[item].dropna().min() if not filtered_df[item].dropna().empty else None
+                max_price = filtered_df[item].dropna().max() if not filtered_df[item].dropna().empty else None
+                supply = supply_dict.get(item, 0)
+                
+                # Display metrics with responsive font size and theme-aware colors
+                metric_style = """
+                    <style>
+                    .metric-container {
+                        text-align: center;
+                        padding: 0.5rem;
+                    }
+                    .metric-label {
+                        font-size: 0.8rem;
+                        color: var(--text-color-secondary);
+                        margin-bottom: 0.3rem;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                    .metric-value {
+                        font-size: 1rem;
+                        font-weight: bold;
+                        color: var(--text-color-primary);
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
 
-        /* Адаптивные стили */
-        @media (min-width: 1200px) {
-            .metric-label { font-size: 1rem; }
-            .metric-value { font-size: 1.2rem; }
-        }
+                    /* Адаптивные стили для разных размеров экрана */
+                    @media (min-width: 1200px) {
+                        .metric-label { font-size: 1rem; }
+                        .metric-value { font-size: 1.2rem; }
+                    }
 
-        @media (max-width: 768px) {
-            .metric-label { font-size: 0.7rem; }
-            .metric-value { font-size: 0.9rem; }
-        }
+                    @media (max-width: 768px) {
+                        .metric-label { font-size: 0.7rem; }
+                        .metric-value { font-size: 0.9rem; }
+                    }
 
-        @media (max-width: 480px) {
-            .metric-label { font-size: 0.6rem; }
-            .metric-value { font-size: 0.8rem; }
-        }
+                    @media (max-width: 480px) {
+                        .metric-label { font-size: 0.6rem; }
+                        .metric-value { font-size: 0.8rem; }
+                    }
 
-        /* Цвета тем */
-        [data-theme="light"] {
-            --text-color-primary: #0f0f0f;
-            --text-color-secondary: #888;
-        }
+                    /* Light theme colors */
+                    [data-theme="light"] {
+                        --text-color-primary: #0f0f0f;
+                        --text-color-secondary: #888;
+                    }
 
-        [data-theme="dark"] {
-            --text-color-primary: #ffffff;
-            --text-color-secondary: #cccccc;
-        }
-        </style>
-    """, unsafe_allow_html=True)
+                    /* Dark theme colors */
+                    [data-theme="dark"] {
+                        --text-color-primary: #ffffff;
+                        --text-color-secondary: #cccccc;
+                    }
+                    </style>
+                """
 
-    # Скрипт определения темы
-    st.markdown("""
-        <script>
-            if (document.documentElement.classList.contains('dark')) {
-                document.documentElement.setAttribute('data-theme', 'dark');
-            } else {
-                document.documentElement.setAttribute('data-theme', 'light');
-            }
-        </script>
-    """, unsafe_allow_html=True)
+                st.markdown(metric_style, unsafe_allow_html=True)
 
-    # Заголовок и колонки
-    st.subheader(f"Statistics - {item}")
-    col1, col2, col3, col4, col5 = st.columns(5)
+                # Add theme detection script
+                theme_script = """
+                    <script>
+                        if (document.documentElement.classList.contains('dark')) {
+                            document.documentElement.setAttribute('data-theme', 'dark');
+                        } else {
+                            document.documentElement.setAttribute('data-theme', 'light');
+                        }
+                    </script>
+                """
+                st.markdown(theme_script, unsafe_allow_html=True)
 
-    # Получение данных
-    current_price = get_last_valid_price(filtered_df, item)
-    min_price = filtered_df[item].dropna().min() if not filtered_df[item].dropna().empty else None
-    max_price = filtered_df[item].dropna().max() if not filtered_df[item].dropna().empty else None
-    supply = supply_dict.get(item, 0)
+                # Custom metric display function remains the same
+                def custom_metric(label, value):
+                    return f"""
+                    <div class="metric-container">
+                        <div class="metric-label">{label}</div>
+                        <div class="metric-value">{value}</div>
+                    </div>
+                    """                    
+                
+                # И обновите отображение метрик:
+                def format_value(value):
+                    if value is None:
+                        return "Нет данных"
+                    return f"{value:.2f}"
 
-    # Функция форматирования значений
-    def format_value(value):
-        if value is None:
-            return "Нет данных"
-        return f"{value:.2f}"
 
-    # Функция создания метрики
-    def custom_metric(label, value):
-        return f"""
-        <div class="metric-container">
-            <div class="metric-label">{label}</div>
-            <div class="metric-value">{value}</div>
-        </div>
-        """
-
-    # Отображение метрик
-    col1.markdown(custom_metric("Current Price", format_value(current_price)), unsafe_allow_html=True)
-    col2.markdown(custom_metric("Minimum Price", format_value(min_price)), unsafe_allow_html=True)
-    col3.markdown(custom_metric("Maximum Price", format_value(max_price)), unsafe_allow_html=True)
-    col4.markdown(custom_metric("Supply", f"{int(supply)}"), unsafe_allow_html=True)
+                col1.markdown(custom_metric("Current Price", format_value(current_price)), unsafe_allow_html=True)
+                col2.markdown(custom_metric("Minimum Price", format_value(min_price)), unsafe_allow_html=True)
+                col3.markdown(custom_metric("Maximum Price", format_value(max_price)), unsafe_allow_html=True)
+                col4.markdown(custom_metric("Supply", f"{int(supply)}"), unsafe_allow_html=True)
                 
 if __name__ == "__main__":
     main()
