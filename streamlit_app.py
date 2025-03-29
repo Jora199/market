@@ -119,14 +119,16 @@ def main():
                 if start_price is not None and end_price is not None:
                     percent_change = ((end_price - start_price) / start_price) * 100
                     color = "green" if percent_change >= 0 else "red"
+                    arrow = "↑" if percent_change >= 0 else "↓"
                     st.markdown(f"""
                         <div style='text-align: right; padding-top: 1rem;'>
-                            <span style='font-size: 24px; color: {color};'>
-                                {percent_change:+.2f}%
+                            <span style='font-size: 32px; color: {color}; font-weight: bold;'>
+                                {arrow} {abs(percent_change):.2f}%
                             </span>
                         </div>
                         """, 
                         unsafe_allow_html=True
+                    )unsafe_allow_html=True
                     )
 
     # Check date_range
