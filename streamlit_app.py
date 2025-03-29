@@ -64,11 +64,6 @@ def main():
     supply_dict = load_supply_data()
     img_dict = load_image_data()
     default_img = "https://i.ibb.co/tpZ9HsSY/photo-2023-12-23-09-42-33.jpg"
-
-    # Удалить эти строки
-    # col1, col2 = st.columns([2, 1])
-    # with col1:
-    #     st.title("Price History Analysis")
     
     items = [col for col in df.columns if col != 'timestamp']
     items_with_supply = [f"{item} (Supply: {int(supply_dict.get(item, 0))})" for item in items]
@@ -104,32 +99,6 @@ def main():
     # Добавляем заголовок в левую колонку
     with title_col:
         st.title("Price History Analysis")
-
-    # # Add percentage change
-    # if selected_items and len(selected_items) == 1:
-    #     item = selected_items[0]
-    #     mask = (df['timestamp'].dt.date >= date_range[0]) & (df['timestamp'].dt.date <= date_range[1])
-    #     filtered_df = df.loc[mask]
-        
-    #     with percent_col:
-    #         start_price = filtered_df[item].dropna().iloc[0] if not filtered_df[item].dropna().empty else None
-    #         end_price = get_last_valid_price(filtered_df, item)
-                
-    #         if start_price is not None and end_price is not None:
-    #             price_change = end_price - start_price
-    #             price_change_percent = (price_change / start_price) * 100
-                
-    #             price_change_color = "green" if price_change >= 0 else "red"
-    #             price_change_arrow = "↑" if price_change >= 0 else "↓"
-                
-    #             st.markdown(
-    #                 f"<h2 style='color: {price_change_color}; text-align: right; margin-top: 15px;'>{price_change_arrow} {abs(price_change_percent):.2f}%</h2>",
-    #                 unsafe_allow_html=True
-    #             )
-    #         else:
-    #             st.markdown("<h2>Нет данных</h2>", unsafe_allow_html=True)
-
-    # Удалить или закомментировать старый код процентного изменения
 
     # Check date_range
     if len(date_range) != 2:
@@ -184,7 +153,7 @@ def main():
             start_price = filtered_df[item].dropna().iloc[0] if not filtered_df[item].dropna().empty else None
             end_price = get_last_valid_price(filtered_df, item)
 
-            img_col, stats_col = st.columns([0.7, 2])
+            img_col, stats_col = st.columns([0.3, 2])
             
             with img_col:
                 img_url = img_dict.get(item, default_img)
