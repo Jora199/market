@@ -128,7 +128,6 @@ def main():
                         </div>
                         """, 
                         unsafe_allow_html=True
-                    )unsafe_allow_html=True
                     )
 
     # Check date_range
