@@ -4,14 +4,14 @@ Item Name,Estimated Supply
 2.5x - 4x Adjustable Advanced Combat Scope for AZV 100,1693
 2.5x - 4x Adjustable Advanced Combat Scope for Boomslang,15581
 2.5x - 4x Adjustable Advanced Combat Scope for Hawk,12741
-2.5x - 4x Adjustable Advanced Combat Scope for Ichnya,2749
+2.5x - 4x Adjustable Advanced Combat Scope for Ichnya,12903
 2.5x - 4x Adjustable Advanced Combat Scope for Kasper,8071
 2.5x - 4x Adjustable Advanced Combat Scope for Kestrel,12574
 2.5x - 4x Adjustable Advanced Combat Scope for Kite,1688
 2.5x - 4x Adjustable Advanced Combat Scope for Kochi,1660
 2.5x - 4x Adjustable Advanced Combat Scope for M4 Commodore ,3265
 2.5x - 4x Adjustable Advanced Combat Scope for Mavinga,4333
-2.5x - 4x Adjustable Advanced Combat Scope for Partisan,1511
+2.5x - 4x Adjustable Advanced Combat Scope for Partisan,6865
 2.5x - 4x Adjustable Advanced Combat Scope for Pierser,12
 2.5x - 4x Adjustable Advanced Combat Scope for Proton,4579
 2.5x - 4x Adjustable Advanced Combat Scope for Tacoma,10436
@@ -142,18 +142,18 @@ Enhanced Compensator for the Tacoma,15652
 Enhanced Compensator for the Terikon,7589
 Enhanced Compensator for the Type 227,5966
 Enhanced Compensator for the Vulture,8546
-Enhanced Compensator for the Woodpecker,7291
+Enhanced Compensator for the Woodpecker,15733
 Flenser,15386
 Flenser Heavy Barrel,9146
 Flenser Legacy,517
 Flenser Mad Biker,7372
 Flenser Retro,554
 Flip the Salute,2992
-GHOST,7291
+GHOST,7305
 Give Peace a Chance,1620
 Green Maze,3459
 HAMMERHEADS,12889
-HOOKSHOT,8337
+HOOKSHOT,8365
 Hawk,8133
 Hawk 4x - 8x Adjustable MR Scope,7274
 Hawk Anarchist,1273
@@ -230,7 +230,7 @@ Kochi Heavy Barrel,6125
 Kochi Tactical Flash Hider,10225
 Kochi Tactical Foregrip,8165
 Kochi Tinsel Terror ,5359
-LEAPERS,12898
+LEAPERS,12909
 Lazer,1501
 Light the Fire,9437
 Logan Mutton Chops,1246
@@ -271,17 +271,17 @@ Osprey 8x - 12x Adjustable LR Scope,3768
 Osprey Heavy Barrel,8155
 Osprey Legacy,595
 Osprey Retro,559
-Osprey Smart Scope,2093
+Osprey Smart Scope,2095
 Osprey Tactical Foregrip,10486
-PARALYZER,8590
-PHOSPHOR FURY ,6781
+PARALYZER,8607
+PHOSPHOR FURY ,8365
 Pacifist Glasses,5995
 Pacifist Hoodie,7857
 Pacifist Jetpack,5579
 Pacifist Mask,5449
 Pacifist Shorts,8451
 Pacifist Tac Vest,6198
-Partisan,15573
+Partisan,15738
 Partisan Heavy Barrel,8571
 Partisan Raverunner,71001
 Partisan Tactical Foregrip,4555
@@ -324,13 +324,13 @@ Proton Legacy,538
 Proton OpenSea,32
 Proton Retro,560
 Proton Tactical Foregrip,1690
-RECON DRONE,12879
+RECON DRONE,12905
 RIPPER,12893
-ROADRUNNERS,15729
+ROADRUNNERS,15745
 Raptor Goggles,5030
 Raverunner Cap,70465
 Raverunner Chest Rig,105116
-Raverunner Jetpack,72998
+Raverunner Jetpack,73375
 Raverunner Mask,107059
 Raverunner Shirt,86640
 Raverunner Shorts,85940
@@ -369,13 +369,13 @@ TAP9 Legacy,331
 TAP9 Pacifist,7712
 TAP9 Retro,544
 THUMPERS,6124
-TRIPMINE,12882
+TRIPMINE,12908
 Tacoma,15308
 Tacoma AVAX Gen 04,6611
 Tacoma Heavy Barrel,12511
 Tacoma Legacy,509
 Tacoma Retro,580
-Tacoma Westcol,2397
+Tacoma Westcol,2415
 Tagger Cap,4283
 Tagger Chest Rig,5111
 Tagger Face Cover,4855
@@ -437,7 +437,7 @@ Vulture Tactical Foregrip,1923
 Westcol Set,2401
 Westcol Till I Die,2156
 Woodpecker,15578
-Woodpecker Heavy Barrel,3309
+Woodpecker Heavy Barrel,3313
 Woodpecker Legacy,495
 Woodpecker Prankster,1106
 Woodpecker Retro,490
