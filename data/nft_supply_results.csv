@@ -65,12 +65,12 @@ Circuit Breaker,44435
 Clawmark Beard,4896
 Clawmark Beard - Blond,1182
 Clawmark Beard - Brown,1162
-Clawmark Beard - Cyan,1207
+Clawmark Beard - Cyan,1234
 Clawmark Beard - Green,1116
 Clawmark Beard - Orange,1154
 Clawmark Beard - Pink,1236
 Cog,1337
-Combat DJ Helmet,49726
+Combat DJ Helmet,50795
 Combat DJ Jacket,46741
 Combat DJ Jetpack,37336
 Combat DJ Pants,57755
@@ -96,7 +96,7 @@ Devil Horns - Brown,1220
 Devil Horns - Cyan,3411
 Devil Horns - Green,1325
 Devil Horns - Orange,6367
-Devil Horns - Pink,1289
+Devil Horns - Pink,1296
 Doomed Zero Hoodie,6665
 Doomed Zero Jetpack,5663
 Doomed Zero Mask,7845
@@ -136,12 +136,12 @@ Enhanced Compensator for the Mavinga,12740
 Enhanced Compensator for the Osprey,2185
 Enhanced Compensator for the Partisan,4555
 Enhanced Compensator for the Pierser,153
-Enhanced Compensator for the Proton,2512
+Enhanced Compensator for the Proton,2517
 Enhanced Compensator for the TAP9,8168
 Enhanced Compensator for the Tacoma,15652
 Enhanced Compensator for the Terikon,7589
 Enhanced Compensator for the Type 227,5966
-Enhanced Compensator for the Vulture,8546
+Enhanced Compensator for the Vulture,10653
 Enhanced Compensator for the Woodpecker,15733
 Flenser,15386
 Flenser Heavy Barrel,9146
@@ -151,7 +151,7 @@ Flenser Retro,554
 Flip the Salute,2992
 GHOST,7311
 Give Peace a Chance,1620
-Green Maze,3459
+Green Maze,3469
 HAMMERHEADS,12889
 HOOKSHOT,8365
 Hawk,8151
@@ -230,7 +230,7 @@ Kochi Heavy Barrel,9198
 Kochi Tactical Flash Hider,10225
 Kochi Tactical Foregrip,8165
 Kochi Tinsel Terror ,5387
-LEAPERS,12912
+LEAPERS,12918
 Lazer,1501
 Light the Fire,9437
 Logan Mutton Chops,1246
@@ -273,18 +273,18 @@ Osprey Legacy,595
 Osprey Retro,559
 Osprey Smart Scope,2095
 Osprey Tactical Foregrip,10486
-PARALYZER,8627
+PARALYZER,8628
 PHOSPHOR FURY ,8365
 Pacifist Glasses,5995
 Pacifist Hoodie,7857
-Pacifist Jetpack,5579
+Pacifist Jetpack,5768
 Pacifist Mask,5449
 Pacifist Shorts,8451
 Pacifist Tac Vest,6198
 Partisan,15738
-Partisan Heavy Barrel,8571
-Partisan Raverunner,71001
-Partisan Tactical Foregrip,4555
+Partisan Heavy Barrel,8574
+Partisan Raverunner,73897
+Partisan Tactical Foregrip,10652
 Pierser,1791
 Pierser 4x - 8x Adjustable MR Scope,167
 Pierser 8x - 12x Adjustable LR Scope,163
@@ -326,13 +326,13 @@ Proton Retro,560
 Proton Tactical Foregrip,6648
 RECON DRONE,12905
 RIPPER,12893
-ROADRUNNERS,15767
+ROADRUNNERS,15777
 Raptor Goggles,5030
-Raverunner Cap,70465
-Raverunner Chest Rig,107894
-Raverunner Jetpack,73375
+Raverunner Cap,72934
+Raverunner Chest Rig,108868
+Raverunner Jetpack,74163
 Raverunner Mask,107059
-Raverunner Shirt,89857
+Raverunner Shirt,90759
 Raverunner Shorts,89162
 Red Set,9789
 Retro Mop Cut,3288
@@ -350,7 +350,7 @@ Scump Set,5522
 Shuriken,4830
 Snow and Blow ,5334
 Squall,12859
-Squall Combat DJ,35663
+Squall Combat DJ,36263
 Squall Heavy Barrel,15594
 Squall Legacy,442
 Squall Retro,449
@@ -405,8 +405,8 @@ Terikon Legacy,588
 Terikon Maniac,5221
 Terikon Retro,620
 Terikon Tactical Foregrip,9121
-Thick Stitch Cornrows,1449
-Thick Stitch Cornrows - Blond,1209
+Thick Stitch Cornrows,1462
+Thick Stitch Cornrows - Blond,1210
 Thick Stitch Cornrows - Brown,1234
 Thick Stitch Cornrows - Cyan,1245
 Thick Stitch Cornrows - Green,1208
@@ -433,8 +433,8 @@ Vulture Heavy Barrel,4753
 Vulture Legacy,464
 Vulture Pink Fury,6540
 Vulture Retro,504
-Vulture Tactical Foregrip,1923
-Westcol Set,2401
+Vulture Tactical Foregrip,3468
+Westcol Set,2500
 Westcol Till I Die,2156
 Woodpecker,15578
 Woodpecker Heavy Barrel,3314
