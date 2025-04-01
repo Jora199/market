@@ -69,28 +69,42 @@ def calculate_price_change(df, item):
     return 0
 
 def main():
-    # Load all data
+    # Существующий код загрузки данных...
     df, _ = load_data()
     supply_dict = load_supply_data()
     img_dict = load_image_data()
-    default_img = "https://i.ibb.co/tpZ9HsSY/photo-2023-12-23-09-42-33.jpg"
-
-    # Проверка соответствия имен
-    items = [col for col in df.columns if col != 'timestamp']
-    items_with_supply = [f"{item} (Supply: {int(supply_dict.get(item, 0))})" for item in items]
-    display_to_original = dict(zip(items_with_supply, items))
     
-    # Sidebar with filters
+    # Вычисляем изменение цены для каждого предмета
+    price_changes = {}
+    for item in items:
+        change = calculate_price_change(df, item)
+        arrow = "↑" if change >= 0 else "↓"
+        price_changes[item] = (change, arrow)
+    
+    # Создаем отсортированный список элементов с информацией о изменении цены
+    items_with_changes = []
+    for item in items:
+        change, arrow = price_changes[item]
+        display_name = f"{arrow} {abs(change):.1f}% | {item} (Supply: {int(supply_dict.get(item, 0))})"
+        items_with_changes.append((display_name, change, item))
+    
+    # Сортируем по изменению цены (по убыванию)
+    items_with_changes.sort(key=lambda x: x[1], reverse=True)
+    
+    # Создаем словарь для преобразования отображаемых имен обратно в оригинальные
+    display_to_original = {item[0]: item[2] for item in items_with_changes}
+    
+    # Обновляем multiselect с отсортированным списком
     with st.sidebar:
         st.header("Filters")
         
-        selected_items_with_supply = st.multiselect(
+        selected_items_with_changes = st.multiselect(
             f"Select items (total: {len(items)})",
-            items_with_supply,
-            default=[items_with_supply[0]] if items_with_supply else []
+            [item[0] for item in items_with_changes],
+            default=[items_with_changes[0][0]] if items_with_changes else []
         )
         
-        selected_items = [display_to_original[item] for item in selected_items_with_supply]
+        selected_items = [display_to_original[item] for item in selected_items_with_changes]
         
         date_range = st.date_input(
             "Select period",
