@@ -59,6 +59,15 @@ def get_last_valid_price(df, item):
         return valid_prices.iloc[-1]
     return None
 
+def calculate_price_change(df, item):
+    valid_prices = df[item].dropna()
+    if len(valid_prices) >= 2:
+        start_price = valid_prices.iloc[0]
+        end_price = valid_prices.iloc[-1]
+        percent_change = ((end_price - start_price) / start_price) * 100
+        return percent_change
+    return 0
+
 def main():
     # Load all data
     df, _ = load_data()
