@@ -69,22 +69,20 @@ def calculate_price_change(df, item):
     return 0
 
 def main():
-    # Существующий код загрузки данных...
+    # Load all data
     df, _ = load_data()
     supply_dict = load_supply_data()
     img_dict = load_image_data()
+    default_img = "https://i.ibb.co/tpZ9HsSY/photo-2023-12-23-09-42-33.jpg"
+
+    # Проверка соответствия имен
+    items = [col for col in df.columns if col != 'timestamp']
     
     # Вычисляем изменение цены для каждого предмета
-    price_changes = {}
+    items_with_changes = []
     for item in items:
         change = calculate_price_change(df, item)
         arrow = "↑" if change >= 0 else "↓"
-        price_changes[item] = (change, arrow)
-    
-    # Создаем отсортированный список элементов с информацией о изменении цены
-    items_with_changes = []
-    for item in items:
-        change, arrow = price_changes[item]
         display_name = f"{arrow} {abs(change):.1f}% | {item} (Supply: {int(supply_dict.get(item, 0))})"
         items_with_changes.append((display_name, change, item))
     
@@ -94,7 +92,7 @@ def main():
     # Создаем словарь для преобразования отображаемых имен обратно в оригинальные
     display_to_original = {item[0]: item[2] for item in items_with_changes}
     
-    # Обновляем multiselect с отсортированным списком
+    # Sidebar with filters
     with st.sidebar:
         st.header("Filters")
         
