@@ -56,8 +56,11 @@ Boomslang Legacy,477
 Boomslang Player Zero,3000
 Boomslang Retro,480
 Boomslang Tactical Foregrip,2604
-ChemTech Jetpack,53
-ChemTech Pants,52
+ChemTech Goggles,3
+ChemTech Jetpack,59
+ChemTech Mask,3
+ChemTech Pants,59
+ChemTech Shirt,3
 ChemTech Vest,242
 Chemical Bro Pants,6149
 Chinese Pirate Beard,4087
@@ -151,6 +154,7 @@ Enhanced Compensator for the Vulture,10653
 Enhanced Compensator for the Woodpecker,15733
 Fire and Flex,239
 Flenser,15386
+Flenser ChemTech,3
 Flenser Heavy Barrel,12920
 Flenser Legacy,517
 Flenser Mad Biker,8680
@@ -196,7 +200,7 @@ Influencer Heavy Barrel,15331
 Influencer Tactical Foregrip,10996
 JAVELINA,13092
 Jungle Ops Tac-Vest,6880
-KINETIC SHIELD,5346
+KINETIC SHIELD,5352
 Karmacide,1244
 Kasper,15906
 Kasper Heavy Barrel,8851
@@ -255,7 +259,7 @@ M4 Commodore,15707
 M4 Commodore Enforcer,13772
 M4 Commodore Heavy Barrel,15396
 M4 Commodore Legacy,572
-M4 Commodore Retro,576
+M4 Commodore Retro,581
 M4 Commodore Tactical Foregrip,8892
 MAXIGUN,15812
 Mad Biker Goggles,9537
@@ -329,16 +333,17 @@ Prankster Tac Vest,1101
 Proton,15605
 Proton 4x - 8x Adjustable MR Scope,15764
 Proton 8x - 12x Adjustable LR Scope,13061
-Proton Adaptive Barrel,47
+Proton Adaptive Barrel,55
+Proton Drifter,3
 Proton Heavy Barrel,8643
-Proton Hybrid Compensator,44
+Proton Hybrid Compensator,54
 Proton Legacy,538
 Proton OpenSea,38
 Proton Retro,560
 Proton Tactical Foregrip,6648
 RECON DRONE,13443
 RIPPER,13098
-ROADRUNNERS,16263
+ROADRUNNERS,16267
 Raptor Goggles,6041
 Raverunner Cap,115407
 Raverunner Chest Rig,163071
@@ -372,7 +377,7 @@ Star-Shaped Beard - Blond,1232
 Star-Shaped Beard - Brown,1246
 Star-Shaped Beard - Cyan,1282
 Star-Shaped Beard - Green,1230
-Star-Shaped Beard - Orange,6287
+Star-Shaped Beard - Orange,6294
 Star-Shaped Beard - Pink,1252
 Street Fighter Pants,6113
 TAP9,14493
