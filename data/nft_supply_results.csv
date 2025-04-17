@@ -56,9 +56,9 @@ Boomslang Legacy,477
 Boomslang Player Zero,3000
 Boomslang Retro,480
 Boomslang Tactical Foregrip,2604
-ChemTech Jetpack,25
-ChemTech Pants,20
-ChemTech Vest,144
+ChemTech Jetpack,36
+ChemTech Pants,35
+ChemTech Vest,186
 Chemical Bro Pants,6149
 Chinese Pirate Beard,4087
 Chinese Pirate Beard - Blond,1259
@@ -142,14 +142,14 @@ Enhanced Compensator for the Mavinga,13001
 Enhanced Compensator for the Osprey,2627
 Enhanced Compensator for the Partisan,4555
 Enhanced Compensator for the Pierser,202
-Enhanced Compensator for the Proton,2553
+Enhanced Compensator for the Proton,2567
 Enhanced Compensator for the TAP9,8168
 Enhanced Compensator for the Tacoma,15652
 Enhanced Compensator for the Terikon,8769
 Enhanced Compensator for the Type 227,5966
 Enhanced Compensator for the Vulture,10653
 Enhanced Compensator for the Woodpecker,15733
-Fire and Flex,130
+Fire and Flex,181
 Flenser,15386
 Flenser Heavy Barrel,12920
 Flenser Legacy,517
@@ -265,7 +265,7 @@ Mad Biker Pants,8970
 Mad Biker Shirt,10211
 Mad Biker Vest,9468
 Mantis Mask,6904
-Mavinga,13129
+Mavinga,13147
 Mavinga Heavy Barrel,15716
 Mavinga Legacy,517
 Mavinga Retro,530
@@ -292,7 +292,7 @@ Pacifist Mask,5449
 Pacifist Shorts,9276
 Pacifist Tac Vest,6198
 Partisan,15738
-Partisan Heavy Barrel,8614
+Partisan Heavy Barrel,8629
 Partisan Raverunner,117700
 Partisan Tactical Foregrip,10652
 Pierser,2828
@@ -329,7 +329,7 @@ Prankster Tac Vest,1101
 Proton,15605
 Proton 4x - 8x Adjustable MR Scope,15764
 Proton 8x - 12x Adjustable LR Scope,13061
-Proton Adaptive Barrel,21
+Proton Adaptive Barrel,25
 Proton Heavy Barrel,8643
 Proton Hybrid Compensator,25
 Proton Legacy,538
@@ -338,7 +338,7 @@ Proton Retro,560
 Proton Tactical Foregrip,6648
 RECON DRONE,13443
 RIPPER,13098
-ROADRUNNERS,16262
+ROADRUNNERS,16263
 Raptor Goggles,6041
 Raverunner Cap,115407
 Raverunner Chest Rig,163071
