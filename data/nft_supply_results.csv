@@ -58,18 +58,18 @@ Boomslang Player Zero,3000
 Boomslang Retro,480
 Boomslang Tactical Foregrip,2604
 ChemTech Goggles,42893
-ChemTech Jetpack,42999
+ChemTech Jetpack,46736
 ChemTech Mask,41347
-ChemTech Pants,43205
-ChemTech Shirt,39941
-ChemTech Vest,23882
+ChemTech Pants,46984
+ChemTech Shirt,40563
+ChemTech Vest,35686
 Chemical Bro Pants,6149
 Chinese Pirate Beard,4105
 Chinese Pirate Beard - Blond,1282
 Chinese Pirate Beard - Brown,1259
 Chinese Pirate Beard - Cyan,1257
-Chinese Pirate Beard - Green,1300
-Chinese Pirate Beard - Orange,1278
+Chinese Pirate Beard - Green,1302
+Chinese Pirate Beard - Orange,1284
 Chinese Pirate Beard - Pink,1205
 Circuit Breaker,103161
 Clawmark Beard,4956
@@ -120,7 +120,7 @@ Double Braided Beard - Green,1297
 Double Braided Beard - Orange,1257
 Double Braided Beard - Pink,1207
 Dreadhawk,4895
-Dreadhawk - Blond,1387
+Dreadhawk - Blond,1397
 Dreadhawk - Brown,1228
 Dreadhawk - Cyan,1269
 Dreadhawk - Green,1258
@@ -161,9 +161,9 @@ Flenser Legacy,517
 Flenser Mad Biker,8680
 Flenser Retro,554
 Flip the Salute,3017
-GHOST,7584
+GHOST,7587
 Give Peace a Chance,1636
-Going Apeshit,46229
+Going Apeshit,59338
 Green Maze,5036
 HAMMERHEADS,13102
 HOOKSHOT,8590
@@ -200,7 +200,7 @@ Inferno Skin for the Woodpecker,1402
 Influencer,15767
 Influencer Heavy Barrel,15331
 Influencer Tactical Foregrip,10996
-JAVELINA,13092
+JAVELINA,13631
 Jungle Ops Tac-Vest,6880
 KINETIC SHIELD,5394
 Karmacide,1244
@@ -245,7 +245,7 @@ Kochi Heavy Barrel,9198
 Kochi Tactical Flash Hider,10225
 Kochi Tactical Foregrip,9244
 Kochi Tinsel Terror ,5536
-LEAPERS,13611
+LEAPERS,13632
 Lazer,11143
 Light the Fire,9437
 Logan Mutton Chops,1317
@@ -256,10 +256,10 @@ Logan Mutton Chops - Green,1326
 Logan Mutton Chops - Orange,1315
 Logan Mutton Chops - Pink,1263
 Look of Death,5678
-M4 Ape-X Predator,50119
+M4 Ape-X Predator,53117
 M4 Commodore,15707
 M4 Commodore Enforcer,13782
-M4 Commodore Heavy Barrel,15396
+M4 Commodore Heavy Barrel,16389
 M4 Commodore Legacy,572
 M4 Commodore Retro,581
 M4 Commodore Tactical Foregrip,8892
@@ -289,7 +289,7 @@ Osprey Legacy,595
 Osprey Retro,559
 Osprey Smart Scope,5649
 Osprey Tactical Foregrip,10486
-PARALYZER,9171
+PARALYZER,9174
 PHOSPHOR FURY ,8365
 Pacifist Glasses,5995
 Pacifist Hoodie,8926
@@ -335,17 +335,17 @@ Prankster Tac Vest,1101
 Proton,15605
 Proton 4x - 8x Adjustable MR Scope,15764
 Proton 8x - 12x Adjustable LR Scope,13061
-Proton Adaptive Barrel,1391
+Proton Adaptive Barrel,1496
 Proton Drifter,42847
 Proton Heavy Barrel,8643
-Proton Hybrid Compensator,1372
+Proton Hybrid Compensator,1474
 Proton Legacy,538
 Proton OpenSea,38
 Proton Retro,568
 Proton Tactical Foregrip,6648
 RECON DRONE,13443
 RIPPER,13534
-ROADRUNNERS,16384
+ROADRUNNERS,16400
 Raptor Goggles,6041
 Raverunner Cap,117156
 Raverunner Chest Rig,165178
@@ -355,7 +355,7 @@ Raverunner Shirt,139375
 Raverunner Shorts,137949
 Red Set,9883
 Retro Mop Cut,3351
-Retro Mop Cut - Blond,1413
+Retro Mop Cut - Blond,1420
 Retro Mop Cut - Brown,1373
 Retro Mop Cut - Cyan,1405
 Retro Mop Cut - Green,1442
@@ -374,12 +374,12 @@ Squall Heavy Barrel,15594
 Squall Legacy,508
 Squall Retro,502
 Squall Tactical Foregrip,7730
-Star-Shaped Beard,1272
+Star-Shaped Beard,1274
 Star-Shaped Beard - Blond,1240
 Star-Shaped Beard - Brown,1265
 Star-Shaped Beard - Cyan,1286
 Star-Shaped Beard - Green,1254
-Star-Shaped Beard - Orange,6294
+Star-Shaped Beard - Orange,6305
 Star-Shaped Beard - Pink,1260
 Street Fighter Pants,6113
 TAP9,14679
@@ -425,15 +425,15 @@ Terikon Maniac,6481
 Terikon Retro,620
 Terikon Tactical Foregrip,12980
 Thick Stitch Cornrows,1527
-Thick Stitch Cornrows - Blond,1262
-Thick Stitch Cornrows - Brown,1287
+Thick Stitch Cornrows - Blond,1267
+Thick Stitch Cornrows - Brown,1290
 Thick Stitch Cornrows - Cyan,1288
 Thick Stitch Cornrows - Green,4693
 Thick Stitch Cornrows - Orange,1239
 Thick Stitch Cornrows - Pink,1437
 Thor Beard,1318
 Thor Beard - Blond,1284
-Thor Beard - Brown,1326
+Thor Beard - Brown,1335
 Thor Beard - Cyan,1244
 Thor Beard - Green,1255
 Thor Beard - Pink,1240
@@ -448,15 +448,15 @@ Type 227 Retro,425
 Type 227 Sleigh Baller,5537
 Vulture,15781
 Vulture CyberGoth,2070
-Vulture Heavy Barrel,4832
+Vulture Heavy Barrel,4844
 Vulture Legacy,510
 Vulture Pink Fury,6585
 Vulture Retro,569
 Vulture Tactical Foregrip,8411
 Westcol Set,43201
-Westcol Till I Die,39426
+Westcol Till I Die,45395
 Woodpecker,15843
-Woodpecker Banananizer,49041
+Woodpecker Banananizer,59356
 Woodpecker Heavy Barrel,8685
 Woodpecker Legacy,495
 Woodpecker Prankster,1106
