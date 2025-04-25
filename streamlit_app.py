@@ -69,43 +69,24 @@ def calculate_price_change(df, item):
     return 0
 
 def main():
-    # Welcome message in English
-    st.markdown("""
-    # 📊 NFT Market Analytics Tool
-
-    Hello, NFT Community! 👋
-
-    I've developed a marketplace analytics tool to help you make more informed decisions when trading NFTs.
-
-    ### 🔍 Tool Features:
-    - Real-time floor price history tracking
-    - Approximate item supply analysis
-    - Price change percentage calculations
-    - Trend visualization with moving averages
-    - Detailed statistics for each item
-
-    ### ⚡ Key Highlights:
-    - Interactive, zoomable charts
-    - Custom time period filtering
-    - Multiple item comparison
-    - Auto-updates every minute
-    - Responsive design for all devices
-
-    ### 💡 How to Use:
-    1. Select items of interest in the sidebar
-    2. Set your desired time period
-    3. Optionally enable moving averages for better trend analysis
-
-    This tool is completely free and open source. Feel free to provide feedback and suggestions for improvement!
-
-    ---
-    """)
-    
     # Load all data
     df, _ = load_data()
     supply_dict = load_supply_data()
     img_dict = load_image_data()
     default_img = "https://i.ibb.co/tpZ9HsSY/photo-2023-12-23-09-42-33.jpg"
+
+    # Add compact welcome message in expander
+    with st.expander("ℹ️ About This Tool", expanded=False):
+        st.markdown("""
+        This NFT market analytics tool helps traders track:
+        - Floor price history
+        - Supply estimates
+        - Price trends with moving averages
+        
+        **Quick Start:** Select items in the sidebar, adjust time period, and enable moving averages for trend analysis.
+        
+        *Free and open source. Feedback welcome!*
+        """)
 
     # Проверка соответствия имен
     items = [col for col in df.columns if col != 'timestamp']
