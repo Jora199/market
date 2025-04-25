@@ -80,10 +80,6 @@ def main():
         st.markdown("""
         # OTG Market Analytics Tool
 
-        Hello, OTG Community!
-
-        I've developed a marketplace analytics tool to help you make more informed decisions when trading NFTs.
-
         ### Tool Features:
         - Real-time floor price history tracking
         - Approximate item supply analysis
