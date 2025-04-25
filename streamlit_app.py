@@ -78,9 +78,9 @@ def main():
     # Add compact welcome message in expander
     with st.expander("ℹ About This Tool", expanded=False):
         st.markdown("""
-        # NFT Market Analytics Tool
+        # OTG Market Analytics Tool
 
-        Hello, NFT Community!
+        Hello, OTG Community!
 
         I've developed a marketplace analytics tool to help you make more informed decisions when trading NFTs.
 
