@@ -76,7 +76,7 @@ def main():
     default_img = "https://i.ibb.co/tpZ9HsSY/photo-2023-12-23-09-42-33.jpg"
 
     # Add compact welcome message in expander
-    with st.expander("ℹ About This Tool", expanded=False):
+    with st.expander("About This Tool", expanded=False):
         st.markdown("""
         # OTG Market Analytics Tool
 
