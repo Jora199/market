@@ -16,7 +16,7 @@ Item Name,Estimated Supply
 2.5x - 4x Adjustable Advanced Combat Scope for Proton,13253
 2.5x - 4x Adjustable Advanced Combat Scope for Tacoma,10436
 2.5x - 4x Adjustable Advanced Combat Scope for Terikon,9543
-2.5x - 4x Adjustable Advanced Combat Scope for Vulture,8147
+2.5x - 4x Adjustable Advanced Combat Scope for Vulture,8160
 2.5x - 4x Adjustable Advanced Combat Scope for Woodpecker,3628
 8x - 12x KAS Scope,15984
 APE-FOOL MASK,13634
@@ -39,46 +39,46 @@ Anarchist Tac Vest,1510
 BOUNCEBOMBER,15896
 BUZZKILLA,7930
 Bagged and Tagged,3846
-Banana Rekt Republic Set,75794
+Banana Rekt Republic Set,80319
 Berserker Beard,1492
 Berserker Beard - Blond,1430
-Berserker Beard - Brown,1428
+Berserker Beard - Brown,1435
 Berserker Beard - Cyan,1425
 Berserker Beard - Green,1427
 Berserker Beard - Orange,1419
 Berserker Beard - Pink,1420
 Blue Set,9645
-Blue Walker,11201
+Blue Walker,11216
 Boogie Down,18204
 Boomslang,15767
 Boomslang 4x - 8x Adjustable MR Scope,2201
 Boomslang Heavy Barrel,15906
 Boomslang Legacy,477
-Boomslang Player Zero,3150
+Boomslang Player Zero,3266
 Boomslang Retro,480
 Boomslang Tactical Foregrip,2604
-ChemTech Goggles,74728
+ChemTech Goggles,75078
 ChemTech Jetpack,66216
-ChemTech Mask,64471
+ChemTech Mask,69035
 ChemTech Pants,66945
-ChemTech Shirt,68040
+ChemTech Shirt,68531
 ChemTech Vest,52074
 Chemical Bro Pants,7169
-Chinese Pirate Beard,4121
+Chinese Pirate Beard,4125
 Chinese Pirate Beard - Blond,1282
-Chinese Pirate Beard - Brown,1259
+Chinese Pirate Beard - Brown,1279
 Chinese Pirate Beard - Cyan,1287
 Chinese Pirate Beard - Green,1307
-Chinese Pirate Beard - Orange,1302
+Chinese Pirate Beard - Orange,1311
 Chinese Pirate Beard - Pink,1218
 Circuit Breaker,103161
 Clawmark Beard,4987
 Clawmark Beard - Blond,1275
 Clawmark Beard - Brown,1245
-Clawmark Beard - Cyan,1310
-Clawmark Beard - Green,1190
-Clawmark Beard - Orange,1271
-Clawmark Beard - Pink,1318
+Clawmark Beard - Cyan,1320
+Clawmark Beard - Green,1200
+Clawmark Beard - Orange,1281
+Clawmark Beard - Pink,1328
 Cog,4935
 Combat DJ Helmet,104695
 Combat DJ Jacket,101432
@@ -101,7 +101,7 @@ CyberGoth Shorts,2201
 CyberGoth T-shirt,2199
 CyberGoth Tactical Vest,2271
 Devil Horns,1269
-Devil Horns - Blond,1275
+Devil Horns - Blond,1292
 Devil Horns - Brown,1315
 Devil Horns - Cyan,3411
 Devil Horns - Green,1387
@@ -119,19 +119,19 @@ Double Braided Beard - Cyan,1280
 Double Braided Beard - Green,1326
 Double Braided Beard - Orange,1257
 Double Braided Beard - Pink,1224
-Dreadhawk,4897
-Dreadhawk - Blond,1404
+Dreadhawk,4919
+Dreadhawk - Blond,1413
 Dreadhawk - Brown,1251
 Dreadhawk - Cyan,4457
 Dreadhawk - Green,1275
-Dreadhawk - Orange,1319
-Dreadhawk - Pink,2770
+Dreadhawk - Orange,1328
+Dreadhawk - Pink,2781
 Enforcer Helmet,13313
 Enforcer Jetpack,10151
-Enforcer Shades,13546
+Enforcer Shades,13551
 Enforcer Shirt,10204
-Enforcer Shorts,13173
-Enforcer Vest,17031
+Enforcer Shorts,13184
+Enforcer Vest,17039
 Enhanced Compensator for the AZV 100,15424
 Enhanced Compensator for the Boomslang,8536
 Enhanced Compensator for the Hawk,10435
@@ -161,13 +161,13 @@ Flenser Legacy,517
 Flenser Mad Biker,8680
 Flenser Retro,554
 Flip the Salute,3017
-GHOST,7684
+GHOST,7698
 Give Peace a Chance,1636
 Going Apeshit,67289
 Green Maze,5036
 HAMMERHEADS,13102
-HOOKSHOT,8647
-Hawk,8409
+HOOKSHOT,8655
+Hawk,8417
 Hawk 4x - 8x Adjustable MR Scope,8564
 Hawk Anarchist,1517
 Hawk Heavy Barrel,9628
@@ -245,18 +245,18 @@ Kochi Heavy Barrel,9198
 Kochi Tactical Flash Hider,10225
 Kochi Tactical Foregrip,9244
 Kochi Tinsel Terror ,5536
-LEAPERS,13773
+LEAPERS,13800
 Lazer,11143
 Light the Fire,9437
-Logan Mutton Chops,1343
+Logan Mutton Chops,1345
 Logan Mutton Chops - Blond,1276
 Logan Mutton Chops - Brown,1339
 Logan Mutton Chops - Cyan,1366
-Logan Mutton Chops - Green,1342
-Logan Mutton Chops - Orange,1323
+Logan Mutton Chops - Green,1358
+Logan Mutton Chops - Orange,1337
 Logan Mutton Chops - Pink,1263
 Look of Death,5678
-M4 Ape-X Predator,75632
+M4 Ape-X Predator,81287
 M4 Commodore,16467
 M4 Commodore Enforcer,13808
 M4 Commodore Heavy Barrel,16389
@@ -271,7 +271,7 @@ Mad Biker Pants,8970
 Mad Biker Shirt,10211
 Mad Biker Vest,9468
 Mantis Mask,6904
-Mavinga,13235
+Mavinga,13253
 Mavinga Heavy Barrel,15716
 Mavinga Legacy,517
 Mavinga Retro,530
@@ -289,7 +289,7 @@ Osprey Legacy,595
 Osprey Retro,559
 Osprey Smart Scope,5649
 Osprey Tactical Foregrip,10486
-PARALYZER,9275
+PARALYZER,9287
 PHOSPHOR FURY ,9259
 Pacifist Glasses,5995
 Pacifist Hoodie,8926
@@ -298,15 +298,15 @@ Pacifist Mask,5449
 Pacifist Shorts,9276
 Pacifist Tac Vest,8095
 Partisan,15738
-Partisan Heavy Barrel,8653
+Partisan Heavy Barrel,8660
 Partisan Raverunner,119411
 Partisan Tactical Foregrip,10652
 Pierser,2994
-Pierser 4x - 8x Adjustable MR Scope,263
-Pierser 8x - 12x Adjustable LR Scope,236
-Pierser Heavy Barrel,230
+Pierser 4x - 8x Adjustable MR Scope,268
+Pierser 8x - 12x Adjustable LR Scope,252
+Pierser Heavy Barrel,236
 Pierser Hybrid Compensator,2646
-Pierser Smart Scope,2344
+Pierser Smart Scope,2382
 Pink Fury Cap,5915
 Pink Fury Jetpack,5603
 Pink Fury Mask,5604
@@ -316,6 +316,7 @@ Pink Fury Tac Vest,6586
 Pioneer Balaklava,547
 Pioneer Eye,550
 Pioneer Hoodie,545
+Pioneer Shorts,310
 Pioneer Tac Vest,545
 Pioneer Trainers,545
 Player Zero Cap,3378
@@ -323,8 +324,8 @@ Player Zero Chest Rig,3469
 Player Zero Jetpack,3221
 Player Zero Mask,3142
 Player Zero Shades,3051
-Player Zero Shorts,3351
-Player Zero Tank Top,3362
+Player Zero Shorts,3477
+Player Zero Tank Top,3482
 Prankster Helmet,1091
 Prankster Jetpack,1102
 Prankster Mask,1100
@@ -335,7 +336,7 @@ Prankster Tac Vest,1103
 Proton,15605
 Proton 4x - 8x Adjustable MR Scope,15764
 Proton 8x - 12x Adjustable LR Scope,13061
-Proton Adaptive Barrel,1912
+Proton Adaptive Barrel,1943
 Proton Drifter,67452
 Proton Heavy Barrel,8643
 Proton Hybrid Compensator,1809
@@ -345,7 +346,7 @@ Proton Retro,568
 Proton Tactical Foregrip,6648
 RECON DRONE,13443
 RIPPER,13690
-ROADRUNNERS,16519
+ROADRUNNERS,16537
 Raptor Goggles,6041
 Raverunner Cap,117156
 Raverunner Chest Rig,165178
@@ -353,18 +354,18 @@ Raverunner Jetpack,119038
 Raverunner Mask,168081
 Raverunner Shirt,140898
 Raverunner Shorts,137949
-Red Set,9883
+Red Set,9898
 Retro Mop Cut,3368
 Retro Mop Cut - Blond,1440
 Retro Mop Cut - Brown,1389
-Retro Mop Cut - Cyan,1422
+Retro Mop Cut - Cyan,1423
 Retro Mop Cut - Green,1442
-Retro Mop Cut - Orange,1438
+Retro Mop Cut - Orange,1453
 Retro Mop Cut - Pink,5331
 S-Comms Helmet,6824
 SKUNKPAW,7901
 SLAMFIST,9201
-SLUGGER,5400
+SLUGGER,5407
 Scump Set,5698
 Shuriken,4946
 Snow and Blow ,5496
@@ -376,10 +377,10 @@ Squall Retro,502
 Squall Tactical Foregrip,7730
 Star-Shaped Beard,1287
 Star-Shaped Beard - Blond,1261
-Star-Shaped Beard - Brown,1285
+Star-Shaped Beard - Brown,1290
 Star-Shaped Beard - Cyan,1317
 Star-Shaped Beard - Green,1268
-Star-Shaped Beard - Orange,6325
+Star-Shaped Beard - Orange,6328
 Star-Shaped Beard - Pink,1296
 Street Fighter Pants,6113
 TAP9,14679
@@ -390,33 +391,33 @@ TAP9 Retro,544
 THUMPERS,6994
 TRIPMINE,12927
 Tacoma,15783
-Tacoma AVAX Gen 04,6834
+Tacoma AVAX Gen 04,6845
 Tacoma Heavy Barrel,13019
 Tacoma Legacy,509
 Tacoma Retro,580
-Tacoma Westcol,59611
-Tagger Cap,4320
+Tacoma Westcol,66835
+Tagger Cap,4321
 Tagger Chest Rig,5128
-Tagger Face Cover,4954
+Tagger Face Cover,4958
 Tagger Jetpack,4115
-Tagger Shades,4243
+Tagger Shades,4255
 Tagger Shorts,4563
-Tagger Tank Top,4132
+Tagger Tank Top,4140
 Tap 9 All Stars,1042
 Tap9 All Stars,1766
 Techno Goth Mohawk,3903
 Techno Goth Mohawk - Blond,1154
-Techno Goth Mohawk - Brown,5860
-Techno Goth Mohawk - Cyan,1188
+Techno Goth Mohawk - Brown,5866
+Techno Goth Mohawk - Cyan,1190
 Techno Goth Mohawk - Green,1159
-Techno Goth Mohawk - Orange,1195
+Techno Goth Mohawk - Orange,1212
 Techno Goth Mohawk - Pink,4532
 Techno Tantrum,140486
 Templar Helmet,4606
 Templar Jetpack,4127
-Templar Mask,5027
+Templar Mask,5037
 Templar Shorts,4613
-Templar T-shirt,4186
+Templar T-shirt,4192
 Templar Tac Vest,5176
 Terikon,16325
 Terikon Heavy Barrel,15824
@@ -424,19 +425,19 @@ Terikon Legacy,588
 Terikon Maniac,7282
 Terikon Retro,620
 Terikon Tactical Foregrip,12980
-Thick Stitch Cornrows,1547
+Thick Stitch Cornrows,1552
 Thick Stitch Cornrows - Blond,1270
-Thick Stitch Cornrows - Brown,1310
+Thick Stitch Cornrows - Brown,1316
 Thick Stitch Cornrows - Cyan,1297
 Thick Stitch Cornrows - Green,4693
 Thick Stitch Cornrows - Orange,1248
 Thick Stitch Cornrows - Pink,1452
 Thor Beard,1335
-Thor Beard - Blond,1299
+Thor Beard - Blond,1310
 Thor Beard - Brown,1341
 Thor Beard - Cyan,1266
 Thor Beard - Green,1271
-Thor Beard - Pink,1251
+Thor Beard - Pink,1254
 Thor Beard -Orange,1286
 Throne of Games,5632
 Toss My Fruit Salad,67068
@@ -453,7 +454,7 @@ Vulture Legacy,510
 Vulture Pink Fury,6585
 Vulture Retro,569
 Vulture Tactical Foregrip,8411
-Westcol Set,59050
+Westcol Set,65607
 Westcol Till I Die,57931
 Woodpecker,15843
 Woodpecker Banananizer,73397
