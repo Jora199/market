@@ -25,6 +25,7 @@ AZV 100,15633
 AZV 100 Doomed Zero,6650
 AZV 100 Heavy Barrel,15540
 AZV 100 Legacy,534
+AZV 100 Pilot,118
 AZV 100 Retro,524
 AZV 100 Tactical Foregrip,5466
 All Stars Bandana,1895
@@ -79,9 +80,10 @@ Clawmark Beard - Cyan,1331
 Clawmark Beard - Green,1213
 Clawmark Beard - Orange,1283
 Clawmark Beard - Pink,1340
+Cleanup Crew Hoodie,521
 Cleanup Crew Jetpack,1074
-Cleanup Crew Mask,534
-Cleanup Crew Shorts,2054
+Cleanup Crew Mask,1196
+Cleanup Crew Shorts,5439
 Cog,4935
 Combat DJ Helmet,104695
 Combat DJ Jacket,101432
@@ -96,7 +98,7 @@ Combat Maniac Tac Vest,6195
 Convict Pants,387
 Convict Shorts,326
 Crackhead Santa Set,5655
-Crash Test Ted Set,12783
+Crash Test Ted Set,17803
 Cyber Aviator Mask,6233
 CyberGoth Helmet,2166
 CyberGoth Jetpack,2066
@@ -131,6 +133,7 @@ Dreadhawk - Cyan,4457
 Dreadhawk - Green,1307
 Dreadhawk - Orange,1341
 Dreadhawk - Pink,2801
+Emergency Ejection,171
 Enforcer Helmet,13328
 Enforcer Jetpack,10170
 Enforcer Shades,13566
@@ -176,13 +179,17 @@ Hawk,8669
 Hawk 4x - 8x Adjustable MR Scope,8564
 Hawk Adaptive Barrel,9
 Hawk Anarchist,1517
-Hawk Cleanup Crew,687
+Hawk Cleanup Crew,1091
 Hawk Heavy Barrel,9628
 Hawk Legacy,549
 Hawk Retro,493
 Hawk Tactical Foregrip,9139
 "Hear That, B*tch?",3234
-Hopper Pilot Jetpack,262
+Hopper Pilot Helmet,96
+Hopper Pilot Jetpack,452
+Hopper Pilot Pants,99
+Hopper Pilot Shirt,17
+Hopper Pilot Tac Vest,149
 Hump for Dominance,77605
 I'm Fine Skin for the Kelowna,1509
 I'm Fine Skin for the Kestrel,131
@@ -407,12 +414,12 @@ Tacoma Legacy,509
 Tacoma Retro,580
 Tacoma Westcol,73635
 Tagger Cap,4330
-Tagger Chest Rig,5153
+Tagger Chest Rig,5156
 Tagger Face Cover,4972
 Tagger Jetpack,4125
 Tagger Shades,4265
 Tagger Shorts,4602
-Tagger Tank Top,4158
+Tagger Tank Top,4162
 Tap 9 All Stars,1042
 Tap9 All Stars,1766
 Techno Goth Mohawk,3903
@@ -467,7 +474,8 @@ Vulture Retro,569
 Vulture Tactical Foregrip,8411
 Westcol Set,72198
 Westcol Till I Die,76788
-Wolf Tamer Skin for the Tacoma,11
+Wolf Tamer Skin for the Ichnya,2
+Wolf Tamer Skin for the Tacoma,13
 Woodpecker,15843
 Woodpecker Banananizer,79848
 Woodpecker Heavy Barrel,9148
